@@ -1,0 +1,153 @@
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferramentas de Produtividade</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .card-round {
+      width: 200px; /* Tamanho do card */
+      height: 200px;
+      perspective: 1000px; /* Perspectiva para o efeito 3D */
+      margin: 10px; /* Espaçamento entre os cards */
+    }
+    .card-round-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d; /* Mantém o efeito 3D */
+      transition: transform 0.8s; /* Duração da animação */
+    }
+    .card-round:hover .card-round-inner {
+      transform: rotateY(180deg); /* Gira 180 graus no eixo Y */
+    }
+    .card-round-front, .card-round-back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden; /* Esconde o verso do card */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%; /* Card redondo */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: white; /* Fundo branco */
+      color: #1919e6; /* Azul para o texto */
+      text-align: center;
+      padding: 20px; /* Espaçamento interno */
+    }
+    .card-round-back {
+      background-color: #1919e6; /* Azul para o verso */
+      transform: rotateY(180deg); /* Inicialmente, o verso está virado */
+      color: white; /* Texto branco no verso */
+    }
+    .card-round-back a {
+      background-color: white; /* Botão branco */
+      color: #1919e6; /* Texto azul no botão */
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+      margin-top: 10px;
+    }
+    .card-round-back a:hover {
+      background-color: #f4f4f4; /* Cor de fundo mais clara ao passar o mouse */
+      color: #1919e6; /* Mantém o texto azul */
+    }
+    .card-round i {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      color: #1919e6; /* Azul para o ícone */
+    }
+    .card-round h3 {
+      font-size: 1.25rem;
+      margin: 0;
+      white-space: nowrap; /* Impede que o título quebre em várias linhas */
+      overflow: hidden; /* Esconde o texto que ultrapassar */
+      text-overflow: ellipsis; /* Adiciona "..." ao texto que não couber */
+      max-width: 100%; /* Limita a largura do título */
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-8">
+    <div class="container">
+      <center><h2 class="text-4xl font-bold mb-4">Ferramentas de Produtividade</h2></center>
+      <p class="text-gray-700 text-xl leading-relaxed">Esta página reúne ferramentas úteis para aumentar a produtividade e facilitar a colaboração em atividades educacionais. Clique nos links abaixo para acessar as ferramentas específicas.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-6">
+    <center><h2 class="text-4xl font-bold mt-8 mb-6">Escolha a Ferramenta que Você Precisa:</h2></center>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+      <!-- Sociograma -->
+      <div class="card-round">
+        <div class="card-round-inner">
+          <div class="card-round-front">
+            <i class="fas fa-users"></i>
+            <h3>Sociograma</h3>
+          </div>
+          <div class="card-round-back">
+            <a href="https://educ.nekoweb.org/geradores/sociograma.html" class="hover-accent">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Videoconferência -->
+      <div class="card-round">
+        <div class="card-round-inner">
+          <div class="card-round-front">
+            <i class="fas fa-video"></i>
+            <h3>Videoconferência</h3>
+          </div>
+          <div class="card-round-back">
+            <a href="https://educ.nekoweb.org/geradores/videoconferencia.html" class="hover-accent">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+     <!-- Fórum -->
+      <div class="card-round">
+        <div class="card-round-inner">
+          <div class="card-round-front">
+            <i class="fas fa-comments"></i>
+            <h3>QR Code</h3>
+          </div>
+          <div class="card-round-back">
+            <a href="https://educ.nekoweb.org/geradores%2Fferramentas/qrcode.html" class="hover-accent">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pad -->
+      <div class="card-round">
+        <div class="card-round-inner">
+          <div class="card-round-front">
+            <i class="fas fa-edit"></i>
+            <h3>Pad</h3>
+          </div>
+          <div class="card-round-back">
+            <a href="https://educ.nekoweb.org/geradores/pad.html" class="hover-accent">Acessar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Ferramentas de Produtividade. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

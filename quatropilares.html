@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Prompts Pedagógicos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <a href="https://educ.nekoweb.org/geradores/home.html" class="text-white">Voltar</a>
+    </nav>
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Cabeçalho -->
+        <div class="text-center mb-12 bg-gray-200 p-6 rounded-lg">
+            <h1 class="text-4xl font-bold text-blue-600 mb-4">Gerador de Prompts para os Quatro Pilares da Educação</h1>
+            <p class="text-gray-600">Baseado nos 4 Pilares da UNESCO - Os 4 pilares da educação, propostos pela UNESCO no relatório "Educação: Um Tesouro a Descobrir" (1996), também conhecido como Relatório Delors, são considerados fundamentais para uma formação integral e contínua ao longo da vida. Preencha os campos abaixo de acordo com as suas necessidades para gerar o Plano.</p>
+        </div>
+
+        <!-- Formulário -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <!-- Aprender a Conhecer -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-blue-500 mb-4">🧠 Aprender a Conhecer</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tema/Disciplina</label>
+                        <select id="conhecer_tema" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione um tema</option>
+                            <option>Matemática</option>
+                            <option>Língua Portuguesa</option>
+                            <option>Ciências Naturais</option>
+                            <option>História</option>
+                            <option>Geografia</option>
+                            <option>Educação Física</option>
+                            <option>Artes</option>
+                            <option>Educação Ambiental</option>
+                            <option>Tecnologia e Inovação</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Habilidades Cognitivas</label>
+                        <select id="conhecer_habilidade" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione habilidades</option>
+                            <option>Análise crítica</option>
+                            <option>Pesquisa científica</option>
+                            <option>Raciocínio lógico</option>
+                            <option>Interpretação textual</option>
+                            <option>Resolução de problemas</option>
+                            <option>Memorização ativa</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aprender a Fazer -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-green-500 mb-4">🛠️ Aprender a Fazer</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Atividade Prática</label>
+                        <select id="fazer_atividade" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione atividade</option>
+                            <option>Projeto interdisciplinar</option>
+                            <option>Experimento científico</option>
+                            <option>Produção textual</option>
+                            <option>Maquete física/digital</option>
+                            <option>Apresentação multimídia</option>
+                            <option>Simulação de situações reais</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ferramentas</label>
+                        <select id="fazer_ferramentas" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione ferramentas</option>
+                            <option>Ferramentas digitais</option>
+                            <option>Material concreto</option>
+                            <option>Laboratório de ciências</option>
+                            <option>Kit de robótica</option>
+                            <option>Aplicativos educacionais</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aprender a Conviver -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-purple-500 mb-4">🤝 Aprender a Conviver</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Interação Social</label>
+                        <select id="conviver_interacao" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione interação</option>
+                            <option>Debate guiado</option>
+                            <option>Trabalho em grupo</option>
+                            <option>Roda de conversa</option>
+                            <option>Jogos cooperativos</option>
+                            <option>Projetos comunitários</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Valores</label>
+                        <select id="conviver_valores" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione valores</option>
+                            <option>Respeito à diversidade</option>
+                            <option>Empatia</option>
+                            <option>Cooperação</option>
+                            <option>Responsabilidade social</option>
+                            <option>Ética e cidadania</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aprender a Ser -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-orange-500 mb-4">💡 Aprender a Ser</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Desenvolvimento Pessoal</label>
+                        <select id="ser_desenvolvimento" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione desenvolvimento</option>
+                            <option>Autoconhecimento</option>
+                            <option>Criatividade</option>
+                            <option>Autonomia</option>
+                            <option>Proatividade</option>
+                            <option>Inteligência emocional</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Competências Socioemocionais</label>
+                        <select id="ser_emocional" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione competências</option>
+                            <option>Resiliência</option>
+                            <option>Liderança</option>
+                            <option>Comunicação assertiva</option>
+                            <option>Gestão de conflitos</option>
+                            <option>Tomada de decisão</option>
+                            <option>Outra</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campos Adicionais -->
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nível de Ensino</label>
+                <select id="nivel_ensino" class="w-full p-2 border rounded-md">
+                    <option value="">Selecione o nível</option>
+                    <option>Fundamental I (1°-5°)</option>
+                    <option>Fundamental II (6°-9°)</option>
+                    <option>EJAI - Educação de Jovens e Adultos I</option>
+                    <option>EJAII - Educação de Jovens e Adultos II</option>
+                    <option>Outra</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Duração</label>
+                <select id="duracao" class="w-full p-2 border rounded-md">
+                    <option value="">Selecione duração</option>
+                    <option>45 minutos</option>
+                    <option>50 minutos</option>
+                    <option>2 aulas de 45 minutos</option>
+                    <option>2 aulas de 50 minutos</option>
+                    <option>Outra</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Botão e Resultado -->
+        <div class="text-center">
+            <button onclick="generatePrompt()"
+                    class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors mb-6">
+                Gerar Prompt
+            </button>
+
+            <div id="output" class="hidden bg-white p-6 rounded-lg shadow-md text-left">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Prompt Gerado:</h2>
+                    <div>
+                        <button onclick="copyPrompt()"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 mr-2">
+                            📋 Copiar
+                        </button>
+                    </div>
+                </div>
+                <pre id="promptOutput" class="whitespace-pre-wrap bg-gray-50 p-4 rounded-md"></pre>
+
+                <div class="mt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <a href="https://chat.deepseek.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-robot"></i> DeepSeek
+                    </a>
+                    <a href="https://chat.qwenlm.ai/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-brain"></i> QwenAi
+                    </a>
+                    <a href="https://chat.openai.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fab fa-openai"></i> ChatGPT
+                    </a>
+                    <a href="https://claude.ai/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-cloud"></i> Claude
+                    </a>
+                    <a href="https://gemini.google.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-gem"></i> Gemini
+                    </a>
+                    <a href="https://copilot.microsoft.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-copilot"></i> Copilot
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 p-4 text-center text-white">
+        <p>&copy; 2025 Gerador de Prompts. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function generatePrompt() {
+            const getSelectedValue = (id) => {
+                const element = document.getElementById(id);
+                return element.options[element.selectedIndex]?.text || '[Não especificado]';
+            };
+
+            const prompt = `Crie um plano de aula detalhado com base nos 4 pilares da UNESCO, seguindo estas especificações:
+
+**Tema Principal**: ${getSelectedValue('conhecer_tema')}
+**Nível de Ensino**: ${getSelectedValue('nivel_ensino')}
+**Duração**: ${getSelectedValue('duracao')}
+
+**Diretrizes por Pilar**:
+1. **Aprender a Conhecer**:
+   - Habilidades cognitivas: ${getSelectedValue('conhecer_habilidade')}
+
+2. **Aprender a Fazer**:
+   - Atividade prática: ${getSelectedValue('fazer_atividade')}
+   - Ferramentas utilizadas: ${getSelectedValue('fazer_ferramentas')}
+
+3. **Aprender a Conviver**:
+   - Dinâmica colaborativa: ${getSelectedValue('conviver_interacao')}
+   - Valores trabalhados: ${getSelectedValue('conviver_valores')}
+
+4. **Aprender a Ser**:
+   - Desenvolvimento pessoal: ${getSelectedValue('ser_desenvolvimento')}
+   - Competências socioemocionais: ${getSelectedValue('ser_emocional')}
+
+**Instruções Adicionais**:
+- Alinhar às competências da BNCC
+- Incluir objetivos de aprendizagem claros
+- Sugerir estratégias de avaliação formativa
+- Fornecer orientações para implementação em sala de aula
+- Listar recursos necessários
+- Incluir adaptações para diferentes necessidades educacionais`;
+
+            document.getElementById('promptOutput').textContent = prompt;
+            document.getElementById('output').classList.remove('hidden');
+        }
+
+        function copyPrompt() {
+            const prompt = document.getElementById('promptOutput').textContent;
+            navigator.clipboard.writeText(prompt);
+            alert('Prompt copiado com sucesso!');
+        }
+    </script>
+</body>
+</html>

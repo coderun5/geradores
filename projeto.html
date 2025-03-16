@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Projetos Didáticos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    body {
+      background-image: url(''); /* Substitua pela URL da sua imagem */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para o conteúdo */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Projetos Didáticos
+    </h1>
+    <p>Esta ferramenta foi projetada para ajudá-lo(a) a criar projetos didáticos personalizados e adaptados às suas necessidades.</p>
+    <marquee></marquee>
+    <form id="didacticProjectForm" class="space-y-6">
+      <!-- Disciplina -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Disciplina</label>
+        <select id="discipline" name="discipline" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherDiscipline" name="otherDiscipline" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra disciplina (opcional)">
+      </div>
+
+      <!-- Assunto -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Tema do Projeto</label>
+        <input type="text" id="subject" name="subject" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Ano de Escolaridade</label>
+        <select id="grade" name="grade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Alfabetização">Alfabetização</option>
+          <option value="G4">G4</option>
+          <option value="G5">G5</option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Número de Etapas -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Número de Etapas</label>
+        <input type="number" id="numberOfSteps" name="numberOfSteps" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Número de Momentos Avaliativos -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Número de Momentos Avaliativos</label>
+        <input type="number" id="numberOfEvaluationMoments" name="numberOfEvaluationMoments" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Número de Aulas -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Número de Aulas</label>
+        <input type="number" id="numberOfClasses" name="numberOfClasses" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Duração das Aulas -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Duração das Aulas</label>
+        <select id="classDuration" name="classDuration" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="45 minutos">45 minutos</option>
+          <option value="50 minutos">50 minutos</option>
+        </select>
+      </div>
+
+      <!-- Recursos -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Recursos</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Livro didático" class="rounded text-gray-600">
+            <span class="ml-2">Livro didático</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Slides" class="rounded text-gray-600">
+            <span class="ml-2">Slides</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Materiais manipuláveis" class="rounded text-gray-600">
+            <span class="ml-2">Materiais manipuláveis</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Vídeos" class="rounded text-gray-600">
+            <span class="ml-2">Vídeos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Jogos educativos" class="rounded text-gray-600">
+            <span class="ml-2">Jogos educativos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherResourceCheck" class="rounded text-gray-600" onchange="toggleOtherResource()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherResource" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro recurso">
+      </div>
+
+      <!-- Componentes Digitais -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Componentes Digitais</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="digitalComponents" value="Plataformas educacionais" class="rounded text-gray-600">
+            <span class="ml-2">Plataformas educacionais</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="digitalComponents" value="Aplicativos" class="rounded text-gray-600">
+            <span class="ml-2">Aplicativos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="digitalComponents" value="Ferramentas de colaboração" class="rounded text-gray-600">
+            <span class="ml-2">Ferramentas de colaboração</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="digitalComponents" value="Realidade aumentada" class="rounded text-gray-600">
+            <span class="ml-2">Realidade aumentada</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherDigitalComponentCheck" class="rounded text-gray-600" onchange="toggleOtherDigitalComponent()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherDigitalComponent" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro componente digital">
+      </div>
+
+      <!-- Instrumentos de Avaliação -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Instrumentos de Avaliação</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluationInstruments" value="Prova" class="rounded text-gray-600">
+            <span class="ml-2">Prova</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluationInstruments" value="Rubrica" class="rounded text-gray-600">
+            <span class="ml-2">Rubrica</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluationInstruments" value="Sondagem" class="rounded text-gray-600">
+            <span class="ml-2">Sondagem</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluationInstruments" value="Observação" class="rounded text-gray-600">
+            <span class="ml-2">Observação</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluationInstruments" value="Autoavaliação" class="rounded text-gray-600">
+            <span class="ml-2">Autoavaliação</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherEvaluationInstrumentCheck" class="rounded text-gray-600" onchange="toggleOtherEvaluationInstrument()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherEvaluationInstrument" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro instrumento de avaliação">
+      </div>
+
+      <!-- Organização da Turma -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Organização da Turma</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="classOrganization" value="Individual" class="rounded text-gray-600">
+            <span class="ml-2">Individual</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="classOrganization" value="Grupo" class="rounded text-gray-600">
+            <span class="ml-2">Grupo</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="classOrganization" value="Duplas" class="rounded text-gray-600">
+            <span class="ml-2">Duplas</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherClassOrganizationCheck" class="rounded text-gray-600" onchange="toggleOtherClassOrganization()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherClassOrganization" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra organização">
+      </div>
+
+      <!-- Culminância -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Culminância</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="culmination" value="Apresentação final" class="rounded text-gray-600">
+            <span class="ml-2">Apresentação final</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="culmination" value="Avaliação" class="rounded text-gray-600">
+            <span class="ml-2">Avaliação</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="culmination" value="Aceito sugestões" class="rounded text-gray-600">
+            <span class="ml-2">Aceito sugestões</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherCulminationCheck" class="rounded text-gray-600" onchange="toggleOtherCulmination()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherCulmination" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra culminância">
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="flex flex-col md:flex-row gap-4">
+        <button type="button" id="generateButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Gerar Prompt</button>
+        <button type="button" id="clearFieldsButton" class="w-full bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors">Limpar Campos</button>
+      </div>
+    </form>
+
+    <!-- Área de Exibição do Projeto Didático -->
+    <div id="outputSection" class="hidden mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Projeto Didático Gerado:</h2>
+      <div id="generatedText" class="w-full p-4 border-2 border-gray-200 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Copiar Texto</button>
+    </div>
+
+    <!-- Seção de Links para AIs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar Projeto Didático com as AIs:</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="https://chat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Chat GPT
+        </a>
+        <a href="https://claude.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Claude
+        </a>
+        <a href="https://deepseek.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          DeepSeek
+        </a>
+        <a href="https://auth.mistral.ai/ui/login?flow=d16c4a30-4cd2-47ce-baea-1f10bba85f4d" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Le Chat
+        </a>
+        <a href="https://chat.qwenlm.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Qwen AI
+        </a>
+         <a href="https://kimi.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Kimi AI
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('discipline').addEventListener('change', function () {
+      const otherDisciplineField = document.getElementById('otherDiscipline');
+      if (this.value === 'Outra') {
+        otherDisciplineField.classList.remove('hidden');
+      } else {
+        otherDisciplineField.classList.add('hidden');
+        otherDisciplineField.value = '';
+      }
+    });
+
+    function toggleOtherResource() {
+      const otherResourceCheck = document.getElementById('otherResourceCheck');
+      const otherResourceInput = document.getElementById('otherResource');
+      otherResourceInput.classList.toggle('hidden', !otherResourceCheck.checked);
+      otherResourceInput.required = otherResourceCheck.checked;
+    }
+
+    function toggleOtherDigitalComponent() {
+      const otherDigitalComponentCheck = document.getElementById('otherDigitalComponentCheck');
+      const otherDigitalComponentInput = document.getElementById('otherDigitalComponent');
+      otherDigitalComponentInput.classList.toggle('hidden', !otherDigitalComponentCheck.checked);
+      otherDigitalComponentInput.required = otherDigitalComponentCheck.checked;
+    }
+
+    function toggleOtherEvaluationInstrument() {
+      const otherEvaluationInstrumentCheck = document.getElementById('otherEvaluationInstrumentCheck');
+      const otherEvaluationInstrumentInput = document.getElementById('otherEvaluationInstrument');
+      otherEvaluationInstrumentInput.classList.toggle('hidden', !otherEvaluationInstrumentCheck.checked);
+      otherEvaluationInstrumentInput.required = otherEvaluationInstrumentCheck.checked;
+    }
+
+    function toggleOtherClassOrganization() {
+      const otherClassOrganizationCheck = document.getElementById('otherClassOrganizationCheck');
+      const otherClassOrganizationInput = document.getElementById('otherClassOrganization');
+      otherClassOrganizationInput.classList.toggle('hidden', !otherClassOrganizationCheck.checked);
+      otherClassOrganizationInput.required = otherClassOrganizationCheck.checked;
+    }
+
+    function toggleOtherCulmination() {
+      const otherCulminationCheck = document.getElementById('otherCulminationCheck');
+      const otherCulminationInput = document.getElementById('otherCulmination');
+      otherCulminationInput.classList.toggle('hidden', !otherCulminationCheck.checked);
+      otherCulminationInput.required = otherCulminationCheck.checked;
+    }
+
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const otherDiscipline = document.getElementById('otherDiscipline').value;
+      const subject = document.getElementById('subject').value;
+      const grade = document.getElementById('grade').value;
+      const numberOfSteps = document.getElementById('numberOfSteps').value;
+      const numberOfEvaluationMoments = document.getElementById('numberOfEvaluationMoments').value;
+      const numberOfClasses = document.getElementById('numberOfClasses').value;
+      const classDuration = document.getElementById('classDuration').value;
+
+      const resources = [...document.querySelectorAll('input[name="resources"]:checked')].map(el => el.value);
+      if (document.getElementById('otherResourceCheck').checked) {
+        resources.push(document.getElementById('otherResource').value);
+      }
+
+      const digitalComponents = [...document.querySelectorAll('input[name="digitalComponents"]:checked')].map(el => el.value);
+      if (document.getElementById('otherDigitalComponentCheck').checked) {
+        digitalComponents.push(document.getElementById('otherDigitalComponent').value);
+      }
+
+      const evaluationInstruments = [...document.querySelectorAll('input[name="evaluationInstruments"]:checked')].map(el => el.value);
+      if (document.getElementById('otherEvaluationInstrumentCheck').checked) {
+        evaluationInstruments.push(document.getElementById('otherEvaluationInstrument').value);
+      }
+
+      const classOrganizations = [...document.querySelectorAll('input[name="classOrganization"]:checked')].map(el => el.value);
+      if (document.getElementById('otherClassOrganizationCheck').checked) {
+        classOrganizations.push(document.getElementById('otherClassOrganization').value);
+      }
+
+      const culminations = [...document.querySelectorAll('input[name="culmination"]:checked')].map(el => el.value);
+      if (document.getElementById('otherCulminationCheck').checked) {
+        culminations.push(document.getElementById('otherCulmination').value);
+      }
+
+      const finalDiscipline = discipline === 'Outra' ? otherDiscipline : discipline;
+
+      const generatedText = `
+        Crie um projeto didático para a disciplina <strong>${finalDiscipline}</strong>, com o tema ou assunto <strong>${subject}</strong>, voltado para alunos do <strong>${grade}</strong> ano.
+
+        <strong>Número de Etapas:</strong> ${numberOfSteps}
+
+        <strong>Número de Momentos Avaliativos:</strong> ${numberOfEvaluationMoments}
+
+        <strong>Número de Aulas:</strong> ${numberOfClasses}
+
+        <strong>Duração das Aulas:</strong> ${classDuration}
+
+        <strong>Recursos:</strong> ${resources.join(', ')}
+
+        <strong>Componentes Digitais:</strong> ${digitalComponents.join(', ')}
+
+        <strong>Instrumentos de Avaliação:</strong> ${evaluationInstruments.join(', ')}
+
+        <strong>Organização da Turma:</strong> ${classOrganizations.join(', ')}
+
+        <strong>Culminância:</strong> ${culminations.join(', ')}
+
+        O projeto didático deve ser estruturado de forma clara e objetiva, com instruções detalhadas para os alunos. Inclua as habilidades da BNCC a partir das escolhas do professor.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+      document.getElementById('outputSection').classList.remove('hidden');
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+
+    document.getElementById('clearFieldsButton').addEventListener('click', function () {
+      document.getElementById('didacticProjectForm').reset();
+      document.getElementById('outputSection').classList.add('hidden');
+      document.getElementById('otherDiscipline').classList.add('hidden');
+      document.getElementById('otherResource').classList.add('hidden');
+      document.getElementById('otherDigitalComponent').classList.add('hidden');
+      document.getElementById('otherEvaluationInstrument').classList.add('hidden');
+      document.getElementById('otherClassOrganization').classList.add('hidden');
+      document.getElementById('otherCulmination').classList.add('hidden');
+      document.getElementById('otherDiscipline').required = false;
+      document.getElementById('otherResource').required = false;
+      document.getElementById('otherDigitalComponent').required = false;
+      document.getElementById('otherEvaluationInstrument').required = false;
+      document.getElementById('otherClassOrganization').required = false;
+      document.getElementById('otherCulmination').required = false;
+    });
+  </script>
+</body>
+</html>
