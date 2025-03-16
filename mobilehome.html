@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8KMYP17RJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S8KMYP17RJ');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geradores e Prompts Educacionais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 0.5rem;
+    }
+    .header {
+      background: linear-gradient(to right, #1919e6, #4a4aff);
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    .header h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    .header p {
+      font-size: 1rem;
+    }
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .button-group a {
+      background-color: #1919e6;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      width: 90%;
+      text-align: center;
+    }
+    .button-group a:hover {
+      background-color: #0000cc;
+    }
+    .button-group i {
+      margin-right: 0.5rem;
+    }
+    .card {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 1.25rem;
+      color: #1919e6;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+    .card a {
+      background-color: #f3f4f6;
+      color: #374151;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s;
+    }
+    .card a:hover {
+      background-color: #1919e6;
+      color: white;
+    }
+    .chatbot-card {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      max-width: 100%;
+      margin: 1rem auto;
+    }
+    .chatbot-card img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      object-fit: cover;
+    }
+    .chatbot-card h3 {
+      font-size: 1.25rem;
+      color: #1919e6;
+      margin-bottom: 0.5rem;
+    }
+    .chatbot-card p {
+      font-size: 1rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+    .chatbot-card a {
+      background-color: #f3f4f6;
+      color: #374151;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s;
+    }
+    .chatbot-card a:hover {
+      background-color: #1919e6;
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Cabeçalho Explicativo -->
+  <header class="header">
+    <div class="container">
+      <h2>Hub de Geradores de Prompts Educacionais</h2>
+      <p>Esta página foi projetada para facilitar o acesso a ferramentas que ajudam o professor a criar recursos educacionais personalizados. Clique nos links abaixo para acessar os geradores específicos e começar a criar atividades com Inteligência Artificial (IA).</p>
+    </div>
+  </header>
+
+  <!-- Botões de Links -->
+  <div class="button-group">
+    <a href="https://educ.nekoweb.org/geradores/ferramentas/ferramentasparaprof.html" target="_blank"><i class="fas fa-tools"></i> Ferramentas úteis</a>
+    <a href="https://educ.nekoweb.org/geradores/produtividade.html" target="_blank"><i class="fas fa-tasks"></i> Produtividade</a>
+    <a href="https://educ.nekoweb.org/geradores%2Fferramentas/online.html" target="_blank"><i class="fas fa-globe"></i> Ferramentas Online</a>
+    <a href="https://educ.nekoweb.org/geradores/ebooktrilhas.html" target="_blank"><i class="fas fa-book"></i> E-book Trilhas</a>
+  </div>
+
+  <!-- Botão centralizado com ícone e hover -->
+  <div style="text-align: center; margin: 1rem 0;">
+    <a href="https://chat.whatsapp.com/SEU_LINK_DO_GRUPO" target="_blank" style="text-decoration: none;">
+      <button style="background-color: #25D366; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; transition: background-color 0.3s ease; width: 90%;">
+        <i class="fab fa-whatsapp"></i> Nossa comunidade
+      </button>
+    </a>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-6">
+    <h2 class="text-4xl font-bold mt-8 mb-6 text-center">Escolha a ferramenta que Você Precisa</h2>
+    <div class="grid grid-cols-1 gap-8">
+      <!-- Atividade para Aula -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Atividade para Aula">
+        <h3>Atividade para Aula</h3>
+        <p>Crie atividades personalizadas para suas aulas de forma rápida e eficiente.</p>
+        <a href="https://educ.nekoweb.org/geradores/atvidade.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Plano de Aula -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/plano.jpg" alt="Plano de Aula">
+        <h3>Plano de Aula</h3>
+        <p>Gere planos de aula completos e personalizados para suas turmas.</p>
+        <a href="https://educ.nekoweb.org/geradores/aula.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Plano de Curso -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Plano de Unidade">
+        <h3>Plano de Unidade</h3>
+        <p>Crie planos de Unidade detalhados e estruturados para suas disciplinas.</p>
+        <a href="https://educ.nekoweb.org/geradores/unidade.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividade Avaliativa -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Atividade Avaliativa">
+        <h3>Atividade Avaliativa</h3>
+        <p>Desenvolva atividades avaliativas para medir o aprendizado dos alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/avaliacao.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Rubrica Avaliativa -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Rubrica de Avaliação">
+        <h3>Rubrica de Avaliação</h3>
+        <p>Crie rubricas de avaliação para avaliar o desempenho dos alunos de forma justa e detalhada.</p>
+        <a href="https://educ.nekoweb.org/geradores/rubrica.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Sequência Didática -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Sequência Didática">
+        <h3>Sequência Didática</h3>
+        <p>Gere sequências didáticas completas e personalizadas para suas aulas.</p>
+        <a href="https://educ.nekoweb.org/geradores/sequencia.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Projeto Didático -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/projeto.jpg" alt="Projeto Didático">
+        <h3>Projeto Didático</h3>
+        <p>Crie projetos didáticos detalhados e estruturados para suas turmas.</p>
+        <a href="https://educ.nekoweb.org/geradores/projeto.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Correção de Texto -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/corrigirtexto.jpg" alt="Correção de Texto">
+        <h3>Correção de Texto</h3>
+        <p>Corrija textos na forma gramatical, ortográfica e estilística.</p>
+        <a href="https://educ.nekoweb.org/geradores/texto.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Texto Base -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/apoio.jpg" alt="Texto de Apoio">
+        <h3>Texto de Apoio</h3>
+        <p>Crie textos base para trabalhar em sala de aula, personalizados para suas necessidades.</p>
+        <a href="https://educ.nekoweb.org/geradores/textobase.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades baseadas no mês -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/mes.jpg" alt="Atividades baseadas no mês">
+        <h3>Atividades baseadas no mês</h3>
+        <p>Crie atividades relacionadas a datas comemorativas do mês selecionado.</p>
+        <a href="https://educ.nekoweb.org/geradores/mes.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Correção de Redação do Enem -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/redacao.jpg" alt="Correção de Redação">
+        <h3>Correção de Redação</h3>
+        <p>Gere prompts para corrigir redações com base nas cinco competências do Enem e reescreva o texto corrigido.</p>
+        <a href="https://educ.nekoweb.org/geradores/redacaoenem.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades de Alfabetização -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/alfa.jpg" alt="Atividades de Alfabetização">
+        <h3>Atividades de Alfabetização</h3>
+        <p>Crie atividades de alfabetização baseadas nas teorias de Emilia Ferreiro e Ana Teberosky.</p>
+        <a href="https://educ.nekoweb.org/geradores/alfabetizacao.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades SAEB -->
+      <div class="card">
+        <img src="https://web2.nekoweb.org/reposit%C3%B3rio/saeb.jpg" alt="Atividades SAEB">
+        <h3>Atividades SAEB</h3>
+        <p>Crie atividades alinhadas às habilidades e competências do SAEB, com questões de anos anteriores.</p>
+        <a href="https://educ.nekoweb.org/geradores/saeb.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Aula Relevante -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Aula Relevante">
+        <h3>Aula Relevante</h3>
+        <p>Crie aulas que tornem o conteúdo relevante para sua turma, com base nos interesses e necessidades dos alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/aularelevante.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades de Inglês -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Atividades de Inglês">
+        <h3>Atividades de Inglês</h3>
+        <p>Crie atividades personalizadas para o ensino de inglês, focadas em vocabulário, gramática e conversação.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/ativ_ingles.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades de Matemática -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Atividades de Matemática">
+        <h3>Atividades de Matemática</h3>
+        <p>Desenvolva atividades de matemática para diferentes níveis de ensino, desde operações básicas até problemas complexos.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/ativmatematica.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Caça-Palavras -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Caça-Palavras">
+        <h3>Caça-Palavras</h3>
+        <p>Gere caça-palavras temáticos para reforçar o vocabulário e a concentração dos alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/ca%C3%83%C2%A7apalavras.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Cruzadas -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Cruzadas">
+        <h3>Cruzadas</h3>
+        <p>Crie cruzadas educativas para estimular o raciocínio e o conhecimento dos alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/cruzadas.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Histórias -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Histórias">
+        <h3>Histórias</h3>
+        <p>Gere histórias personalizadas para trabalhar a criatividade e a interpretação de texto.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/historias.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Vocabulário -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Vocabulário">
+        <h3>Vocabulário</h3>
+        <p>Desenvolva atividades para expandir o vocabulário dos alunos de forma contextualizada.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/vocabuario.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Compreensão de Texto -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Compreensão de Texto">
+        <h3>Compreensão de Texto</h3>
+        <p>Crie atividades de compreensão de leitura com textos informativos e perguntas variadas.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/compreensaotexto.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Escape Room -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Escape Room">
+        <h3>Escape Room</h3>
+        <p>Gere prompts para criar escape rooms educativos e envolventes.</p>
+        <a href="https://educ.nekoweb.org/geradores%2Fnew/escaperoom.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades para Educação Infantil -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Atividades para Educação Infantil">
+        <h3>Atividades para Educação Infantil</h3>
+        <p>Crie atividades personalizadas para crianças de 4 e 5 anos (níveis G4 e G5).</p>
+        <a href="https://educ.nekoweb.org/geradores/edinfantil.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades Socioemocionais -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Atividades Socioemocionais">
+        <h3>Atividades Socioemocionais</h3>
+        <p>Crie atividades focadas no desenvolvimento das competências socioemocionais dos alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/socioemocionais.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Estudo de Caso -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Estudo de Caso">
+        <h3>Estudo de Caso</h3>
+        <p>Crie estudos de caso detalhados para análise e discussão em sala de aula.</p>
+        <a href="https://educ.nekoweb.org/geradores/estudodecaso.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Atividades para PCD -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Atividades para PCD">
+        <h3>Atividades para PCD</h3>
+        <p>Crie atividades adaptadas para alunos com deficiência física, sensorial ou intelectual.</p>
+        <a href="https://educ.nekoweb.org/geradores/pcd.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Design Thinking -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Design Thinking">
+        <h3>Design Thinking</h3>
+        <p>Crie atividades baseadas na metodologia de Design Thinking para resolver problemas de forma criativa.</p>
+        <a href="https://educ.nekoweb.org/geradores/designthinking.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Sala de Aula Invertida -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Sala de Aula Invertida">
+        <h3>Sala de Aula Invertida</h3>
+        <p>Gere prompts para atividades de Flipped Classroom, com foco no estudo prévio e aplicação em sala.</p>
+        <a href="https://educ.nekoweb.org/geradores/flipped.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Trilha de Aprendizagem -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Trilha de Aprendizagem">
+        <h3>Trilha de Aprendizagem</h3>
+        <p>Crie trilhas de aprendizagem personalizadas com sequências de atividades e recursos.</p>
+        <a href="https://educ.nekoweb.org/geradores/trilha.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Mapas Mentais -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Mapas Mentais">
+        <h3>Mapas Mentais</h3>
+        <p>Crie prompts personalizados para gerar mapas mentais com IA.</p>
+        <a href="https://educ.nekoweb.org/geradores/mapamental.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Resumos -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Resumos">
+        <h3>Resumos</h3>
+        <p>Crie prompts personalizados para gerar resumos de textos com IA.</p>
+        <a href="https://educ.nekoweb.org/geradores/resumo.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Apresentação de Slides -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Apresentação de Slides">
+        <h3>Apresentação de Slides</h3>
+        <p>Crie prompts personalizados para gerar apresentações de slides completas com IA.</p>
+        <a href="https://educ.nekoweb.org/geradores/apresenta%C3%83%C2%A7%C3%83%C2%B5es.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Habilidades e Competências da BNCC -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Habilidades e Competências da BNCC">
+        <h3>Gerador de Habilidades e Competências da BNCC</h3>
+        <p>Crie alinhamentos de atividades e planos de aula de acordo com as diretrizes da BNCC.</p>
+        <a href="https://educ.nekoweb.org/geradores/bncc.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Recursos Educacionais -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Recursos Educacionais">
+        <h3>Recursos Educacionais</h3>
+        <p>Explore uma variedade de recursos educacionais criados com IA para aprimorar sua experiência de aprendizado.</p>
+        <a href="https://educ.nekoweb.org/geradores/recursos.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Jogos Educativos -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Jogos Educativos">
+        <h3>Jogos Educativos</h3>
+        <p>Crie jogos educativos interativos gerados por IA para tornar o aprendizado mais divertido e eficaz.</p>
+        <a href="https://educ.nekoweb.org/geradores/jogos.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Quizzes -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Quizzes">
+        <h3>Gerador de Quizzes</h3>
+        <p>Crie quizzes personalizados de forma rápida e fácil, com sugestões geradas por IA para engajar seus alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/quiz.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Questões de PDF -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Questões de PDF">
+        <h3>Gerador de Questões de PDF</h3>
+        <p>Crie questões personalizadas a partir de arquivos PDF hospedados na web, com sugestões geradas por IA para engajar seus alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/questtoespdf.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Boletim de acompanhamento da Aprendizagem -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Boletim de acompanhamento da Aprendizagem">
+        <h3>Gerador de Boletim de acompanhamento da Aprendizagem</h3>
+        <p>Crie boletins escolares personalizados com mensagens para os pais, incentivando a colaboração no processo de aprendizagem dos alunos em sua(s) disciplina(s).</p>
+        <a href="https://educ.nekoweb.org/geradores/boletim.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Perguntas sobre Vídeos -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Perguntas sobre Vídeos">
+        <h3>Gerador de Perguntas sobre Vídeos</h3>
+        <p>Crie perguntas personalizadas a partir de vídeos, com sugestões geradas por IA para engajar seus alunos e avaliar a compreensão do conteúdo.</p>
+        <a href="https://educ.nekoweb.org/geradores/questoesvideos.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Autocorreção de textos para erros comuns -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Autocorreção de textos para erros comuns">
+        <h3>Gerador de Autocorreção de textos para erros comuns</h3>
+        <p>Crie atividades de autocorreção para erros comuns (repetitivos) para incentivar a autonomia dos alunos e facilitar a avaliação contínua do aprendizado.</p>
+        <a href="https://educ.nekoweb.org/geradores/autocorrecao.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Imagens -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Imagens">
+        <h3>Gerador de Imagens</h3>
+        <p>Crie imagens para tornar o aprendizado mais visual, dinâmico e atrativo para os alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/imagens.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Criar Temas Geradores para EJA -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Criar Temas Geradores para EJA">
+        <h3>Criar Temas Geradores para EJA</h3>
+        <p>Gere Prompts perfeitos paa trabalhar com temas Geradores na EJA e Outras..</p>
+        <a href="https://educ.nekoweb.org/geradores/temagerador.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Atividades para Creches -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Atividades para Creches">
+        <h3>Gerador de Atividades para Creches</h3>
+        <p>Crie atividades lúdicas e educativas alinhadas com as Diretrizes Pedagógicas e a BNCC para crianças de 0 a 3 anos.</p>
+        <a href="https://educ.nekoweb.org/geradores/creche.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Quadros Comparativos -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Quadros Comparativos">
+        <h3>Gerador de Quadros Comparativos</h3>
+        <p>Crie quadros comparativos eficazes para comparar conceitos, fatos históricos ou situações de aprendizagem, com sugestões personalizadas para uso em sala de aula.</p>
+        <a href="https://educ.nekoweb.org/geradores/quadrocomparativo.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Planos de Aula com Filmes Nacionais -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Planos de Aula com Filmes Nacionais">
+        <h3>Gerador de Planos de Aula com Filmes Nacionais</h3>
+        <p>Crie planos de aula envolventes e alinhados à BNCC utilizando filmes nacionais, com sugestões de atividades prévias, durante e pós-filme, além de habilidades e competências sugeridas.</p>
+        <a href="https://educ.nekoweb.org/geradores/filme.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Prompt para Pesquisa de Bibliografia -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Prompt para Pesquisa de Bibliografia">
+        <h3>Gerador de Prompt para Pesquisa de Bibliografia</h3>
+        <p>Crie prompts eficazes para pesquisar bibliografia em português, em formato PDF e disponível para download gratuito, com sugestões personalizadas para uso em sala de aula.</p>
+        <a href="https://educ.nekoweb.org/geradores/bibliografia.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Prompt para Aulas de Geometria -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Prompt para Aulas de Geometria">
+        <h3>Gerador de Prompt para Aulas de Geometria</h3>
+        <p>Crie prompts eficazes para gerar planos de aula de Geometria alinhados à BNCC, com sugestões personalizadas e recursos na web para uso em sala de aula.</p>
+        <a href="https://educ.nekoweb.org/geradores/geometria.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Prompt para Debate Regrado -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Prompt para Debate Regrado">
+        <h3>Gerador de Prompt para Debate Regrado</h3>
+        <p>Crie prompts eficazes para gerar atividades de debate regrado alinhadas à BNCC, com sugestões personalizadas e recursos na web para uso em sala de aula.</p>
+        <a href="https://educ.nekoweb.org/geradores/debate.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Prompt para Linhas do Tempo -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Prompt para Linhas do Tempo">
+        <h3>Gerador de Prompt para Linhas do Tempo</h3>
+        <p>Crie prompts eficazes para gerar linhas do tempo escritas alinhadas à BNCC, com sugestões de atividades e recursos para uso em sala de aula.</p>
+        <a href="https://educ.nekoweb.org/geradores/linhadotempo.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Prompt para o Primeiro Dia de Aula -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Prompt para o Primeiro Dia de Aula">
+        <h3>Gerador de Prompt para o Primeiro Dia de Aula</h3>
+        <p>Crie prompts personalizados para atividades lúdicas e interativas no primeiro dia de aula, alinhadas à BNCC, com sugestões de dinâmicas e recursos para integrar os alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/primer.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Gerador de Planejamento para Educação Integral -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gerador de Planejamento para Educação Integral">
+        <h3>Gerador de Planejamento para Educação Integral</h3>
+        <p>Ferramenta para gerar prompts para AIs de Planos de aula, Sequências, etc. Para Educação Integral.</p>
+        <a href="https://educ.nekoweb.org/geradores/integral.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Detector de Plágio e textos gerados por AI -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Detector de Plágio e textos gerados por AI">
+        <h3>Detector de Plágio e textos gerados por AI</h3>
+        <p>Ferramenta para auxiliar na identificação de possíveis plágios e gerados por AI em textos e trabalhos acadêmicos.</p>
+        <a href="https://educ.nekoweb.org/geradores/plagio.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Estratégias de Aprendizagem Personalizadas -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Estratégias de Aprendizagem Personalizadas">
+        <h3>Estratégias de Aprendizagem Personalizadas</h3>
+        <p>Ferramenta para auxiliar professores a identificar estilos de aprendizagem e criar estratégias personalizadas para seus alunos.</p>
+        <a href="https://educ.nekoweb.org/geradores/aprendizagem.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Análise de Texto Literário para Sala de Aula -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Análise de Texto Literário para Sala de Aula">
+        <h3>Análise de Texto Literário para Sala de Aula</h3>
+        <p>Ferramenta para auxiliar professores a analisar textos literários e gerar sugestões de como utilizá-los em sala de aula.</p>
+        <a href="https://educ.nekoweb.org/geradores/textoliterario.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Plano de Aula sobre Ética e Valores -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Plano de Aula sobre Ética e Valores">
+        <h3>Plano de Aula sobre Ética e Valores</h3>
+        <p>Ferramenta para auxiliar professores a criar planos de aula que abordam ética, respeito, cidadania e convivência.</p>
+        <a href="https://educ.nekoweb.org/geradores/valores.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Plano de Aula sobre Educação Ambiental -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Plano de Aula sobre Educação Ambiental">
+        <h3>Plano de Aula sobre Educação Ambiental</h3>
+        <p>Ferramenta para auxiliar professores a criar planos de aula que abordam sustentabilidade, preservação ambiental e conscientização ecológica.</p>
+        <a href="https://educ.nekoweb.org/geradores/ambiental.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Plano de Aula sobre Consumo Consciente -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Plano de Aula sobre Consumo Consciente">
+        <h3>Plano de Aula sobre Consumo Consciente</h3>
+        <p>Ferramenta para auxiliar professores a criar planos de aula que abordam consumo responsável, sustentabilidade e impacto ambiental.</p>
+        <a href="https://educ.nekoweb.org/geradores/consumo.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Plano de Aula sobre Roteiros de Documentários -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Plano de Aula sobre Roteiros de Documentários">
+        <h3>Plano de Aula sobre Roteiros de Documentários</h3>
+        <p>Ferramenta para auxiliar professores a criar planos de aula que ensinam alunos a produzirem roteiros de documentários ou curtas-metragens escolares.</p>
+        <a href="https://educ.nekoweb.org/geradores/documentario.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Plano de Aula sobre Júri Simulado -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Plano de Aula sobre Júri Simulado">
+        <h3>Plano de Aula sobre Júri Simulado</h3>
+        <p>Ferramenta para auxiliar professores a criar planos de aula que envolvem debates, argumentação e simulação de julgamentos.</p>
+        <a href="https://educ.nekoweb.org/geradores/juri.html" class="hover-accent">Acessar</a>
+      </div>
+
+      <!-- Análise de Dados de Provas Escolares -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Análise de Dados de Provas Escolares">
+        <h3>Análise de Dados de Provas Escolares</h3>
+        <p>Ferramenta para auxiliar professores a analisar o desempenho dos alunos em provas, com relatórios detalhados e insights personalizados.</p>
+        <a href="https://educ.nekoweb.org/geradores/analisededados.html" class="hover-accent">Acessar</a>
+      </div>
+    </div>
+
+    <!-- Brinde: Chatbot com Paulo Freire -->
+    <div class="chatbot-card">
+      <img src="https://educ.nekoweb.org/geradores/images.jpeg" alt="Paulo Freire">
+      <h3>Chatbot: Converse com Paulo Freire</h3>
+      <p>Explore a filosofia educacional de Paulo Freire em um bate-papo interativo.</p>
+      <a href="https://character.ai/chat/DguWzOrPqEufwTxnUedHRw3Ln0H7vjjNT5Kv1ZC54OQ" class="hover-accent">Acessar Assistente</a>
+    </div>
+  </main>
+
+  <!-- Feedback -->
+  <script src="https://form.jotform.com/static/feedback2.js"></script>
+  <script>
+    var componentID = new JotformFeedback({
+      type: 0,
+      width: '100%',
+      height: 'auto',
+      fontColor: "#FFFFFF",
+      background: "#1919e6",
+      isCardForm: false,
+      formId: "243572692451057",
+      buttonText: "Feedback",
+      buttonSide: "right",
+      buttonAlign: "bottom",
+      base: "https://form.jotform.com/",
+    }).componentID;
+  </script>
+  <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+</body>
+</html>

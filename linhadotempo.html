@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Linhas do Tempo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompts para Linhas do Tempo</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Linhas do Tempo</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar prompts eficazes para gerar linhas do tempo escritas, que podem ser copiadas e coladas diretamente no Word. Preencha os campos abaixo para gerar um prompt que pode ser levado para uma IA e obter sugestões de linhas do tempo prontas para uso em sala de aula.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um prompt:</h2></center>
+    <form id="timelineForm" class="space-y-4">
+      <!-- Disciplina -->
+      <div>
+        <label for="subject" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina para a qual deseja criar a linha do tempo.</span>
+          </span>
+        </label>
+        <select id="subject" name="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Língua Portuguesa">Língua Portuguesa</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherSubject" name="otherSubject" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra disciplina (opcional)" style="display: none;">
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano de Escolaridade
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano de escolaridade para o qual deseja criar a linha do tempo.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <optgroup label="Fundamental I">
+            <option value="1º ano">1º ano</option>
+            <option value="2º ano">2º ano</option>
+            <option value="3º ano">3º ano</option>
+            <option value="4º ano">4º ano</option>
+            <option value="5º ano">5º ano</option>
+          </optgroup>
+          <optgroup label="Fundamental II">
+            <option value="6º ano">6º ano</option>
+            <option value="7º ano">7º ano</option>
+            <option value="8º ano">8º ano</option>
+            <option value="9º ano">9º ano</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <!-- Tema da Linha do Tempo -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema da Linha do Tempo
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Defina o tema central da linha do tempo.</span>
+          </span>
+        </label>
+        <input type="text" id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Revolução Industrial, Segunda Guerra Mundial, História do Brasil">
+      </div>
+
+      <!-- Período Histórico -->
+      <div>
+        <label for="period" class="block text-lg font-medium text-gray-700 flex items-center">
+          Período Histórico
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Defina o período histórico que a linha do tempo deve cobrir. Pode ser uma descrição ou intervalo de datas.</span>
+          </span>
+        </label>
+        <input type="text" id="period" name="period" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: 1750-1850, Roma: da criação ao fim do Império, Era Vargas">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000ff]">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50">
+        <p class="text-gray-700">O prompt gerado aparecerá aqui.</p>
+      </div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000ff]">Copiar Prompt</button>
+    </div>
+
+    <!-- Links para AIs Capazes de Criar Linhas do Tempo Escritas -->
+    <div class="mt-8">
+      <h3 class="text-xl font-bold mb-4">Leve o Prompt para uma IA:</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 text-center">
+          <i class="fas fa-comment-alt mr-2"></i>ChatGPT
+        </a>
+        <a href="https://www.deepseek.com/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-center">
+          <i class="fas fa-search mr-2"></i>DeepSeek
+        </a>
+        <a href="https://www.anthropic.com/claude" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 text-center">
+          <i class="fas fa-brain mr-2"></i>Claude
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Linhas do Tempo Escritas. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Mostrar campo de texto para "Outra" disciplina
+    document.getElementById('subject').addEventListener('change', function () {
+      const otherSubjectField = document.getElementById('otherSubject');
+      if (this.value === 'Outra') {
+        otherSubjectField.style.display = 'block';
+      } else {
+        otherSubjectField.style.display = 'none';
+        otherSubjectField.value = '';
+      }
+    });
+
+    // Gerar prompt
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const subject = document.getElementById('subject').value === 'Outra' ? document.getElementById('otherSubject').value : document.getElementById('subject').value;
+      const grade = document.getElementById('grade').value;
+      const theme = document.getElementById('theme').value;
+      const period = document.getElementById('period').value;
+
+      const promptText = `
+        Crie uma linha do tempo escrita para a disciplina de ${subject}, no ${grade}, com o tema "${theme}", cobrindo o período histórico de ${period}.
+
+        **Instruções para a IA:**
+        1. Identifique e liste as habilidades da BNCC relevantes para o tema e o ano de escolaridade selecionados.
+        2. Destaque os eventos mais importantes relacionados ao tema e ao período histórico.
+        3. Organize a linha do tempo em ordem cronológica, com datas e descrições claras dos eventos.
+        4. Formate a linha do tempo em texto puro, para que possa ser copiada e colada diretamente no Word.
+        5. Certifique-se de que o conteúdo seja adequado para uso em sala de aula, com linguagem clara e acessível.
+        6. Sugira uma atividade prática para os alunos utilizando a linha do tempo, que esteja alinhada com o tema, o ano de escolaridade e as habilidades da BNCC identificadas.
+      `;
+
+      document.getElementById('generatedText').innerText = promptText;
+    });
+
+    // Copiar prompt gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Prompt Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Prompt';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
