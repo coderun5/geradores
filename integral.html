@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação Integal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Gerador de Prompts para Planos de Aula de Educação Integral</h1>
+            <p class="mt-2">Ferramenta para criação de planos de aula alinhados à Educação Integral</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto my-8 p-4 bg-white rounded shadow">
+        <h2 class="text-2xl font-bold mb-4">Configuração do Prompt</h2>
+        <form id="promptForm" class="space-y-6">
+            <!-- Intencionalidade e Dimensões -->
+            <div>
+                <label class="block text-lg font-medium">Defina a intencionalidade do plano de aula:</label>
+                <div class="mt-2 space-y-2">
+                    <div class="flex items-center">
+                        <input id="intent1" name="intent" type="checkbox" value="Desenvolvimento de competências socioemocionais" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="intent1" class="ml-2">Desenvolvimento de competências socioemocionais</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="intent2" name="intent" type="checkbox" value="Promoção da cidadania ativa" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="intent2" class="ml-2">Promoção da cidadania ativa</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="intent3" name="intent" type="checkbox" value="Fomento à criatividade e inovação" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="intent3" class="ml-2">Fomento à criatividade e inovação</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="intent4" name="intent" type="checkbox" value="Integração de saberes interdisciplinares" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="intent4" class="ml-2">Integração de saberes interdisciplinares</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdos -->
+            <div>
+                <label class="block text-lg font-medium">Organize os conteúdos a serem trabalhados:</label>
+                <div class="mt-2 space-y-2">
+                    <div class="flex items-center">
+                        <input id="content1" name="contents" type="checkbox" value="Língua Portuguesa" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="content1" class="ml-2">Língua Portuguesa</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="content2" name="contents" type="checkbox" value="Matemática" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="content2" class="ml-2">Matemática</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="content3" name="contents" type="checkbox" value="Ciências" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="content3" class="ml-2">Ciências</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="content4" name="contents" type="checkbox" value="História e Geografia" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="content4" class="ml-2">História e Geografia</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="content5" name="contents" type="checkbox" value="Interdisciplinar" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="content5" class="ml-2">Interdisciplinar</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="content6" name="contents" type="checkbox" value="Multidisciplinar" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="content6" class="ml-2">Multidisciplinar</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="content7" name="contents" type="checkbox" value="Transdisciplinar" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="content7" class="ml-2">Transdisciplinar</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metodologias -->
+            <div>
+                <label class="block text-lg font-medium">Escolha as metodologias:</label>
+                <div class="mt-2 space-y-2">
+                    <div class="flex items-center">
+                        <input id="method1" name="methodologies" type="checkbox" value="Aprendizagem Baseada em Projetos" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method1" class="ml-2">Aprendizagem Baseada em Projetos</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="method2" name="methodologies" type="checkbox" value="Sala de Aula Invertida" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method2" class="ml-2">Sala de Aula Invertida</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="method3" name="methodologies" type="checkbox" value="Gamificação" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method3" class="ml-2">Gamificação</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="method4" name="methodologies" type="checkbox" value="Aprendizagem Cooperativa" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method4" class="ml-2">Aprendizagem Cooperativa</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="method5" name="methodologies" type="checkbox" value="Sequência Didática" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method5" class="ml-2">Sequência Didática</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="method6" name="methodologies" type="checkbox" value="Estudo de Caso" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method6" class="ml-2">Estudo de Caso</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="method7" name="methodologies" type="checkbox" value="Aprendizagem Baseada em Problemas" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method7" class="ml-2">Aprendizagem Baseada em Problemas</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="method8" name="methodologies" type="checkbox" value="Design Thinking" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="method8" class="ml-2">Design Thinking</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diretrizes e BNCC -->
+            <div>
+                <fieldset>
+                    <legend class="block text-lg font-medium">Diretrizes e Bases:</legend>
+                    <div class="flex items-center mt-2">
+                        <input id="bncc" name="guidelines" type="checkbox" value="BNCC" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="bncc" class="ml-2">Base Nacional Comum Curricular (BNCC)</label>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <input id="antiRacist" name="guidelines" type="checkbox" value="Diretrizes Antirracistas" 
+                               class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="antiRacist" class="ml-2">Diretrizes de Educação Integral Antirracista</label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Botão Gerar -->
+            <div class="text-center">
+                <button type="button" onclick="generatePrompt()" 
+                        class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700 focus:outline-none">
+                    Gerar Prompt
+                </button>
+            </div>
+        </form>
+
+        <!-- Resultado -->
+        <div id="promptOutput" class="mt-8 p-4 bg-gray-100 border rounded hidden">
+            <h3 class="text-xl font-bold mb-2">Prompt Gerado:</h3>
+            <pre id="outputContent" class="text-sm bg-white p-2 rounded"></pre>
+            <button onclick="copyPrompt()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 focus:outline-none">
+                Copiar Prompt
+            </button>
+        </div>
+
+        <!-- Links para AIs -->
+        <div class="mt-8 text-center">
+            <h3 class="text-xl font-bold mb-4">Leve seu prompt para:</h3>
+            <div class="space-x-4">
+                <a href="https://chat.openai.com" target="_blank" class="bg-green-600 text-white px-6 py-2 rounded font-bold hover:bg-green-700">ChatGPT</a>
+                <a href="https://gemini.google.com" target="_blank" class="bg-purple-600 text-white px-6 py-2 rounded font-bold hover:bg-purple-700">Gemini</a>
+                <a href="https://www.deepseek.com" target="_blank" class="bg-orange-600 text-white px-6 py-2 rounded font-bold hover:bg-orange-700">DeepSeek</a>
+                <a href="https://claude.ai" target="_blank" class="bg-red-600 text-white px-6 py-2 rounded font-bold hover:bg-red-700">Claude AI</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function generatePrompt() {
+            const intents = [];
+            document.querySelectorAll('input[name="intent"]:checked').forEach((checkbox) => {
+                intents.push(checkbox.value);
+            });
+
+            const contents = [];
+            document.querySelectorAll('input[name="contents"]:checked').forEach((checkbox) => {
+                contents.push(checkbox.value);
+            });
+
+            const methodologies = [];
+            document.querySelectorAll('input[name="methodologies"]:checked').forEach((checkbox) => {
+                methodologies.push(checkbox.value);
+            });
+
+            const guidelines = [];
+            document.querySelectorAll('input[name="guidelines"]:checked').forEach((checkbox) => {
+                guidelines.push(checkbox.value);
+            });
+
+            const prompt = `Crie um plano de aula detalhado para educação integral no ensino fundamental, com base nas seguintes escolhas:
+
+**Intencionalidade**:
+${intents.join(', ')}
+
+**Conteúdos**:
+${contents.join(', ')}
+
+**Metodologias**:
+${methodologies.join(', ')}
+
+**Diretrizes e Bases**:
+${guidelines.join(', ')}
+
+**Instruções para a AI**:
+1. Explique como o plano atenderá às intencionalidades selecionadas.
+2. Organize os conteúdos de forma interdisciplinar, relacionando-os ao cotidiano dos estudantes.
+3. Utilize as metodologias ativas escolhidas para engajar os estudantes.
+4. Alinhe o plano com as diretrizes selecionadas.
+5. Siga a estrutura sugerida: tema, duração, recursos, desenvolvimento da aula e avaliação.
+6. Inclua dicas práticas para implementação em sala de aula.`;
+
+            document.getElementById('outputContent').textContent = prompt;
+            document.getElementById('promptOutput').classList.remove('hidden');
+        }
+
+        function copyPrompt() {
+            const promptText = document.getElementById('outputContent').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert('Prompt copiado para a área de transferência!');
+            });
+        }
+    </script>
+</body>
+</html>

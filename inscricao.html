@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Inscrição</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100">
+  <!-- Cabeçalho -->
+  <header class="bg-white shadow-md py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <div class="flex items-center">
+        <img src="https://educ.nekoweb.org/geradores/ai.gif" alt="Logo" class="h-10 mr-4">
+        <h1 class="text-xl font-bold text-gray-800">Inscrição e Login</h1>
+      </div>
+      <nav class="space-x-6">
+        <a href="https://educ.nekoweb.org/geradores/landing.html" class="text-gray-600 hover:text-orange-500">Voltar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção Principal -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl mx-auto">
+        <!-- Card do Formulário do Google -->
+        <div class="bg-white p-8 rounded-lg shadow-md mb-8">
+          <h2 class="text-3xl font-bold text-center mb-6">Inscreva-se para ter acesso</h2>
+          <p class="text-gray-600 text-center mb-8">
+            Preencha o formulário para nos enviar uma mensagem. Responderemos imediatamente na mensagem de retorno do formulário com login e senha de acesso. Faça login no form abaixo deste.
+          </p>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU5nvRUupwb4PEtku4y8ndeRtoDBexdiV9qNqd3MyqLTac3g/viewform?embedded=true" width="100%" height="885" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        </div>
+
+        <!-- Card do Formulário de Login -->
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold text-center mb-4">Login</h3>
+          <form id="loginForm" class="space-y-4">
+            <input type="text" id="username" placeholder="Usuário" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <input type="password" id="password" placeholder="Senha" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Entrar</button>
+          </form>
+          <div id="errorMessage" class="text-red-500 text-center mt-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script de Login -->
+  <script>
+    // Função para validar o login
+    function validateLogin(event) {
+      event.preventDefault(); // Impede o envio do formulário
+
+      // Credenciais válidas
+      const validUsername = "prof";
+      const validPassword = "profai";
+
+      // Captura os valores dos campos
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Verifica as credenciais
+      if (username === validUsername && password === validPassword) {
+        // Redireciona para a página desejada após o login bem-sucedido
+        window.location.href = "https://educ.nekoweb.org/geradores/loadingpage.html";
+      } else {
+        // Exibe uma mensagem de erro
+        document.getElementById("errorMessage").textContent = "Usuário ou senha incorretos.";
+        document.getElementById("errorMessage").classList.remove("text-green-500");
+        document.getElementById("errorMessage").classList.add("text-red-500");
+      }
+    }
+
+    // Adiciona um listener para o formulário
+    document.getElementById("loginForm").addEventListener("submit", validateLogin);
+  </script>
+</body>
+</html>

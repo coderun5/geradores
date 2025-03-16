@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferramentas Educacionais</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .rounded-card {
+      border-radius: 50%; /* Torna o card completamente redondo */
+      aspect-ratio: 1; /* Garante que o card seja um quadrado perfeito */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem; /* Espaçamento interno */
+      width: 300px; /* Largura fixa */
+      height: 300px; /* Altura fixa */
+    }
+    .rounded-quote {
+      border-radius: 50%; /* Torna a citação completamente redonda */
+      aspect-ratio: 1; /* Garante que a citação seja um quadrado perfeito */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem; /* Mesmo padding dos outros cards */
+      width: 400px; /* Card da citação maior */
+      height: 400px; /* Card da citação maior */
+    }
+    .rounded-quote img {
+      width: 80px; /* Tamanho da imagem ajustado */
+      height: 80px; /* Tamanho da imagem ajustado */
+    }
+    .custom-gap {
+      gap: 55px; /* Espaço personalizado de 55px entre os cards */
+    }
+  </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+
+  <!-- Cabeçalho -->
+  <header class="bg-blue-600 text-white py-4 shadow-lg">
+    <div class="container mx-auto flex items-center justify-between px-6">
+      <div class="flex items-center">
+        <img src="https://educ.nekoweb.org/geradores/logo.png" alt="Logo" class="h-12">
+        <h1 class="text-2xl font-semibold ml-4">Ferramentas de IA para professores</h1>
+      </div>
+      <nav class="space-x-4">
+        <a href="#sobre" class="bg-white text-blue-600 px-4 py-2 rounded-md shadow hover:bg-blue-100">Saiba Mais</a>
+        <a href="https://educ.nekoweb.org/geradores/inscricao.html" class="bg-blue-500 px-4 py-2 rounded-md shadow hover:bg-blue-700">Cadastro/Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Citação -->
+  <section class="bg-blue-100 py-16">
+    <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center">
+      <img src="https://educ.nekoweb.org/geradores/girl.png" alt="Professora" class="w-full lg:w-1/2 rounded-lg mb-8 lg:mb-0">
+      <div class="bg-white p-8 shadow-lg rounded-quote lg:ml-8">
+        <img src="https://educ.nekoweb.org/geradores/OIP.jpeg" alt="Seymour Papert" class="w-24 h-24 rounded-full mx-auto mb-4">
+        <p class="text-lg italic text-gray-600">"A tecnologia por si só não melhora a educação, mas professores que sabem usá-la podem transformar o aprendizado."</p>
+        <p class="text-right text-gray-800 font-bold mt-4">Seymour Papert</p>
+      </div>
+    </div>
+  </section>
+  <marquee></marquee>
+<center><p> <strong>Olá, professores e professoras. Gostariam de ter uma plataforma que simplificasse o seu trabalho e ajudasse a melhorar a sua prática docente? Então. </p>
+<p>Aqui está a mãozinha da Inteligência Artificial para professores.Clique no botão abaixo para ver todas as ferramentas.</strong></p></center>
+  <!-- Botão para abrir o modal -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 text-center">
+      <button id="openModal" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow hover:bg-blue-700 transition">
+        Ver Todas as Ferramentas Educacionais
+      </button>
+    </div>
+  </section>
+
+  <!-- Modal -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center p-4">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl max-h-[80vh] overflow-y-auto">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h2 class="text-2xl font-bold">Ferramentas Educacionais</h2>
+      <button id="closeModal" class="text-gray-700 hover:text-gray-900">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <!-- Iframe no lugar da lista -->
+      <iframe src="https://share.descript.com/embed/LrEmpvNp7NX" width="100%" height="360" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+  <!-- Ferramentas -->
+  <section id="sobre" class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-8">O que você encontrará?</h2>
+      <div class="flex justify-center"> <!-- Centraliza o grid de cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 custom-gap"> <!-- Espaço personalizado de 55px -->
+          <div class="bg-blue-600 text-white p-6 rounded-card shadow-lg text-center">
+            <i class="fas fa-chalkboard-teacher text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-4">Ferramentas de Criação de Prompts</h3>
+            <p>Gere prompts educacionais personalizados e otimize sua preparação de aulas.</p>
+          </div>
+          <div class="bg-blue-600 text-white p-6 rounded-card shadow-lg text-center">
+            <i class="fas fa-book-open text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-4">Recursos Educacionais</h3>
+            <p>Acesse materiais didáticos e ferramentas para planejamento de aulas.</p>
+          </div>
+          <div class="bg-blue-600 text-white p-6 rounded-card shadow-lg text-center">
+            <i class="fas fa-user-tie text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-4">Suporte ao Professor</h3>
+            <p>Descubra plataformas como Oppia, Lumi, Genially, entre outras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cadastro -->
+  <section id="formulario" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Cadastre-se Gratuitamente</h2>
+      <p class="text-gray-700 mb-8">Preencha o formulário para ter acesso às nossas ferramentas.</p>
+      <a href="https://educ.nekoweb.org/geradores/inscricao.html" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow hover:bg-blue-700 transition">Acessar Formulário e Login</a>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-gray-800 text-gray-300 py-8">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2025 Sérgio Araújo. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para controlar o modal -->
+  <script>
+    const modal = document.getElementById('modal');
+    const openModalButton = document.getElementById('openModal');
+    const closeModalButton = document.getElementById('closeModal');
+
+    openModalButton.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+    });
+
+    closeModalButton.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    // Fechar o modal ao clicar fora dele
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  </script>
+
+</body>
+</html>

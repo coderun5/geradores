@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Jogos Educacionais com IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Jogos Educacionais com IA</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Jogos Educacionais com IA</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar prompts eficazes para gerar jogos educacionais com IA. Preencha os campos abaixo para orientar a criação do jogo.</p>
+    </div>
+  </header>
+
+  <!-- Instruções no Topo -->
+  <div class="container mt-6">
+    <div class="bg-blue-50 p-4 rounded-md border border-blue-200">
+      <h3 class="text-xl font-bold mb-2">Como Usar o Código Gerado:</h3>
+      <ol class="list-decimal pl-5">
+        <li><strong>Copie o Prompt:</strong> Clique no botão "Copiar Prompt" para copiar o texto gerado.</li>
+        <li><strong>Cole no DeepSeek ou Blackbox AI:</strong> Acesse o <a href="https://deepseek.com/" target="_blank" class="text-blue-600 hover:underline">DeepSeek</a> ou o <a href="https://www.blackbox.ai/screenshot" target="_blank" class="text-blue-600 hover:underline">Blackbox AI</a> e cole o prompt na ferramenta.</li>
+        <li><strong>Gere o Jogo:</strong> Siga as instruções da IA para criar o jogo educacional.</li>
+        <li><strong>Salve o Código:</strong> Salve o código HTML gerado no Editor de Texto, e salve em um arquivo com a extensão <code>.html</code> (ex: <code>jogo.html</code>).</li>
+        <li><strong>Abra no Navegador:</strong> Clique duas vezes no arquivo salvo para abrir o jogo no navegador e jogar.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um prompt:</h2></center>
+    <form id="gameForm" class="space-y-4">
+      <!-- Nível de Ensino -->
+      <div>
+        <label for="educationLevel" class="block text-lg font-medium text-gray-700 flex items-center">
+          Nível de Ensino
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o nível de ensino para o qual o jogo será criado.</span>
+          </span>
+        </label>
+        <select id="educationLevel" name="educationLevel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="g4">G4</option>
+          <option value="g5">G5</option>
+          <option value="1ano">1º ano</option>
+          <option value="2ano">2º ano</option>
+          <option value="3ano">3º ano</option>
+          <option value="4ano">4º ano</option>
+          <option value="5ano">5º ano</option>
+          <option value="6ano">6º ano</option>
+          <option value="7ano">7º ano</option>
+          <option value="8ano">8º ano</option>
+          <option value="9ano">9º ano</option>
+        </select>
+      </div>
+
+      <!-- Tema do Jogo -->
+      <div>
+        <label for="gameTheme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema do Jogo
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva o tema do jogo (ex: Descobrimento do Brasil, Sistema Solar).</span>
+          </span>
+        </label>
+        <input type="text" id="gameTheme" name="gameTheme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Descobrimento do Brasil">
+      </div>
+
+      <!-- Tipo de Jogo -->
+      <div>
+        <label for="gameType" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tipo de Jogo
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o tipo de jogo que você deseja criar.</span>
+          </span>
+        </label>
+        <select id="gameType" name="gameType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="quiz">Quiz (Perguntas e Respostas)</option>
+          <option value="aventura">Jogo de Aventura</option>
+          <option value="memoria">Jogo de Memória</option>
+          <option value="tabuleiro">Jogo de Tabuleiro Virtual</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+
+      <!-- Objetivos Educacionais -->
+      <div>
+        <label for="educationalObjectives" class="block text-lg font-medium text-gray-700 flex items-center">
+          Objetivos Educacionais
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione os objetivos educacionais do jogo.</span>
+          </span>
+        </label>
+        <select id="educationalObjectives" name="educationalObjectives" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="ensinar_conceitos">Ensinar conceitos básicos sobre o tema.</option>
+          <option value="reforçar_conhecimentos">Reforçar conhecimentos prévios dos alunos.</option>
+          <option value="desenvolver_habilidades">Desenvolver habilidades de pensamento crítico.</option>
+          <option value="promover_colaboracao">Promover a colaboração entre os alunos.</option>
+          <option value="avaliar_aprendizado">Avaliar o aprendizado dos alunos de forma lúdica.</option>
+        </select>
+      </div>
+
+      <!-- Instruções Adicionais -->
+      <div>
+        <label for="additionalInstructions" class="block text-lg font-medium text-gray-700 flex items-center">
+          Instruções Adicionais
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione instruções para aprimorar a criação do jogo.</span>
+          </span>
+        </label>
+        <select id="additionalInstructions" name="additionalInstructions" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="incluir_imagens">Incluir imagens relacionadas ao tema.</option>
+          <option value="usar_multimidia">Usar elementos multimídia (áudios, vídeos).</option>
+          <option value="feedback_imediato">Fornecer feedback imediato para respostas.</option>
+          <option value="niveis_dificuldade">Adicionar níveis de dificuldade progressivos.</option>
+          <option value="atividades_interativas">Incluir atividades interativas e engajadoras.</option>
+        </select>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Copiar Texto</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Criar Jogo com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique no link abaixo e leve o seu prompt gerado para o DeepSeek ou Blackbox AI:</p>
+        <div class="space-y-4">
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+          <a href="https://www.blackbox.ai/screenshot" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-cube mr-2"></i>Blackbox AI
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Jogos Educacionais com IA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Gerar prompt
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const educationLevel = document.getElementById('educationLevel').value;
+      const gameTheme = document.getElementById('gameTheme').value;
+      const gameType = document.getElementById('gameType').value;
+      const educationalObjectives = document.getElementById('educationalObjectives').value;
+      const additionalInstructions = document.getElementById('additionalInstructions').value;
+
+      const generatedText = `
+        Crie um jogo educacional do tipo "${gameType}" para o ${educationLevel}, com o tema "${gameTheme}". O jogo deve ter os seguintes objetivos educacionais:
+        ${educationalObjectives}
+
+        Instruções Adicionais:
+        ${additionalInstructions}
+
+        **Exemplos de Funcionalidades:**
+        - Perguntas de múltipla escolha.
+        - Níveis de dificuldade progressivos.
+        - Feedback imediato para respostas corretas e incorretas.
+        - Elementos visuais e interativos para engajar os alunos.
+        - Integração de imagens, áudios ou vídeos relacionados ao tema.
+
+        Certifique-se de que o jogo seja adequado ao nível de ensino e ao tema escolhido.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
