@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompts para Correção de Textos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    body {
+      background-color: #f0f0f0; /* Fundo cinza claro */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #555; /* Fundo cinza escuro */
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Prompts para Correção de Textos
+    </h1>
+    <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo a criar prompts que permitam às AIs corrigir textos de alunos, identificando erros comuns com símbolos específicos, fornecendo explicações gramaticais e sugerindo correções.</p>
+    <p class="text-gray-700 mt-2">Os alunos podem usar os símbolos e explicações para autocorreção de erros comuns para garantir um aprendizado ativo.</p>
+    <marquee></marquee>
+    <form id="correctionForm" class="space-y-6">
+      <!-- Texto do Aluno -->
+      <div>
+        <label for="studentText" class="block text-lg font-medium text-gray-700 flex items-center">
+          Texto do Aluno
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira o texto do aluno que deseja corrigir.</span>
+          </span>
+        </label>
+        <textarea id="studentText" name="studentText" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500" rows="8" placeholder="Cole ou digite o texto do aluno aqui." required></textarea>
+      </div>
+
+      <!-- Nível de Escolaridade -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Nível de Escolaridade
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano escolar do aluno.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500">
+          <option value="G4">G4 (Educação Infantil)</option>
+          <option value="G5">G5 (Educação Infantil)</option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="1º EM">1º Ensino Médio</option>
+          <option value="2º EM">2º Ensino Médio</option>
+          <option value="3º EM">3º Ensino Médio</option>
+        </select>
+      </div>
+
+      <!-- Tipo de Erros a Identificar -->
+      <div>
+        <label for="errorTypes" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tipo de Erros a Identificar
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione os tipos de erros que deseja identificar no texto.</span>
+          </span>
+        </label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="errorTypes" value="Gramática e Ortografia" class="rounded text-gray-600">
+            <span class="ml-2">Gramática e Ortografia</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="errorTypes" value="Pontuação" class="rounded text-gray-600">
+            <span class="ml-2">Pontuação</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="errorTypes" value="Coesão e Coerência" class="rounded text-gray-600">
+            <span class="ml-2">Coesão e Coerência</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherErrorCheck" name="errorTypes" value="Outro" class="rounded text-gray-600" onchange="toggleOtherError()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherError" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro tipo de erro">
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="flex space-x-4">
+        <button type="button" id="generateButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Gerar Prompt</button>
+        <button type="button" id="clearButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Limpar Campos</button>
+      </div>
+    </form>
+
+    <!-- Área de Exibição do Prompt Gerado -->
+    <div id="outputSection" class="hidden mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Copiar Prompt</button>
+    </div>
+
+    <!-- Seção de Links para AIs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-xl font-semibold text-gray-700 mb-4">Corrigir Texto com IA:</h3>
+      <div class="flex space-x-4"> <!-- Botões em linha -->
+        <a href="https://chat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          <i class="fas fa-robot mr-2"></i> Chat GPT
+        </a>
+        <a href="https://claude.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          <i class="fas fa-brain mr-2"></i> Claude
+        </a>
+        <a href="https://deepseek.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          <i class="fas fa-search mr-2"></i> DeepSeek
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mostrar/ocultar campo "Outro" no Tipo de Erros
+    function toggleOtherError() {
+      const check = document.getElementById('otherErrorCheck');
+      const input = document.getElementById('otherError');
+      input.classList.toggle('hidden', !check.checked);
+      input.required = check.checked;
+    }
+
+    // Gerar prompt
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const studentText = document.getElementById('studentText').value;
+      const grade = document.getElementById('grade').value;
+      const errorTypesCheckboxes = document.querySelectorAll('input[name="errorTypes"]:checked');
+      const otherError = document.getElementById('otherError').value.trim();
+
+      if (!studentText) {
+        alert('Por favor, insira o texto do aluno.');
+        return;
+      }
+
+      let errorTypes = [];
+      errorTypesCheckboxes.forEach(checkbox => {
+        if (checkbox.value === 'Outro' && otherError) {
+          errorTypes.push(otherError);
+        } else if (checkbox.value !== 'Outro') {
+          errorTypes.push(checkbox.value);
+        }
+      });
+
+      const generatedText = `
+        Corrija o texto abaixo, escrito por um aluno do ${grade}, identificando erros de ${errorTypes.join(', ')}. Use os seguintes símbolos para marcar os erros:
+        - [O] para erros de ortografia.
+        - [G] para erros de gramática.
+        - [P] para erros de pontuação.
+        - [C] para problemas de coesão ou coerência.
+
+        **Texto do Aluno**:
+        ${studentText}
+
+        **Instruções**:
+        1. Marque os erros no texto usando os símbolos acima.
+        2. Para cada erro, forneça:
+           - Uma breve explicação do erro.
+           - O que diz a gramática ou norma sobre o erro.
+           - Como corrigir o erro.
+        3. Retorne o texto em duas versões:
+           - **Texto Marcado**: Com os erros identificados por símbolos e explicações ao lado.
+           - **Texto Corrigido**: A versão final sem erros, para referência.
+
+        **Exemplo**:
+        Texto original: "Ele foi na padaria comprar pães."
+        Texto marcado: "Ele foi [G]na padaria comprar pães."
+        Explicação: [G] Uso incorreto da preposição "na". A norma culta exige o uso da crase ("à") antes de nomes femininos que indicam destino.
+        Texto corrigido: "Ele foi à padaria comprar pães."
+
+        Dicas:
+        - Priorize erros que sejam mais comuns no nível de escolaridade do ${grade}.
+        - Use linguagem clara e acessível para as explicações.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+      document.getElementById('outputSection').classList.remove('hidden');
+    });
+
+    // Copiar prompt gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Prompt Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Prompt';
+      }, 2000);
+    });
+
+    // Limpar campos
+    document.getElementById('clearButton').addEventListener('click', function () {
+      document.getElementById('correctionForm').reset();
+      document.getElementById('outputSection').classList.add('hidden');
+      document.getElementById('otherError').classList.add('hidden');
+      document.getElementById('otherError').required = false;
+    });
+  </script>
+</body>
+</html>

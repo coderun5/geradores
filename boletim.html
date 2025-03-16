@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Boletim de Aprendizagem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompt para Boletim de Acompanhamento das Aprendizagens</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Boletim de Aprendizagem</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar boletins de aprendizagem personalizados, com uma mensagem para os pais, incentivando o contato e a colaboração no processo de aprendizagem do aluno.</p>
+      <p class="text-gray-700 mt-2">O boletim gerado pode ser facilmente copiado para o Word e inclui informações como notas, frequência, observações e uma mensagem personalizada.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um boletim:</h2></center>
+    <form id="reportForm" class="space-y-4">
+      <!-- Nome do Aluno -->
+      <div>
+        <label for="studentName" class="block text-lg font-medium text-gray-700 flex items-center">
+          Nome do Aluno
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira o nome completo do aluno.</span>
+          </span>
+        </label>
+        <input type="text" id="studentName" name="studentName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: João da Silva" required>
+      </div>
+
+      <!-- Ano e Turma -->
+      <div>
+        <label for="gradeClass" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano e Turma
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira o ano e a turma do aluno.</span>
+          </span>
+        </label>
+        <input type="text" id="gradeClass" name="gradeClass" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: 6º ano - Turma A" required>
+      </div>
+
+      <!-- Disciplinas e Notas -->
+      <div>
+        <label for="subjectsGrades" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplinas e Notas
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira as disciplinas e as respectivas notas do aluno.</span>
+          </span>
+        </label>
+        <textarea id="subjectsGrades" name="subjectsGrades" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="4" placeholder="Ex: Matemática: 8.5, Português: 7.0, Ciências: 9.0" required></textarea>
+      </div>
+
+      <!-- Frequência -->
+      <div>
+        <label for="attendance" class="block text-lg font-medium text-gray-700 flex items-center">
+          Frequência
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira a frequência do aluno (em porcentagem).</span>
+          </span>
+        </label>
+        <input type="text" id="attendance" name="attendance" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: 95%" required>
+      </div>
+
+      <!-- Observações -->
+      <div>
+        <label for="observations" class="block text-lg font-medium text-gray-700 flex items-center">
+          Observações (Opcional)
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira observações sobre o desempenho do aluno.</span>
+          </span>
+        </label>
+        <textarea id="observations" name="observations" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="4" placeholder="Ex: O aluno demonstrou melhoria em Matemática, mas precisa se dedicar mais em Português."></textarea>
+      </div>
+
+      <!-- Mensagem para os Pais -->
+      <div>
+        <label for="parentMessage" class="block text-lg font-medium text-gray-700 flex items-center">
+          Mensagem para os Pais (Opcional)
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira uma mensagem personalizada para os pais.</span>
+          </span>
+        </label>
+        <textarea id="parentMessage" name="parentMessage" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="4" placeholder="Ex: Gostaríamos de agendar uma reunião para discutir o desempenho do João. Por favor, entre em contato comigo pelo e-mail ou telefone da escola."></textarea>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Gerar Boletim</button>
+    </form>
+
+    <!-- Área de Exibição do Boletim Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Boletim Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Copiar Boletim</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Boletim com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu boletim gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Boletim de Aprendizagem. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Boletim -->
+  <script>
+    // Gerar boletim
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const studentName = document.getElementById('studentName').value;
+      const gradeClass = document.getElementById('gradeClass').value;
+      const subjectsGrades = document.getElementById('subjectsGrades').value;
+      const attendance = document.getElementById('attendance').value;
+      const observations = document.getElementById('observations').value;
+      const parentMessage = document.getElementById('parentMessage').value;
+
+      const generatedText = `
+        Boletim de Aprendizagem - ${studentName} (${gradeClass})
+
+        **Disciplinas e Notas**:
+        ${subjectsGrades}
+
+        **Frequência**:
+        ${attendance}
+
+        **Observações**:
+        ${observations || "Nenhuma observação adicional."}
+
+        **Mensagem para os Pais**:
+        ${parentMessage || "Nenhuma mensagem adicional."}
+
+        O boletim deve:
+        1. Ter um cabeçalho com o nome da escola, nome do aluno, ano/turma e data.
+        2. Listar as disciplinas e as respectivas notas de forma organizada.
+        3. Incluir a frequência do aluno.
+        4. Incluir uma seção de observações sobre o desempenho do aluno.
+        5. Incluir uma mensagem personalizada para os pais, incentivando o contato e a colaboração.
+        6. Ser formatado de maneira clara e profissional, pronto para impressão ou envio digital.
+
+        Dicas:
+        - Use uma tabela para organizar as disciplinas e notas.
+        - Destaque a frequência e as observações de forma clara.
+        - A mensagem para os pais deve ser amigável e convidativa.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar boletim gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Boletim Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Boletim';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

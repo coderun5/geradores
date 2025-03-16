@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Atividades Avaliativas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    body {
+      background-color: #f0f0f0; /* Fundo cinza claro */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #555; /* Fundo cinza escuro */
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Atividades Avaliativas
+    </h1>
+    <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar atividades avaliativas personalizadas, que serão enviadas por você para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para gerar atividades adaptadas às suas necessidades.</p>
+    <marquee></marquee>
+    <form id="evaluationActivityForm" class="space-y-6">
+      <!-- Disciplina -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Disciplina</label>
+        <select id="discipline" name="discipline" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherDiscipline" name="otherDiscipline" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra disciplina (opcional)">
+      </div>
+
+      <!-- Assunto da Avaliação -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Assunto da Avaliação</label>
+        <input type="text" id="subject" name="subject" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Ano de Escolaridade</label>
+        <select id="grade" name="grade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required onchange="toggleOtherGrade()">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="text" id="otherGrade" name="otherGrade" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro ano de escolaridade (opcional)">
+      </div>
+
+      <!-- Número de Questões -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Número de Questões</label>
+        <input type="number" id="numberOfQuestions" name="numberOfQuestions" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Tipo de Questão -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Tipo de Questão</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="questionType" value="Múltipla Escolha" class="rounded text-gray-600">
+            <span class="ml-2">Múltipla Escolha</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="questionType" value="Dissertativa" class="rounded text-gray-600">
+            <span class="ml-2">Dissertativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="questionType" value="Verdadeiro/Falso" class="rounded text-gray-600">
+            <span class="ml-2">Verdadeiro/Falso</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="questionType" value="Resposta Curta" class="rounded text-gray-600">
+            <span class="ml-2">Resposta Curta</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherQuestionTypeCheck" name="questionType" value="Outro" class="rounded text-gray-600" onchange="toggleOtherQuestionType()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherQuestionType" name="otherQuestionType" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro tipo de questão (opcional)">
+      </div>
+
+      <!-- Com ou Sem Respostas -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Com ou Sem Respostas</label>
+        <select id="withAnswers" name="withAnswers" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Com Respostas">Com Respostas</option>
+          <option value="Sem Respostas">Sem Respostas</option>
+        </select>
+      </div>
+
+      <!-- Grau de Dificuldade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Grau de Dificuldade</label>
+        <select id="difficultyLevel" name="difficultyLevel" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Fácil">Fácil</option>
+          <option value="Médio">Médio</option>
+          <option value="Difícil">Difícil</option>
+        </select>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="flex space-x-4">
+        <button type="button" id="generateButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Gerar Prompt</button>
+        <button type="button" id="clearButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Limpar Campos</button>
+      </div>
+    </form>
+
+    <!-- Área de Exibição da Atividade Avaliativa -->
+    <div id="outputSection" class="hidden mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Atividade Avaliativa Gerada:</h2>
+      <div id="generatedText" class="w-full p-4 border-2 border-gray-200 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Copiar Texto</button>
+    </div>
+
+    <!-- Seção de Links para AIs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar Atividade Avaliativa com as AIs:</h3>
+      <div class="flex space-x-4"> <!-- Botões em linha -->
+        <a href="https://chat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          Chat GPT
+        </a>
+        <a href="https://claude.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          Claude
+        </a>
+        <a href="https://deepseek.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          DeepSeek
+        </a>
+        <a href="https://auth.mistral.ai/ui/login?flow=d16c4a30-4cd2-47ce-baea-1f10bba85f4d" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          Le Chat
+        </a>
+        <a href="https://chat.qwenlm.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          Qwen AI
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mostrar/ocultar campo "Outro" no Ano de Escolaridade
+    function toggleOtherGrade() {
+      const gradeSelect = document.getElementById('grade');
+      const otherGradeInput = document.getElementById('otherGrade');
+      otherGradeInput.classList.toggle('hidden', gradeSelect.value !== 'Outro');
+      otherGradeInput.required = gradeSelect.value === 'Outro';
+    }
+
+    // Mostrar/ocultar campo "Outro" no Tipo de Questão
+    function toggleOtherQuestionType() {
+      const check = document.getElementById('otherQuestionTypeCheck');
+      const input = document.getElementById('otherQuestionType');
+      input.classList.toggle('hidden', !check.checked);
+      input.required = check.checked;
+    }
+
+    // Gerar prompt
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const otherDiscipline = document.getElementById('otherDiscipline').value;
+      const subject = document.getElementById('subject').value;
+      const grade = document.getElementById('grade').value;
+      const otherGrade = document.getElementById('otherGrade').value;
+      const numberOfQuestions = document.getElementById('numberOfQuestions').value;
+      const questionTypeCheckboxes = document.querySelectorAll('input[name="questionType"]:checked');
+      const otherQuestionType = document.getElementById('otherQuestionType').value;
+      const withAnswers = document.getElementById('withAnswers').value;
+      const difficultyLevel = document.getElementById('difficultyLevel').value;
+
+      const finalDiscipline = discipline === 'Outra' ? otherDiscipline : discipline;
+      const finalGrade = grade === 'Outro' ? otherGrade : grade;
+
+      let questionTypes = [];
+      questionTypeCheckboxes.forEach(checkbox => {
+        if (checkbox.value === 'Outro' && otherQuestionType) {
+          questionTypes.push(otherQuestionType);
+        } else if (checkbox.value !== 'Outro') {
+          questionTypes.push(checkbox.value);
+        }
+      });
+
+      const generatedText = `
+        Crie uma atividade avaliativa para a disciplina <strong>${finalDiscipline}</strong>, com o tema ou assunto <strong>${subject}</strong>, voltada para alunos do <strong>${finalGrade}</strong> ano.
+
+        <strong>Número de Questões:</strong> ${numberOfQuestions}
+
+        <strong>Tipo de Questão:</strong> ${questionTypes.join(', ')}
+
+        <strong>Com ou Sem Respostas:</strong> ${withAnswers}
+
+        <strong>Grau de Dificuldade:</strong> ${difficultyLevel}
+
+        **Instruções para a IA**:
+        1. Alinhe as questões às habilidades e competências da BNCC para o ano de escolaridade e disciplina selecionados.
+        2. Certifique-se de que as questões abordem os objetivos de aprendizagem específicos da BNCC para o tema escolhido.
+        3. Inclua uma breve explicação de como cada questão se relaciona com as habilidades da BNCC.
+        4. Se necessário, forneça sugestões de adaptação para diferentes níveis de aprendizagem.
+        5. Garanta que as questões sejam claras, objetivas e adequadas ao nível de escolaridade selecionado.
+
+        **Estrutura sugerida**:
+        - Objetivos de aprendizagem (alinhados à BNCC).
+        - Questões com instruções claras.
+        - Respostas ou gabarito (se solicitado).
+        - Explicações sobre como as questões se relacionam com a BNCC.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+      document.getElementById('outputSection').classList.remove('hidden');
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+
+    // Limpar campos
+    document.getElementById('clearButton').addEventListener('click', function () {
+      document.getElementById('evaluationActivityForm').reset();
+      document.getElementById('outputSection').classList.add('hidden');
+      document.getElementById('otherDiscipline').classList.add('hidden');
+      document.getElementById('otherGrade').classList.add('hidden');
+      document.getElementById('otherQuestionType').classList.add('hidden');
+      document.getElementById('otherDiscipline').required = false;
+      document.getElementById('otherGrade').required = false;
+      document.getElementById('otherQuestionType').required = false;
+    });
+  </script>
+</body>
+</html>
