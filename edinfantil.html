@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Atividades para Educação Infantil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Atividades para Educação Infantil</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Prompts de Atividades para Educação Infantil</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar atividades personalizadas para crianças de 4 e 5 anos (níveis G4 e G5). Preencha os campos abaixo para gerar sugestões de atividades adaptadas às suas necessidades.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar uma atividade:</h2></center>
+    <form id="activityForm" class="space-y-4">
+      <!-- Nível -->
+      <div>
+        <label for="level" class="block text-lg font-medium text-gray-700 flex items-center">
+          Nível
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o nível da turma (G4 para 4 anos ou G5 para 5 anos).</span>
+          </span>
+        </label>
+        <select id="level" name="level" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="G4">G4 (4 anos)</option>
+          <option value="G5">G5 (5 anos)</option>
+        </select>
+      </div>
+
+      <!-- Tipo de Atividade -->
+      <div>
+        <label for="activityType" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tipo de Atividade
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Escolha o tipo de atividade que deseja gerar.</span>
+          </span>
+        </label>
+        <select id="activityType" name="activityType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Linguagem e Comunicação">Linguagem e Comunicação</option>
+          <option value="Matemática">Matemática</option>
+          <option value="Natureza e Sociedade">Natureza e Sociedade</option>
+          <option value="Artes">Artes</option>
+          <option value="Atividades Motoras">Atividades Motoras</option>
+          <option value="Jogos e Brincadeiras">Jogos e Brincadeiras</option>
+        </select>
+      </div>
+
+      <!-- Tema -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o tema central da atividade (ex: cores, números, animais, etc.).</span>
+          </span>
+        </label>
+        <select id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Cores">Cores</option>
+          <option value="Números">Números</option>
+          <option value="Animais">Animais</option>
+          <option value="Família">Família</option>
+          <option value="Natureza">Natureza</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="text" id="otherTheme" name="otherTheme" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outro tema (opcional)" style="display: none;">
+      </div>
+
+      <!-- Objetivo -->
+      <div>
+        <label for="objective" class="block text-lg font-medium text-gray-700 flex items-center">
+          Objetivo
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o objetivo da atividade (ex: desenvolver coordenação motora, reconhecer cores, etc.).</span>
+          </span>
+        </label>
+        <select id="objective" name="objective" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Desenvolver coordenação motora">Desenvolver coordenação motora</option>
+          <option value="Reconhecer cores">Reconhecer cores</option>
+          <option value="Identificar números">Identificar números</option>
+          <option value="Estimular a criatividade">Estimular a criatividade</option>
+          <option value="Promover interação social">Promover interação social</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="text" id="otherObjective" name="otherObjective" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outro objetivo (opcional)" style="display: none;">
+      </div>
+
+      <!-- Recursos Necessários -->
+      <div>
+        <label for="resources" class="block text-lg font-medium text-gray-700 flex items-center">
+          Recursos Necessários
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione os materiais necessários para a atividade (ex: lápis, papel, tinta, etc.).</span>
+          </span>
+        </label>
+        <select id="resources" name="resources" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Lápis e papel">Lápis e papel</option>
+          <option value="Tinta guache">Tinta guache</option>
+          <option value="Bolinhas de gude">Bolinhas de gude</option>
+          <option value="Brinquedos educativos">Brinquedos educativos</option>
+          <option value="Músicas infantis">Músicas infantis</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="text" id="otherResources" name="otherResources" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outros recursos (opcional)" style="display: none;">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Gerar Atividade</button>
+    </form>
+
+    <!-- Área de Exibição da Atividade Gerada -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Atividade Gerada:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Copiar Texto</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Atividade com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Atividades para Educação Infantil. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Mostrar campos de texto quando "Outro" é selecionado
+    document.getElementById('theme').addEventListener('change', function () {
+      const otherThemeField = document.getElementById('otherTheme');
+      if (this.value === 'Outro') {
+        otherThemeField.style.display = 'block';
+      } else {
+        otherThemeField.style.display = 'none';
+        otherThemeField.value = '';
+      }
+    });
+
+    document.getElementById('objective').addEventListener('change', function () {
+      const otherObjectiveField = document.getElementById('otherObjective');
+      if (this.value === 'Outro') {
+        otherObjectiveField.style.display = 'block';
+      } else {
+        otherObjectiveField.style.display = 'none';
+        otherObjectiveField.value = '';
+      }
+    });
+
+    document.getElementById('resources').addEventListener('change', function () {
+      const otherResourcesField = document.getElementById('otherResources');
+      if (this.value === 'Outro') {
+        otherResourcesField.style.display = 'block';
+      } else {
+        otherResourcesField.style.display = 'none';
+        otherResourcesField.value = '';
+      }
+    });
+
+    // Gerar atividade
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const level = document.getElementById('level').value;
+      const activityType = document.getElementById('activityType').value;
+      const theme = document.getElementById('theme').value === 'Outro' ? document.getElementById('otherTheme').value : document.getElementById('theme').value;
+      const objective = document.getElementById('objective').value === 'Outro' ? document.getElementById('otherObjective').value : document.getElementById('objective').value;
+      const resources = document.getElementById('resources').value === 'Outro' ? document.getElementById('otherResources').value : document.getElementById('resources').value;
+
+      const generatedText = `
+        Crie uma atividade para Educação Infantil com as seguintes características:
+        - Nível: ${level} (${level === 'G4' ? '4 anos' : '5 anos'}).
+        - Tipo de Atividade: ${activityType}.
+        - Tema: ${theme}.
+        - Objetivo: ${objective}.
+        - Recursos Necessários: ${resources}.
+
+        A atividade deve ser lúdica, envolvente e adequada à faixa etária. Inclua:
+        1. Uma breve introdução para contextualizar a atividade.
+        2. Passo a passo detalhado para a execução.
+        3. Sugestões de adaptação para crianças com diferentes níveis de habilidade.
+        4. Uma conclusão que reforce o aprendizado e incentive a participação.
+
+        Certifique-se de que a atividade promova o desenvolvimento integral das crianças, considerando aspectos cognitivos, emocionais e sociais.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

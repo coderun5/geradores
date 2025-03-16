@@ -1,0 +1,117 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escriba</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <nav class="bg-[#1919e6] p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Escriba</h1>
+            <a href="https://educ.nekoweb.org/geradores/home.html" class="text-white text-lg">Voltar</a>
+        </div>
+    </nav>
+    <div class="container mx-auto p-4">
+        <div class="bg-white p-4 rounded shadow-md mb-4">
+            <h2 class="text-xl font-semibold mb-2">Sobre esta página:</h2>
+            <p class="mb-4">Esta página é uma ferramenta minimalista de escrita que permite que você escreva, edite e gerencie textos diretamente no seu navegador. Ela oferece funcionalidades como copiar, baixar e limpar o texto, além de contar automaticamente o número de palavras.</p>
+            
+        </div>
+        <div class="bg-white p-4 rounded shadow-md">
+            <textarea id="editor" class="w-full h-64 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escreva aqui..."></textarea>
+            <div class="flex justify-between items-center mt-4">
+                <div>
+                    <button id="copyButton" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"><i class="fas fa-copy"></i> Copiar</button>
+                    <button id="downloadButton" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none"><i class="fas fa-download"></i> Download</button>
+                    <button id="clearButton" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 focus:outline-none"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+                <div>
+                    <span id="wordCount" class="text-gray-600">0 palavras</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editor = document.getElementById('editor');
+            const wordCount = document.getElementById('wordCount');
+            const copyButton = document.getElementById('copyButton');
+            const downloadButton = document.getElementById('downloadButton');
+            const readButton = document.getElementById('readButton');
+            const stopButton = document.getElementById('stopButton');
+            const clearButton = document.getElementById('clearButton');
+            let utterance;
+
+            // Load saved content from localStorage
+            if (localStorage.getItem('content')) {
+                editor.value = localStorage.getItem('content');
+                updateWordCount();
+            }
+
+            // Save content to localStorage
+            editor.addEventListener('input', () => {
+                localStorage.setItem('content', editor.value);
+                updateWordCount();
+            });
+
+            // Update word count
+            function updateWordCount() {
+                const text = editor.value.trim();
+                const words = text.split(/\s+/).filter(word => word.length > 0);
+                wordCount.textContent = `${words.length} palavras`;
+            }
+
+            // Copy text to clipboard
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(editor.value).then(() => {
+                    alert('Texto copiado!');
+                });
+            });
+
+            // Download text as a file
+            downloadButton.addEventListener('click', () => {
+                const blob = new Blob([editor.value], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'texto.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            // Read text aloud
+            readButton.addEventListener('click', () => {
+                if (utterance) {
+                    speechSynthesis.cancel();
+                }
+                utterance = new SpeechSynthesisUtterance(editor.value);
+                utterance.lang = 'pt-BR';
+                speechSynthesis.speak(utterance);
+            });
+
+            // Stop reading text aloud
+            stopButton.addEventListener('click', () => {
+                if (utterance) {
+                    speechSynthesis.cancel();
+                }
+            });
+
+            // Clear text
+            clearButton.addEventListener('click', () => {
+                editor.value = '';
+                localStorage.removeItem('content');
+                updateWordCount();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Prompts para Atividades de Matemática</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #1919e6, #4a4aff);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .header p {
+            font-size: 1.25rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px 0;
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .card p {
+            color: #666;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkbox-group input {
+            width: 20px;
+            height: 20px;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e9f5ff;
+            border-radius: 10px;
+        }
+        .result h3 {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .result p {
+            color: #666;
+        }
+        .ai-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .ai-buttons button {
+            background-color: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .ai-buttons button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="container">
+            <h1>Gerador de Prompts para Atividades com Descritores SAEB de Matemática</h1>
+            <p>Selecione os descritores do SAEB e gere prompts perfeitos para criar atividades com problemas matemáticos.</p>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- Card de Seleção de Descritores -->
+        <div class="card">
+            <h2>Configurações da Atividade</h2>
+            <div class="form-group">
+                <label for="disciplina">Disciplina:</label>
+                <select id="disciplina">
+                    <option value="Matemática">Matemática</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ano-escolaridade">Ano de Escolaridade:</label>
+                <select id="ano-escolaridade">
+                    <option value="5º ano">5º ano</option>
+                    <option value="6º ano">6º ano</option>
+                    <option value="7º ano">7º ano</option>
+                    <option value="8º ano">8º ano</option>
+                    <option value="9º ano">9º ano</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tamanho-texto">Número de Problemas:</label>
+                <select id="tamanho-texto">
+                    <option value="1">1 problema</option>
+                    <option value="2">2 problemas</option>
+                    <option value="3">3 problemas</option>
+                    <option value="4">4 problemas</option>
+                    <option value="5">5 problemas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="numero-questoes">Número de Questões por Problema:</label>
+                <input type="number" id="numero-questoes" min="1" max="10" value="3">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Questões:</label>
+                <div class="checkbox-group" id="tipo-questoes">
+                    <label>
+                        <input type="checkbox" value="múltipla escolha"> Múltipla escolha
+                    </label>
+                    <label>
+                        <input type="checkbox" value="dissertativa"> Dissertativa
+                    </label>
+                    <label>
+                        <input type="checkbox" value="verdadeiro/falso"> Verdadeiro/Falso
+                    </label>
+                    <label>
+                        <input type="checkbox" value="completar lacunas"> Completar lacunas
+                    </label>
+                    <label>
+                        <input type="checkbox" value="associação"> Associação
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Selecione os Descritores:</label>
+                <div class="checkbox-group" id="descritores">
+                    <!-- Descritores de Matemática do Ensino Fundamental -->
+                    <label>
+                        <input type="checkbox" value="D4"> D4 - Resolver problemas envolvendo as quatro operações básicas.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D6"> D6 - Resolver problemas envolvendo noções de porcentagem.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D8"> D8 - Resolver problemas envolvendo grandezas e medidas.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D10"> D10 - Resolver problemas envolvendo equações do 1º grau.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D12"> D12 - Identificar propriedades de figuras geométricas planas.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D13"> D13 - Resolver problemas envolvendo o cálculo de área de figuras planas.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D15"> D15 - Resolver problemas envolvendo o Teorema de Pitágoras.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D18"> D18 - Resolver problemas envolvendo probabilidade.
+                    </label>
+                    <label>
+                        <input type="checkbox" value="D20"> D20 - Resolver problemas envolvendo grandezas proporcionais.
+                    </label>
+                </div>
+            </div>
+            <button class="button" onclick="gerarPrompt()">Gerar Prompt</button>
+        </div>
+
+        <!-- Card de Resultado -->
+        <div class="card result" id="resultado" style="display: none;">
+            <h3>Prompt Gerado</h3>
+            <p id="prompt-texto"></p>
+            <button class="button" onclick="copiarPrompt()">Copiar Prompt</button>
+            <div class="ai-buttons">
+                <button onclick="abrirDeepSeek()">DeepSeek</button>
+                <button onclick="abrirChatGPT()">ChatGPT</button>
+                <button onclick="abrirClaude()">Claude</button>
+                <button onclick="abrirQwen()">Qwen</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Script para Gerar Prompts -->
+    <script>
+        function gerarPrompt() {
+            const disciplina = document.getElementById('disciplina').value;
+            const anoEscolaridade = document.getElementById('ano-escolaridade').value;
+            const tamanhoTexto = document.getElementById('tamanho-texto').value;
+            const numeroQuestoes = document.getElementById('numero-questoes').value;
+            const tipoQuestoes = [];
+            const descritoresSelecionados = [];
+            const checkboxesTipoQuestoes = document.querySelectorAll('#tipo-questoes input:checked');
+            const checkboxesDescritores = document.querySelectorAll('#descritores input:checked');
+
+            checkboxesTipoQuestoes.forEach(checkbox => {
+                tipoQuestoes.push(checkbox.value);
+            });
+
+            checkboxesDescritores.forEach(checkbox => {
+                descritoresSelecionados.push(checkbox.value);
+            });
+
+            if (descritoresSelecionados.length === 0) {
+                alert("Selecione pelo menos um descritor!");
+                return;
+            }
+
+            if (tipoQuestoes.length === 0) {
+                alert("Selecione pelo menos um tipo de questão!");
+                return;
+            }
+
+            const prompt = `Crie uma atividade de ${disciplina} para o ${anoEscolaridade} com ${tamanhoTexto} problema(s) e ${numeroQuestoes} questões por problema do(s) tipo(s) ${tipoQuestoes.join(", ")}. As questões devem permitir aos alunos exercitar os seguintes descritores do SAEB: ${descritoresSelecionados.join(", ")}. Os problemas devem ser adequados ao nível dos alunos e incluir perguntas que explorem as habilidades relacionadas a esses descritores. Além disso, forneça o gabarito das questões.`;
+
+            document.getElementById('prompt-texto').textContent = prompt;
+            document.getElementById('resultado').style.display = 'block';
+        }
+
+        function copiarPrompt() {
+            const promptTexto = document.getElementById('prompt-texto').textContent;
+            navigator.clipboard.writeText(promptTexto).then(() => {
+                alert("Prompt copiado para a área de transferência!");
+            });
+        }
+
+        function abrirDeepSeek() {
+            const promptTexto = document.getElementById('prompt-texto').textContent;
+            const url = `https://www.deepseek.com/?q=${encodeURIComponent(promptTexto)}`;
+            window.open(url, '_blank');
+        }
+
+        function abrirChatGPT() {
+            const promptTexto = document.getElementById('prompt-texto').textContent;
+            const url = `https://chat.openai.com/?q=${encodeURIComponent(promptTexto)}`;
+            window.open(url, '_blank');
+        }
+
+        function abrirClaude() {
+            const promptTexto = document.getElementById('prompt-texto').textContent;
+            const url = `https://www.claude.ai/?q=${encodeURIComponent(promptTexto)}`;
+            window.open(url, '_blank');
+        }
+
+        function abrirQwen() {
+            const promptTexto = document.getElementById('prompt-texto').textContent;
+            const url = `https://chat.qwenlm.ai/?q=${encodeURIComponent(promptTexto)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
