@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Sequências Didáticas BNCC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url(''); /* Substitua pela URL da sua imagem */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .content-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para o conteúdo */
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4">
+    <div class="max-w-4xl mx-auto content-container">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+            🎓 Gerador de Sequências Didáticas BNCC
+        </h1>
+        <p>Esta ferramenta foi projetada para ajudá-lo(a) a criar prompts personalizados que serão enviados por você para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para gerar planos de aula completos e adaptados às suas necessidades.</p>
+        <marquee></marquee>
+        <form id="promptForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Disciplina -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Disciplina</label>
+                    <select id="subject" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required onchange="toggleOtherSubject()">
+                        <option value="Língua Portuguesa">Português</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="Ciências">Ciências</option>
+                        <option value="História">História</option>
+                        <option value="Geografia">Geografia</option>
+                        <option value="Arte">Arte</option>
+                        <option value="Educação Física">Educação Física</option>
+                        <option value="Ensino Religioso">Ensino Religioso</option>
+                        <option value="Língua Estrangeira">Língua Estrangeira</option>
+                        <option value="outra">Outra</option>
+                    </select>
+                    <input type="text" id="otherSubject" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique a disciplina">
+                </div>
+
+                <!-- Série -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Série</label>
+                    <select id="grade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+                        <option value="1º EF">1º Ano</option>
+                        <option value="2º EF">2º Ano</option>
+                        <option value="3º EF">3º Ano</option>
+                        <option value="4º EF">4º Ano</option>
+                        <option value="5º EF">5º Ano</option>
+                        <option value="6º EF">6º Ano</option>
+                        <option value="7º EF">7º Ano</option>
+                        <option value="8º EF">8º Ano</option>
+                        <option value="9º EF">9º Ano</option>
+                    </select>
+                </div>
+
+                <!-- Tema da Sequência -->
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 font-medium mb-2">Tema da Sequência</label>
+                    <input type="text" id="theme" 
+                           class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                           required>
+                </div>
+
+                <!-- Subtemas -->
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 font-medium mb-2">Subtemas <span class="text-gray-500 font-normal">(Opcional)</span></label>
+                    <input type="text" id="subthemes" 
+                           class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                           placeholder="Separe por vírgulas (ex: História local, Linha do tempo, Patrimônio cultural)">
+                </div>
+
+                <!-- Duração -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Duração (em número de aulas)</label>
+                    <input type="number" id="duration" min="1" 
+                           class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                           required>
+                </div>
+            </div>
+
+            <!-- Avaliação -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Métodos de Avaliação</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="evaluation" value="Rubricas" class="rounded text-gray-600">
+                        <span class="ml-2">Rubricas</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="evaluation" value="Portfólio" class="rounded text-gray-600">
+                        <span class="ml-2">Portfólio</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="evaluation" value="Autoavaliação" class="rounded text-gray-600">
+                        <span class="ml-2">Autoavaliação</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="evaluation" value="Prova Escrita" class="rounded text-gray-600">
+                        <span class="ml-2">Prova Escrita</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" id="otherEvalCheck" class="rounded text-gray-600" onchange="toggleOtherEval()">
+                        <span class="ml-2">Outro</span>
+                    </label>
+                </div>
+                <input type="text" id="otherEval" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique o método">
+            </div>
+
+            <!-- Recursos -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Recursos</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="resources" value="Livro didático" class="rounded text-gray-600">
+                        <span class="ml-2">Livro didático</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="resources" value="Slides" class="rounded text-gray-600">
+                        <span class="ml-2">Slides</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="resources" value="Materiais manipuláveis" class="rounded text-gray-600">
+                        <span class="ml-2">Materiais manipuláveis</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="resources" value="Vídeos" class="rounded text-gray-600">
+                        <span class="ml-2">Vídeos</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="resources" value="Jogos educativos" class="rounded text-gray-600">
+                        <span class="ml-2">Jogos educativos</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="resources" value="Filmes" class="rounded text-gray-600">
+                        <span class="ml-2">Filmes</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" id="otherResourceCheck" class="rounded text-gray-600" onchange="toggleOtherResource()">
+                        <span class="ml-2">Outro</span>
+                    </label>
+                </div>
+                <input type="text" id="otherResource" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique o recurso">
+            </div>
+
+            <!-- Organização da Turma -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Organização da turma</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="organization" value="Individual" class="rounded text-gray-600">
+                        <span class="ml-2">Individual</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="organization" value="Grupos" class="rounded text-gray-600">
+                        <span class="ml-2">Grupos</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="organization" value="Duplas" class="rounded text-gray-600">
+                        <span class="ml-2">Duplas</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" id="otherOrganizationCheck" class="rounded text-gray-600" onchange="toggleOtherOrganization()">
+                        <span class="ml-2">Outro</span>
+                    </label>
+                </div>
+                <input type="text" id="otherOrganization" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique a organização">
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="flex flex-col md:flex-row gap-4">
+                <button type="button" onclick="generatePrompt()" 
+                        class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+                    Gerar Prompt
+                </button>
+                <button type="button" onclick="clearForm()" 
+                        class="w-full bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors">
+                    Limpar Campos
+                </button>
+            </div>
+        </form>
+
+        <!-- Saída do Prompt -->
+        <div id="outputSection" class="hidden mt-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Prompt Gerado:</h2>
+            <textarea id="generatedPrompt" 
+                      class="w-full p-4 border-2 border-gray-200 rounded-md bg-gray-50" 
+                      rows="10" 
+                      readonly></textarea>
+            <button onclick="copyPrompt()"
+                    class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+                Copiar Prompt
+            </button>
+        </div>
+
+        <!-- Links para AIs -->
+        <div class="mt-8 border-t pt-6">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar o plano em plataformas de IA:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="https://www.deepseek.com" target="_blank" 
+                   class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+                    DeepSeek
+                </a>
+                <a href="https://chat.qwenlm.ai/" target="_blank" 
+                   class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+                    QuenAI
+                </a>
+                <a href="https://chat.mistral.ai/chat" target="_blank" 
+                   class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+                    Le Chat
+                </a>
+                <a href="https://kimi.ai/" target="_blank" 
+                   class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+                    Kimi AI
+                </a>
+                <a href="https://chat.openai.com/" target="_blank" 
+                   class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+                    ChatGPT
+                </a>
+                <a href="https://claude.ai/" target="_blank" 
+                   class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+                    Claude
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleOtherSubject() {
+            const subjectSelect = document.getElementById('subject');
+            const otherSubjectInput = document.getElementById('otherSubject');
+            otherSubjectInput.classList.toggle('hidden', subjectSelect.value !== 'outra');
+            otherSubjectInput.required = subjectSelect.value === 'outra';
+        }
+
+        function toggleOtherEval() {
+            const otherEvalCheck = document.getElementById('otherEvalCheck');
+            const otherEvalInput = document.getElementById('otherEval');
+            otherEvalInput.classList.toggle('hidden', !otherEvalCheck.checked);
+            otherEvalInput.required = otherEvalCheck.checked;
+        }
+
+        function toggleOtherResource() {
+            const otherResourceCheck = document.getElementById('otherResourceCheck');
+            const otherResourceInput = document.getElementById('otherResource');
+            otherResourceInput.classList.toggle('hidden', !otherResourceCheck.checked);
+            otherResourceInput.required = otherResourceCheck.checked;
+        }
+
+        function toggleOtherOrganization() {
+            const otherOrganizationCheck = document.getElementById('otherOrganizationCheck');
+            const otherOrganizationInput = document.getElementById('otherOrganization');
+            otherOrganizationInput.classList.toggle('hidden', !otherOrganizationCheck.checked);
+            otherOrganizationInput.required = otherOrganizationCheck.checked;
+        }
+
+        function generatePrompt() {
+            // Coletar dados do formulário
+            const subject = document.getElementById('subject').value === 'outra' 
+                          ? document.getElementById('otherSubject').value 
+                          : document.getElementById('subject').value;
+            
+            const grade = document.getElementById('grade').value;
+            const theme = document.getElementById('theme').value;
+            const subthemes = document.getElementById('subthemes').value.split(',').map(st => st.trim()).filter(st => st);
+            const duration = document.getElementById('duration').value;
+            
+            // Coletar avaliações
+            let evaluations = [...document.querySelectorAll('input[name="evaluation"]:checked')]
+                .map(el => el.value);
+            
+            if(document.getElementById('otherEvalCheck').checked) {
+                evaluations.push(document.getElementById('otherEval').value);
+            }
+
+            // Coletar recursos
+            let resources = [...document.querySelectorAll('input[name="resources"]:checked')]
+                .map(el => el.value);
+            if(document.getElementById('otherResourceCheck').checked) {
+                resources.push(document.getElementById('otherResource').value);
+            }
+
+            // Coletar organização
+            let organizations = [...document.querySelectorAll('input[name="organization"]:checked')]
+                .map(el => el.value);
+            if(document.getElementById('otherOrganizationCheck').checked) {
+                organizations.push(document.getElementById('otherOrganization').value);
+            }
+
+            // Construir prompt
+            const prompt = `Crie uma sequência didática para ${subject} (${grade}) com base na BNCC. 
+
+1. CABEÇALHO
+- Tema: ${theme}
+${subthemes.length > 0 ? `- Subtemas: ${subthemes.join(', ')}\n` : ''}
+- Duração: ${duration} aulas
+- Habilidades BNCC: [Incluir códigos BNCC relevantes para o tema e série selecionada]
+
+2. OBJETIVOS DE APRENDIZAGEM
+• [Objetivo 1 relacionado ao tema]
+• [Objetivo 2 com foco em habilidades específicas]
+• [Objetivo 3 de aplicação prática]
+
+3. DESENVOLVIMENTO
+Aula 1: [Introdução ao tema com atividade motivadora]
+...
+Aula ${duration}: [Sistematização e conclusão]
+
+4. AVALIAÇÃO
+- ${evaluations.join('\n- ') || '[Métodos de avaliação]'}
+${evaluations.includes('Rubricas') ? `
+**Instrução para a IA:**
+Se a avaliação incluir rubricas, crie uma rubrica detalhada com critérios claros e níveis de desempenho (ex: Insuficiente, Regular, Bom, Excelente).` : ''}
+
+5. RECURSOS
+- ${resources.join('\n- ') || '[Recursos utilizados]'}
+**Instrução para a IA:**
+Proponha recursos adicionais para fundamentar a sequência didática, como:
+- Materiais complementares (ex: textos, infográficos, mapas).
+- Atividades práticas (ex: experimentos, jogos, dinâmicas).
+- Sugestões de leitura ou vídeos relacionados ao tema.
+
+6. ORGANIZAÇÃO DA TURMA
+- ${organizations.join('\n- ') || '[Organização da turma]'}`;
+
+            // Exibir resultado
+            document.getElementById('generatedPrompt').value = prompt;
+            document.getElementById('outputSection').classList.remove('hidden');
+        }
+
+        function copyPrompt() {
+            const textarea = document.getElementById('generatedPrompt');
+            textarea.select();
+            document.execCommand('copy');
+            alert('Prompt copiado para a área de transferência!');
+        }
+
+        function clearForm() {
+            document.getElementById('promptForm').reset();
+            document.getElementById('outputSection').classList.add('hidden');
+            document.getElementById('otherSubject').classList.add('hidden');
+            document.getElementById('otherEval').classList.add('hidden');
+            document.getElementById('otherResource').classList.add('hidden');
+            document.getElementById('otherOrganization').classList.add('hidden');
+            document.getElementById('otherSubject').required = false;
+            document.getElementById('otherEval').required = false;
+            document.getElementById('otherResource').required = false;
+            document.getElementById('otherOrganization').required = false;
+        }
+    </script>
+</body>
+</html>

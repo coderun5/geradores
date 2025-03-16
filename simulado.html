@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompt para Testes Simulados</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompt para Testes Simulados</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo Professor(a) ao Gerador de Prompt para Testes Simulados</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo a criar prompts que gerem testes simulados personalizados, prontos para serem utilizados em ferramentas de IA como Chat GPT, Claude e DeepSeek. O prompt gerado pode ser usado para criar testes bem estruturados e responsivos, que podem ser integrados ao Word.</p>
+      <center> <h2 class="text-3xl font-bold mb-2">Como funciona este Gerador de Prompt:</h2></center>
+      <p class="text-gray-700"><strong>Preencha os Campos do Formulário:</strong></p>
+      <p>Cada campo no formulário foi criado para capturar informações essenciais que ajudarão a personalizar o prompt enviado às IAs.</p>
+      <p><strong>Gere o Prompt:</strong></p>
+      <p>Após preencher todos os campos, clique no botão "Gerar".</p>
+      <p><strong>Envie o Prompt para as IAs:</strong></p>
+      <p>Abaixo do prompt gerado, você encontrará links para as ferramentas de IA (Chat GPT, Claude e DeepSeek).</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um Prompt personalizado:</h2></center>
+    <form id="testForm" class="space-y-4">
+      <!-- Disciplina -->
+      <div>
+        <label for="discipline" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina para a qual o teste será criado.</span>
+          </span>
+        </label>
+        <select id="discipline" name="discipline" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Religião">Religião</option>
+          <option value="Literatura e Produção Textual">Literatura e Produção Textual</option>
+        </select>
+      </div>
+
+      <!-- Tempo de Aula -->
+      <div>
+        <label for="classTime" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tempo de Aula
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o tempo de aula disponível para o teste.</span>
+          </span>
+        </label>
+        <select id="classTime" name="classTime" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <option value=""></option>
+          <option value="1 hora">1 hora</option>
+          <option value="2 horas">2 horas</option>
+          <option value="3 horas">3 horas</option>
+          <option value="4 horas">4 horas</option>
+        </select>
+      </div>
+
+      <!-- Estilo do Simulado -->
+      <div>
+        <label for="testStyle" class="block text-lg font-medium text-gray-700 flex items-center">
+          Estilo do Simulado
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o estilo do simulado que deseja criar.</span>
+          </span>
+        </label>
+        <select id="testStyle" name="testStyle" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <option value=""></option>
+          <option value="Enem Exatas">Enem Exatas</option>
+          <option value="Enem Humanas">Enem Humanas</option>
+          <option value="SAEB">SAEB</option>
+          <option value="SABE">SABE (Sistema de Avaliação Baiano de Educação)</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+
+      <!-- Tipo de Questão -->
+      <div>
+        <label for="questionType" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tipo de Questão
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o tipo de questão que deseja incluir no teste.</span>
+          </span>
+        </label>
+        <select id="questionType" name="questionType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <option value=""></option>
+          <option value="Objetiva">Objetiva</option>
+          <option value="Discursiva">Discursiva</option>
+          <option value="Mista">Mista</option>
+          <option value="Outra">Outra</option>
+        </select>
+      </div>
+
+      <!-- Número de Questões -->
+      <div>
+        <label for="numberOfQuestions" class="block text-lg font-medium text-gray-700 flex items-center">
+          Número de Questões
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o número de questões que o teste deve conter.</span>
+          </span>
+        </label>
+        <input type="number" id="numberOfQuestions" name="numberOfQuestions" min="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano de Escolaridade
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano da turma para adaptar o conteúdo ao nível de conhecimento dos alunos.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Grau de Dificuldade -->
+      <div>
+        <label for="difficulty" class="block text-lg font-medium text-gray-700 flex items-center">
+          Grau de Dificuldade
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o grau de dificuldade do teste.</span>
+          </span>
+        </label>
+        <input type="range" id="difficulty" name="difficulty" min="1" max="5" class="mt-1 block w-full">
+        <div class="flex justify-between text-sm text-gray-600">
+          <span>Muito Fácil</span>
+          <span>Muito Difícil</span>
+        </div>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Copiar Texto</button>
+
+      <!-- Seção de Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Testes com as AIs:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="flex space-x-4">
+          <!-- Link para Chat GPT -->
+          <div class="flex-1">
+            <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 block text-center">
+              <i class="fas fa-robot mr-2"></i> Chat GPT
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma ferramenta de IA da OpenAI, especializada em geração de texto e assistência em tarefas criativas.</p>
+          </div>
+
+          <!-- Link para Claude -->
+          <div class="flex-1">
+            <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 block text-center">
+              <i class="fas fa-brain mr-2"></i> Claude
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma IA avançada da Anthropic, focada em segurança e assistência em tarefas complexas.</p>
+          </div>
+
+          <!-- Link para DeepSeek -->
+          <div class="flex-1">
+            <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 block text-center">
+              <i class="fas fa-search mr-2"></i> DeepSeek
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma plataforma de IA para pesquisa e geração de conteúdo, ideal para exploração de dados e insights.</p>
+          </div>
+
+          <!-- Link para Qwen AI -->
+          <div class="flex-1">
+            <a href="https://qwen.ai/" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 block text-center">
+              <i class="fas fa-cogs mr-2"></i> Qwen AI
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma IA versátil e poderosa, ideal para geração de conteúdo e automação de tarefas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Gerador de Prompt para Testes Simulados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const classTime = document.getElementById('classTime').value;
+      const testStyle = document.getElementById('testStyle').value;
+      const questionType = document.getElementById('questionType').value;
+      const numberOfQuestions = document.getElementById('numberOfQuestions').value;
+      const grade = document.getElementById('grade').value;
+      const difficulty = document.getElementById('difficulty').value;
+
+      const difficultyLabels = {
+        1: "Muito Fácil",
+        2: "Fácil",
+        3: "Médio",
+        4: "Difícil",
+        5: "Muito Difícil"
+      };
+
+      const generatedText = `
+        Crie um teste simulado para a disciplina de <strong>${discipline}</strong>, com duração de <strong>${classTime}</strong>, no estilo <strong>${testStyle}</strong>. O teste deve conter <strong>${numberOfQuestions}</strong> questões do tipo <strong>${questionType}</strong>, adequadas para alunos do <strong>${grade}</strong> ano, com um grau de dificuldade <strong>${difficultyLabels[difficulty]}</strong>. O teste deve ser bem estruturado, com questões claras e objetivas, e deve ser formatado de forma responsiva para integração no Word. Inclua gabarito e, se necessário, instruções específicas para cada tipo de questão.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
