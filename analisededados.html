@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompt para Análise de Provas Escolares</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompt para Análise de Provas Escolares</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo Professor(a) ao Gerador de Prompt para Análise de Provas</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo a criar prompts personalizados que serão enviados por você para ferramentas de IA, como Chat GPT e Claude, para analisar o desempenho dos alunos em provas.</p>
+      <center> <h2 class="text-3xl font-bold mb-2">Como Funciona:</h2></center>
+      <ol class="list-decimal list-inside text-gray-700 space-y-2">
+        <li><strong>Preencha os campos</strong> de <strong>Nível de Ensino</strong> e <strong>Disciplina</strong>.</li>
+        <li><strong>Clique em "Gerar Prompt"</strong> e o prompt personalizado será exibido.</li>
+        <li><strong>Copie o prompt</strong> e acesse o <strong>ChatGPT Plus</strong> ou <strong>Claude</strong>.</li>
+        <li><strong>Faça upload dos PDFs</strong> das provas e cole o prompt para análise.</li>
+        <li><strong>Receba os relatórios</strong> de desempenho dos alunos diretamente na ferramenta de IA.</li>
+      </ol>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos para gerar o Prompt:</h2></center>
+    <form id="analysisPromptForm" class="space-y-4">
+      <!-- Nível de Ensino -->
+      <div>
+        <label for="educationLevel" class="block text-lg font-medium text-gray-700 flex items-center">
+          Nível de Ensino
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o nível de ensino para o qual as provas serão analisadas.</span>
+          </span>
+        </label>
+        <select id="educationLevel" name="educationLevel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Disciplina -->
+      <div>
+        <label for="discipline" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina das provas.</span>
+          </span>
+        </label>
+        <select id="discipline" name="discipline" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Língua Portuguesa">Língua Portuguesa</option>
+          <option value="Matemática">Matemática</option>
+          <option value="Ciências">Ciências</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Ensino Religioso">Ensino Religioso</option>
+          <option value="LPT (Literatura e Produção Textual)">LPT (Literatura e Produção Textual)</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherDiscipline" name="otherDiscipline" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra disciplina (opcional)" style="display: none;">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50">
+        <p class="text-gray-700">O prompt será exibido aqui após o preenchimento dos campos.</p>
+      </div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Copiar Texto</button>
+    </div>
+
+    <!-- Seção de Links para AIs -->
+    <div class="mt-6">
+      <h3 class="text-xl font-bold mb-2">Analisar Provas com as AIs:</h3>
+      <p class="text-gray-700 mb-4"><strong>Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt e os PDFs das provas:</strong></p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+        <!-- Link para Chat GPT -->
+        <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+            <i class="fas fa-robot mr-2"></i> Chat GPT
+          </a>
+          <p class="text-sm text-gray-600 text-center">Use o ChatGPT Plus com plugins para carregar PDFs e analisar os dados das provas.</p>
+        </div>
+
+        <!-- Link para Claude -->
+        <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            <i class="fas fa-brain mr-2"></i> Claude
+          </a>
+          <p class="text-sm text-gray-600 text-center">Use o Claude para carregar PDFs e gerar relatórios detalhados de desempenho.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Gerador de Prompt para Análise de Provas Escolares. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    document.getElementById('discipline').addEventListener('change', function () {
+      const otherDisciplineField = document.getElementById('otherDiscipline');
+      if (this.value === 'Outra') {
+        otherDisciplineField.style.display = 'block';
+      } else {
+        otherDisciplineField.style.display = 'none';
+        otherDisciplineField.value = '';
+      }
+    });
+
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const educationLevel = document.getElementById('educationLevel').value;
+      const discipline = document.getElementById('discipline').value;
+      const otherDiscipline = document.getElementById('otherDiscipline').value;
+
+      const finalDiscipline = discipline === 'Outra' ? otherDiscipline : discipline;
+
+      let generatedText = `
+        **Prompt para Análise de Provas Escolares:**
+
+        Você é uma IA especializada em análise de dados educacionais. Sua tarefa é analisar os PDFs das provas enviados e gerar relatórios objetivos e detalhados sobre o desempenho dos alunos. Siga estas etapas:
+
+        1. **Extraia os Dados**:
+           - Identifique as questões, respostas dos alunos e gabaritos.
+           - Classifique as questões por tipo (múltipla escolha, dissertativa, verdadeiro/falso, etc.).
+           - Extraia métricas como: número de acertos, erros, questões deixadas em branco e tempo médio de resposta (se disponível).
+
+        2. **Analise o Desempenho**:
+           - Calcule a porcentagem de acertos por aluno, por turma e por questão.
+           - Identifique os tópicos ou habilidades com maior taxa de erro.
+           - Detecte padrões de desempenho, como alunos com dificuldades semelhantes ou questões particularmente desafiadoras.
+
+        3. **Gere Relatórios**:
+           - Crie um relatório individual para cada aluno, destacando:
+             - Pontos fortes e fracos.
+             - Sugestões de temas para revisão.
+             - Comparação com a média da turma.
+           - Gere um relatório geral para a turma, incluindo:
+             - Média de acertos por questão.
+             - Gráficos de desempenho (como histogramas ou heatmaps).
+             - Recomendações para ajustes no plano de aula.
+
+        4. **Forneça Insights**:
+           - Sugira estratégias pedagógicas para melhorar o desempenho dos alunos com base nos dados.
+           - Identifique se há questões mal formuladas ou ambíguas que possam ter afetado os resultados.
+           - Proponha atividades complementares para reforçar os tópicos com maior taxa de erro.
+
+        5. **Formato do Relatório**:
+           - Apresente os dados de forma clara e visual, com gráficos, tabelas e resumos executivos.
+           - Use linguagem acessível para que os professores possam entender e aplicar as recomendações.
+
+        **Contexto:**
+        - Nível de Ensino: ${educationLevel}.
+        - Disciplina: ${finalDiscipline}.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

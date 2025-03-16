@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Atividades</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    body {
+      background-color: #f0f0f0; /* Fundo cinza claro */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #555; /* Fundo cinza escuro */
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Prompts para Atividades
+    </h1>
+    <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar atividades personalizadas, que serão enviadas por você para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para gerar atividades adaptadas às suas necessidades.</p>
+    <marquee></marquee>
+    <form id="activityForm" class="space-y-6">
+      <!-- Disciplina -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Disciplina</label>
+        <select id="discipline" name="discipline" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherDiscipline" name="otherDiscipline" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mt-2 hidden" placeholder="Especifique outra disciplina (opcional)">
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Ano de Escolaridade</label>
+        <select id="grade" name="grade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="G4">G4</option>
+          <option value="G5">G5</option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Tema ou Assunto -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Tema ou Assunto</label>
+        <input type="text" id="subject" name="subject" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Ex: Meio ambiente, Festa junina" required>
+      </div>
+
+      <!-- Metodologia -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Metodologia</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodology" value="Individual" class="rounded text-gray-600">
+            <span class="ml-2">Individual</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodology" value="Em grupo" class="rounded text-gray-600">
+            <span class="ml-2">Em grupo</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodology" value="Expositiva" class="rounded text-gray-600">
+            <span class="ml-2">Expositiva</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodology" value="Interativa" class="rounded text-gray-600">
+            <span class="ml-2">Interativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherMethodologyCheckbox" name="methodology" value="Outra" class="rounded text-gray-600">
+            <span class="ml-2">Outra</span>
+          </label>
+        </div>
+        <input type="text" id="otherMethodology" name="otherMethodology" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mt-2 hidden" placeholder="Especifique outra metodologia (opcional)">
+      </div>
+
+      <!-- Recursos Didáticos -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Recursos Didáticos</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Livro didático" class="rounded text-gray-600">
+            <span class="ml-2">Livro didático</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Slides" class="rounded text-gray-600">
+            <span class="ml-2">Slides</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Materiais manipuláveis" class="rounded text-gray-600">
+            <span class="ml-2">Materiais manipuláveis</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherResourcesCheckbox" name="resources" value="Outro" class="rounded text-gray-600">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherResources" name="otherResources" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mt-2 hidden" placeholder="Especifique outro recurso didático (opcional)">
+      </div>
+
+      <!-- Duração da Atividade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Duração da Atividade</label>
+        <select id="duration" name="duration" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="30 minutos">30 minutos</option>
+          <option value="45 minutos">45 minutos</option>
+          <option value="50 minutos">50 minutos</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="text-center space-x-4">
+        <button type="button" id="generateButton" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">Gerar Prompt</button>
+        <button type="button" id="copyButton" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">Copiar Texto</button>
+        <button type="button" id="clearButton" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">Apagar todos os campos</button>
+      </div>
+    </form>
+
+    <!-- Área de Exibição da Atividade -->
+    <div id="outputSection" class="mt-8 hidden">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Atividade Gerada:</h2>
+      <div id="generatedText" class="w-full p-4 border-2 border-gray-200 rounded-md bg-gray-50"></div>
+    </div>
+
+    <!-- Seção de Links para IAs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar Atividade com as IAs:</h3>
+      <div class="flex space-x-4"> <!-- Botões em linha -->
+        <a href="https://chat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          Chat GPT
+        </a>
+        <a href="https://claude.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          Claude
+        </a>
+        <a href="https://deepseek.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          DeepSeek
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('discipline').addEventListener('change', function () {
+      const otherDisciplineField = document.getElementById('otherDiscipline');
+      if (this.value === 'Outra') {
+        otherDisciplineField.classList.remove('hidden');
+      } else {
+        otherDisciplineField.classList.add('hidden');
+        otherDisciplineField.value = '';
+      }
+    });
+
+    document.getElementById('otherMethodologyCheckbox').addEventListener('change', function () {
+      const otherMethodologyField = document.getElementById('otherMethodology');
+      if (this.checked) {
+        otherMethodologyField.classList.remove('hidden');
+      } else {
+        otherMethodologyField.classList.add('hidden');
+        otherMethodologyField.value = '';
+      }
+    });
+
+    document.getElementById('otherResourcesCheckbox').addEventListener('change', function () {
+      const otherResourcesField = document.getElementById('otherResources');
+      if (this.checked) {
+        otherResourcesField.classList.remove('hidden');
+      } else {
+        otherResourcesField.classList.add('hidden');
+        otherResourcesField.value = '';
+      }
+    });
+
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const otherDiscipline = document.getElementById('otherDiscipline').value;
+      const grade = document.getElementById('grade').value;
+      const subject = document.getElementById('subject').value;
+      const methodologyCheckboxes = document.querySelectorAll('input[name="methodology"]:checked');
+      const resourcesCheckboxes = document.querySelectorAll('input[name="resources"]:checked');
+      const duration = document.getElementById('duration').value;
+
+      const finalDiscipline = discipline === 'Outra' ? otherDiscipline : discipline;
+
+      let methodologies = [];
+      methodologyCheckboxes.forEach(checkbox => {
+        if (checkbox.value === 'Outra') {
+          const otherMethodology = document.getElementById('otherMethodology').value;
+          if (otherMethodology) {
+            methodologies.push(otherMethodology);
+          }
+        } else {
+          methodologies.push(checkbox.value);
+        }
+      });
+
+      let resources = [];
+      resourcesCheckboxes.forEach(checkbox => {
+        if (checkbox.value === 'Outro') {
+          const otherResources = document.getElementById('otherResources').value;
+          if (otherResources) {
+            resources.push(otherResources);
+          }
+        } else {
+          resources.push(checkbox.value);
+        }
+      });
+
+      const generatedText = `
+        Crie uma atividade para a disciplina <strong>${finalDiscipline}</strong>, voltada para alunos do <strong>${grade}</strong>, com o tema ou assunto <strong>${subject}</strong>.
+
+        <strong>Metodologia:</strong> A atividade deve seguir uma abordagem <strong>${methodologies.join(', ')}</strong>, utilizando os seguintes recursos didáticos: <strong>${resources.join(', ')}</strong>.
+
+        <strong>Duração da Atividade:</strong> A atividade deve ter uma duração de <strong>${duration}</strong>.
+
+        <strong>Instruções para a IA:</strong>
+        1. Incorpore objetivos educacionais e competências da BNCC com base no tema e no ano de escolaridade.
+        2. Desenvolva um cabeçalho escolar, incluindo o nome da escola, disciplina, ano, tema e data.
+        3. Explique passo a passo como o professor deve desenvolver a atividade, incluindo introdução, desenvolvimento e conclusão.
+        4. Inclua uma seção com indicações de textos, links, sites, vídeos e outros materiais que ajudarão o professor a implementar a atividade de forma competente.
+        5. Certifique-se de que a atividade seja clara, objetiva e adaptada ao nível de escolaridade selecionado.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+      document.getElementById('outputSection').classList.remove('hidden');
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+
+    document.getElementById('clearButton').addEventListener('click', function () {
+      document.getElementById('activityForm').reset();
+      document.getElementById('outputSection').classList.add('hidden');
+      document.getElementById('otherDiscipline').classList.add('hidden');
+      document.getElementById('otherMethodology').classList.add('hidden');
+      document.getElementById('otherResources').classList.add('hidden');
+    });
+  </script>
+</body>
+</html>

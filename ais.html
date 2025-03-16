@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .neumorphic-card {
+            background: rgba(173, 216, 230, 0.8); /* Tom azul claro com transparência */
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), -10px -10px 20px rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+        }
+        .neumorphic-card:hover {
+            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px rgba(255, 255, 255, 0.8);
+            transform: translateY(-5px);
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="neumorphic-card">
+            <img src="https://www.blackbox.ai/apple-touch-icon.png" alt="BlackBox Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">BlackBox</h3>
+            <p class="mb-4">"BlackBox" Reune várias AIs no mesmo local, permitindo que você escolha qual AI vai usar.</p>
+            <a href="https://blackbox.ai" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://logos-world.net/imageup/ChatGPT/ChatGPT_logo_PNG%20(14).png" alt="ChatGPT Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">ChatGPT</h3>
+            <p class="mb-4">"ChatGPT" Testado com nossos Prompts.</p>
+            <a href="https://chat.openai.com" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/claude-color.png" alt="Claude Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Claude</h3>
+            <p class="mb-4">"Claude" <strong>Destaque.</strong> Testado com nossos Prompts.</p>
+            <a href="https://claude.ai" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/copilot-color.png" alt="Copilot Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Copilot</h3>
+            <p class="mb-4">"Copilot" Melhor para pesquisa. Se sai bem em Prompts para gerar imagem.</p>
+            <a href="https://copilot.microsoft.com/onboarding" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://educ.nekoweb.org/geradores/deep.png" alt="DeepSeek Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">DeepSeek</h3>
+            <p class="mb-4">"DeepSeek" <strong>Destaque.</strong> Testado com nossos Prompts. Tem alternativa de colocar como extensão do Chrome.</p>
+            <a href="https://deepseek.ai/" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://www.pngall.com/wp-content/uploads/16/Google-Gemini-Logo-Transparent.png" alt="Gemini Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Gemini</h3>
+            <p class="mb-4">"Gemini" O mesmo que no Copilot, bom para pesquisa, gerar imagens e dá boas respostas com alguns Prompts nossos.</p>
+            <a href="https://deepmind.com/gemini" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://chat.mistral.ai/_next/static/media/le-chat-logo-dark.ff291bca.png" alt="Le Chat Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Le Chat</h3>
+            <p class="mb-4">"Le Chat" <strong>Destaque.</strong> Testado com nossos Prompts.</p>
+            <a href="https://chat.mistral.ai/chat" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://zorgle.co.uk/wp-content/uploads/2024/11/Meta-ai-logo.png" alt="Meta Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Meta</h3>
+            <p class="mb-4">"Meta" Bom para gerar imagens e talvez alguns Prompts nossos.</p>
+            <a href="https://ai.meta.com/meta-ai/" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/qwen-color.png" alt="Qwen Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Qwen</h3>
+            <p class="mb-4">"Qwen" <strong>Destaque.</strong> Testado com nossos Prompts.</p>
+            <a href="https://chat.qwenlm.ai/" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://educ.nekoweb.org/geradores/kimi.jpeg" alt="Qwen Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Kimi.AI</h3>
+            <p class="mb-4">"Kimi" <strong></strong> Tente</p>
+            <a href="https://kimi.ai/" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://educ.nekoweb.org/geradores/grok.png" alt="Qwen Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Grok.AI</h3>
+            <p class="mb-4">"Grok" <strong></strong> Tente.</p>
+            <a href="https://grok.com/?referrer=website" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+        <div class="neumorphic-card">
+            <img src="https://educ.nekoweb.org/geradores/hix.png" alt="Qwen Logo" class="logo">
+            <h3 class="text-xl font-bold mb-2 text-gray-800">Hix.AI</h3>
+            <p class="mb-4">"Hix" <strong></strong> Tente. Nesta é possível usar várias AIs.</p>
+            <a href="https://hix.ai/" target="_blank" class="text-blue-500 hover:underline">Acessar</a>
+        </div>
+    </div>
+</body>
+</html>

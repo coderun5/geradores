@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Planos de Aula BNCC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #f0f0f0; /* Fundo cinza claro */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Planos de Aula BNCC
+    </h1>
+    <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar prompts personalizados que serão enviados por você para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para gerar planos de aula completos e adaptados às suas necessidades.</p>
+    <marquee></marquee>
+    <form id="planForm" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Disciplina -->
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Disciplina</label>
+          <select id="subject" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required onchange="toggleOtherSubject()">
+            <option value="Língua Portuguesa">Português</option>
+            <option value="Matemática">Matemática</option>
+            <option value="Ciências">Ciências</option>
+            <option value="História">História</option>
+            <option value="Geografia">Geografia</option>
+            <option value="Arte">Arte</option>
+            <option value="Educação Física">Educação Física</option>
+            <option value="Ensino Religioso">Ensino Religioso</option>
+            <option value="Língua Estrangeira">Língua Estrangeira</option>
+            <option value="outra">Outra</option>
+          </select>
+          <input type="text" id="otherSubject" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique a disciplina">
+        </div>
+
+        <!-- Série -->
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Série</label>
+          <select id="grade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+            <option value="1º EF">1º Ano</option>
+            <option value="2º EF">2º Ano</option>
+            <option value="3º EF">3º Ano</option>
+            <option value="4º EF">4º Ano</option>
+            <option value="5º EF">5º Ano</option>
+            <option value="6º EF">6º Ano</option>
+            <option value="7º EF">7º Ano</option>
+            <option value="8º EF">8º Ano</option>
+            <option value="9º EF">9º Ano</option>
+          </select>
+        </div>
+
+        <!-- Tema/Assunto -->
+        <div class="md:col-span-2">
+          <label class="block text-gray-700 font-medium mb-2">Tema ou Assunto da Aula</label>
+          <input type="text" id="theme" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+        </div>
+
+        <!-- Duração -->
+        <div class="md:col-span-2">
+          <label class="block text-gray-700 font-medium mb-2">Duração da Aula</label>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="duration" value="45 minutos" class="rounded text-gray-600">
+              <span class="ml-2">45 minutos</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="duration" value="50 minutos" class="rounded text-gray-600">
+              <span class="ml-2">50 minutos</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" id="otherDurationCheck" class="rounded text-gray-600" onchange="toggleOtherDuration()">
+              <span class="ml-2">Outro</span>
+            </label>
+          </div>
+          <input type="text" id="otherDuration" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique a duração">
+        </div>
+      </div>
+
+      <!-- Recursos -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Recursos Didáticos</label>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Livro didático" class="rounded text-gray-600">
+            <span class="ml-2">Livro didático</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Slides" class="rounded text-gray-600">
+            <span class="ml-2">Slides</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Vídeos" class="rounded text-gray-600">
+            <span class="ml-2">Vídeos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="Jogos educativos" class="rounded text-gray-600">
+            <span class="ml-2">Jogos educativos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherResourceCheck" class="rounded text-gray-600" onchange="toggleOtherResource()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherResource" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique o recurso">
+      </div>
+
+      <!-- Avaliação -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Formas de Avaliação</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="assessment" value="Observação participativa" class="rounded text-gray-600">
+            <span class="ml-2">Observação participativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="assessment" value="Atividade prática" class="rounded text-gray-600">
+            <span class="ml-2">Atividade prática</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="assessment" value="Quiz rápido" class="rounded text-gray-600">
+            <span class="ml-2">Quiz rápido</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherAssessmentCheck" class="rounded text-gray-600" onchange="toggleOtherAssessment()">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherAssessment" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique a avaliação">
+      </div>
+
+      <!-- Botões de Ação (em linha) -->
+      <div class="flex space-x-4">
+        <button type="button" onclick="generatePlan()" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+          Gerar Plano
+        </button>
+        <button type="button" onclick="clearForm()" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+          Limpar Campos
+        </button>
+      </div>
+    </form>
+
+    <!-- Saída do Plano -->
+    <div id="outputSection" class="hidden mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Plano de Aula Gerado:</h2>
+      <textarea id="generatedPlan" class="w-full p-4 border-2 border-gray-200 rounded-md bg-gray-50" rows="12" readonly></textarea>
+      <button onclick="copyPlan()" class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+        Copiar Plano
+      </button>
+    </div>
+
+    <!-- Links para AIs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar o plano em plataformas de IA:</h3>
+      <div class="flex space-x-4"> <!-- Botões em linha -->
+        <a href="https://www.deepseek.com" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          DeepSeek
+        </a>
+        <a href="https://chat.qwenlm.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          QuenAI
+        </a>
+        <a href="https://chat.mistral.ai/chat" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center flex-1">
+          Le Chat
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Funções para mostrar/ocultar campos "Outro"
+    function toggleOtherSubject() {
+      const subjectSelect = document.getElementById('subject');
+      const otherSubjectInput = document.getElementById('otherSubject');
+      otherSubjectInput.classList.toggle('hidden', subjectSelect.value !== 'outra');
+      otherSubjectInput.required = subjectSelect.value === 'outra';
+    }
+
+    function toggleOtherDuration() {
+      const check = document.getElementById('otherDurationCheck');
+      const input = document.getElementById('otherDuration');
+      input.classList.toggle('hidden', !check.checked);
+      input.required = check.checked;
+    }
+
+    function toggleOtherResource() {
+      const check = document.getElementById('otherResourceCheck');
+      const input = document.getElementById('otherResource');
+      input.classList.toggle('hidden', !check.checked);
+      input.required = check.checked;
+    }
+
+    function toggleOtherAssessment() {
+      const check = document.getElementById('otherAssessmentCheck');
+      const input = document.getElementById('otherAssessment');
+      input.classList.toggle('hidden', !check.checked);
+      input.required = check.checked;
+    }
+
+    function generatePlan() {
+      // Coletar dados do formulário
+      const subject = document.getElementById('subject').value === 'outra'
+                      ? document.getElementById('otherSubject').value
+                      : document.getElementById('subject').value;
+
+      const grade = document.getElementById('grade').value;
+      const theme = document.getElementById('theme').value;
+
+      // Coletar duração
+      let durations = [...document.querySelectorAll('input[name="duration"]:checked')]
+          .map(el => el.value);
+      if(document.getElementById('otherDurationCheck').checked) {
+        durations.push(document.getElementById('otherDuration').value);
+      }
+
+      // Coletar recursos
+      let resources = [...document.querySelectorAll('input[name="resources"]:checked')]
+          .map(el => el.value);
+      if(document.getElementById('otherResourceCheck').checked) {
+        resources.push(document.getElementById('otherResource').value);
+      }
+
+      // Coletar avaliações
+      let assessments = [...document.querySelectorAll('input[name="assessment"]:checked')]
+          .map(el => el.value);
+      if(document.getElementById('otherAssessmentCheck').checked) {
+        assessments.push(document.getElementById('otherAssessment').value);
+      }
+
+      // Construir prompt
+      const plan = `Crie um plano de aula para ${subject} (${grade}) alinhado à BNCC com as seguintes especificações:
+
+Tema: ${theme}
+Duração: ${durations.join(' ou ')}
+
+Recursos selecionados:
+- ${resources.join('\n- ')}
+
+Formas de avaliação:
+- ${assessments.join('\n- ')}
+
+Instruções para o plano:
+1. Elaborar 3 objetivos de aprendizagem específicos e mensuráveis
+2. Criar uma introdução contextualizadora que engaje os alunos
+3. Desenvolver atividades principais com metodologia ativa
+4. Incluir estratégias de diferenciação para alunos com diferentes níveis
+5. Proporcionar momentos de reflexão e síntese do aprendizado
+6. Vincular explicitamente às competências e habilidades da BNCC
+7. Sugerir adaptações para diferentes realidades escolares
+
+Estrutura sugerida:
+- Objetivos de aprendizagem
+- Recursos necessários
+- Desenvolvimento metodológico
+- Avaliação formativa
+- Conexões com a BNCC`;
+
+      // Exibir resultado
+      document.getElementById('generatedPlan').value = plan;
+      document.getElementById('outputSection').classList.remove('hidden');
+    }
+
+    function copyPlan() {
+      const textarea = document.getElementById('generatedPlan');
+      textarea.select();
+      document.execCommand('copy');
+      alert('Plano copiado para a área de transferência!');
+    }
+
+    function clearForm() {
+      document.getElementById('planForm').reset();
+      document.getElementById('outputSection').classList.add('hidden');
+      document.getElementById('otherSubject').classList.add('hidden');
+      document.getElementById('otherDuration').classList.add('hidden');
+      document.getElementById('otherResource').classList.add('hidden');
+      document.getElementById('otherAssessment').classList.add('hidden');
+      document.getElementById('otherSubject').required = false;
+      document.getElementById('otherDuration').required = false;
+      document.getElementById('otherResource').required = false;
+      document.getElementById('otherAssessment').required = false;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Atividades para Alfabetizar Letrando</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    body {
+      background-color: #f5f5f5; /* Fundo cinza claro */
+      color: #333; /* Texto cinza escuro */
+    }
+    .content-container {
+      background-color: #ffffff; /* Fundo branco para o conteúdo */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .accent-color {
+      background-color: #cccccc; /* Cinza claro */
+    }
+    .accent-text {
+      color: #666666; /* Cinza médio */
+    }
+    .hover-accent:hover {
+      background-color: #aaaaaa; /* Cinza médio no hover */
+      color: white;
+    }
+    .mono-button {
+      background-color: #666666; /* Cinza médio */
+    }
+    .mono-button:hover {
+      background-color: #555555; /* Cinza mais escuro no hover */
+    }
+    .action-field {
+      border: 2px solid #cccccc; /* Contorno cinza claro */
+      border-radius: 0.5rem;
+      padding: 1rem;
+      background-color: #f9f9f9; /* Fundo cinza muito claro */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Atividades para Alfabetizar Letrando
+    </h1>
+    <p>Esta ferramenta foi projetada para ajudá-lo a criar atividades práticas de alfabetização para alunos de qualquer série/ano, que serão enviadas por você para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para gerar atividades adaptadas às suas necessidades.</p>
+    <marquee></marquee>
+    <form id="activityForm" class="space-y-6">
+      <!-- Nível de Ensino -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Nível de Ensino no qual os(as) alunos(as) se encontram ainda não alfabetizados</label>
+        <select id="gradeLevel" name="gradeLevel" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Educação Infantil">Educação Infantil</option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Tema ou Contexto -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Tema ou Contexto</label>
+        <input type="text" id="theme" name="theme" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Ex: Meio ambiente, Festa junina" required>
+      </div>
+
+      <!-- Habilidades a Serem Desenvolvidas -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Habilidades a Serem Desenvolvidas</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="skills" value="conscienciaFonologica" class="accent-color">
+            <span class="ml-2">Consciência fonológica</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="skills" value="leituraPalavras" class="accent-color">
+            <span class="ml-2">Leitura de palavras e frases</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="skills" value="producaoTextos" class="accent-color">
+            <span class="ml-2">Produção de textos coletivos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="skills" value="interpretacaoTextos" class="accent-color">
+            <span class="ml-2">Interpretação de textos curtos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="skills" value="outro" class="accent-color" id="outroSkill">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="outroSkillText" name="outroSkill" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mt-2 hidden" placeholder="Descreva a habilidade">
+        </div>
+      </div>
+
+      <!-- Recursos Disponíveis -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Recursos Disponíveis</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="livros" class="accent-color">
+            <span class="ml-2">Livros didáticos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="slides" class="accent-color">
+            <span class="ml-2">Slides</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="materiaisManipulaveis" class="accent-color">
+            <span class="ml-2">Materiais manipuláveis</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="videos" class="accent-color">
+            <span class="ml-2">Vídeos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="jogosEducativos" class="accent-color">
+            <span class="ml-2">Jogos educativos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="textos" class="accent-color">
+            <span class="ml-2">Textos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="resources" value="outro" class="accent-color" id="outroResource">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="outroResourceText" name="outroResource" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mt-2 hidden" placeholder="Descreva o recurso">
+        </div>
+      </div>
+
+      <!-- Nível de Alfabetização -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Nível de Construção da Lectoescrita no qual o aluno se encontra</label>
+        <select id="literacyLevel" name="literacyLevel" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="pré-silábico">Pré-silábico</option>
+          <option value="silábico">Silábico</option>
+          <option value="silábico-alfabético">Silábico-alfabético</option>
+          <option value="alfabético">Alfabético</option>
+        </select>
+      </div>
+
+      <!-- Interesses dos Alunos -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Interesses dos Alunos</label>
+        <input type="text" id="studentInterests" name="studentInterests" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Ex: Dinossauros, esportes">
+      </div>
+
+      <!-- Tipo de Atividade -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Tipo de Atividade</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="jogo" class="accent-color">
+            <span class="ml-2">Jogo educativo</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="leitura" class="accent-color">
+            <span class="ml-2">Leitura compartilhada</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="producao" class="accent-color">
+            <span class="ml-2">Produção de texto coletivo</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="projeto" class="accent-color">
+            <span class="ml-2">Projeto interdisciplinar</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="convite" class="accent-color">
+            <span class="ml-2">Convite para leitura</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="historia" class="accent-color">
+            <span class="ml-2">História em quadrinhos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="noticia" class="accent-color">
+            <span class="ml-2">Notícia</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="activityType" value="outro" class="accent-color" id="outroActivity">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="outroActivityText" name="outroActivity" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mt-2 hidden" placeholder="Descreva a atividade">
+        </div>
+      </div>
+
+      <!-- Gênero Textual -->
+      <div class="action-field">
+        <label class="block text-gray-700 font-medium mb-2">Gênero Textual</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="textGenre" value="bilhete" class="accent-color">
+            <span class="ml-2">Bilhete</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="textGenre" value="lista" class="accent-color">
+            <span class="ml-2">Lista</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="textGenre" value="poema" class="accent-color">
+            <span class="ml-2">Poema</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="textGenre" value="convite" class="accent-color">
+            <span class="ml-2">Convite</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="textGenre" value="historia" class="accent-color">
+            <span class="ml-2">História</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="textGenre" value="noticia" class="accent-color">
+            <span class="ml-2">Notícia</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="textGenre" value="outro" class="accent-color" id="outroTextGenre">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="outroTextGenreText" name="outroTextGenre" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mt-2 hidden" placeholder="Descreva o gênero textual">
+        </div>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="text-center space-x-4">
+        <button type="submit" class="mono-button text-white px-6 py-2 rounded-md">Gerar Prompt</button>
+        <button type="button" id="copyButton" class="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition-colors">Copiar Prompt</button>
+        <button type="button" id="clearButton" class="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition-colors">Apagar todos os campos</button>
+      </div>
+    </form>
+
+    <!-- Área de Exibição do Prompt Gerado -->
+    <div id="generatedPrompt" class="mt-8 bg-white p-8 rounded-md shadow-md hidden">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Prompt Gerado:</h2>
+      <p id="promptText" class="text-gray-700"></p>
+    </div>
+
+    <!-- Seção de Links para AIs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar Atividade com as AIs:</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="https://chat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Chat GPT
+        </a>
+        <a href="https://claude.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Claude
+        </a>
+        <a href="https://deepseek.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          DeepSeek
+        </a>
+        <a href="https://auth.mistral.ai/ui/login?flow=d16c4a30-4cd2-47ce-baea-1f10bba85f4d" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Le Chat
+        </a>
+        <a href="https://chat.qwenlm.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Qwen AI
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('activityForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Captura os valores dos campos
+      const gradeLevel = document.getElementById('gradeLevel').value;
+      const theme = document.getElementById('theme').value;
+      const skills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(el => el.value).join(', ');
+      const resources = Array.from(document.querySelectorAll('input[name="resources"]:checked')).map(el => el.value).join(', ');
+      const literacyLevel = document.getElementById('literacyLevel').value;
+      const studentInterests = document.getElementById('studentInterests').value;
+      const activityType = Array.from(document.querySelectorAll('input[name="activityType"]:checked')).map(el => el.value).join(', ');
+      const textGenre = Array.from(document.querySelectorAll('input[name="textGenre"]:checked')).map(el => el.value).join(', ');
+
+      // Gera o prompt
+      const promptText = `
+        Crie uma atividade de alfabetização para uma turma de ${gradeLevel} com o tema "${theme}". A atividade deve desenvolver as seguintes habilidades: ${skills}. Utilize os seguintes recursos: ${resources}. O nível de alfabetização dos alunos é ${literacyLevel}. Considere os interesses dos alunos: ${studentInterests}. A atividade deve ser do tipo ${activityType} e trabalhar com o gênero textual ${textGenre}.
+
+        A atividade deve ser estruturada de forma clara e objetiva, com instruções detalhadas para os alunos. Inclua as habilidades da BNCC a partir das escolhas do professor.
+      `;
+
+      // Exibe o prompt gerado
+      document.getElementById('promptText').textContent = promptText;
+      document.getElementById('generatedPrompt').classList.remove('hidden');
+    });
+
+    // Copiar prompt
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const promptText = document.getElementById('promptText').textContent;
+      navigator.clipboard.writeText(promptText).then(() => {
+        this.textContent = 'Prompt Copiado!';
+        setTimeout(() => {
+          this.textContent = 'Copiar Prompt';
+        }, 2000);
+      });
+    });
+
+    // Apagar todos os campos
+    document.getElementById('clearButton').addEventListener('click', function () {
+      document.getElementById('activityForm').reset();
+      document.getElementById('generatedPrompt').classList.add('hidden');
+      document.getElementById('outroSkillText').classList.add('hidden');
+      document.getElementById('outroResourceText').classList.add('hidden');
+      document.getElementById('outroActivityText').classList.add('hidden');
+      document.getElementById('outroTextGenreText').classList.add('hidden');
+    });
+
+    // Mostrar/Esconder campos de texto "Outro"
+    document.getElementById('outroSkill').addEventListener('change', function () {
+      document.getElementById('outroSkillText').classList.toggle('hidden', !this.checked);
+    });
+
+    document.getElementById('outroResource').addEventListener('change', function () {
+      document.getElementById('outroResourceText').classList.toggle('hidden', !this.checked);
+    });
+
+    document.getElementById('outroActivity').addEventListener('change', function () {
+      document.getElementById('outroActivityText').classList.toggle('hidden', !this.checked);
+    });
+
+    document.getElementById('outroTextGenre').addEventListener('change', function () {
+      document.getElementById('outroTextGenreText').classList.toggle('hidden', !this.checked);
+    });
+  </script>
+</body>
+</html>
