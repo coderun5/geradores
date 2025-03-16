@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompt para Plano de Unidade</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    body {
+      background-image: url(''); /* Substitua pela URL da sua imagem */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para o conteúdo */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Prompt para Plano de Unidade
+    </h1>
+    <p>Esta ferramenta foi projetada para ajudá-lo(a) a criar prompts personalizados que serão enviados por você para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para gerar planos de unidade completos e adaptados às suas necessidades.</p>
+    <marquee></marquee>
+    <form id="unitPlanForm" class="space-y-6">
+      <!-- Disciplina -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Disciplina</label>
+        <select id="discipline" name="discipline" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Ensino Religioso">Ensino Religioso</option>
+          <option value="(LPT) Literatura e Produção Textual">(LPT) Literatura e Produção Textual</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherDiscipline" name="otherDiscipline" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra disciplina (opcional)">
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Ano de Escolaridade</label>
+        <select id="grade" name="grade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="G4">G4</option>
+          <option value="G5">G5</option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Unidade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Unidade</label>
+        <select id="unit" name="unit" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="I Unidade">I Unidade</option>
+          <option value="II Unidade">II Unidade</option>
+          <option value="III Unidade">III Unidade</option>
+        </select>
+      </div>
+
+      <!-- Número de Dias Letivos da Unidade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Número de Dias Letivos da Unidade</label>
+        <input type="number" id="schoolDays" name="schoolDays" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Número de Aulas Semanais -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Número de Aulas Semanais</label>
+        <input type="number" id="weeklyClasses" name="weeklyClasses" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Unidades Temáticas e Conteúdos das UTs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Unidades Temáticas -->
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Unidades Temáticas <span class="text-sm text-gray-500">(Escolha de acordo ou não com os capítulos do livro didático da disciplina)</span></label>
+          <div id="utContainer" class="space-y-2">
+            <input type="text" name="ut1" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Unidade Temática 1">
+            <input type="text" name="ut2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Unidade Temática 2">
+            <input type="text" name="ut3" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Unidade Temática 3">
+            <input type="text" name="ut4" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Unidade Temática 4">
+            <input type="text" name="ut5" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Unidade Temática 5">
+          </div>
+          <button type="button" id="addUTButton" class="mt-2 bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700">Adicionar Unidade Temática</button>
+        </div>
+
+        <!-- Conteúdos das UTs -->
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Conteúdos das UTs <span class="text-sm text-gray-500">(Escolha de acordo ou não com os capítulos do livro didático da disciplina)</span></label>
+          <div id="contentContainer" class="space-y-2">
+            <textarea name="content1" rows="2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Conteúdo da UT 1"></textarea>
+            <textarea name="content2" rows="2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Conteúdo da UT 2"></textarea>
+            <textarea name="content3" rows="2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Conteúdo da UT 3"></textarea>
+            <textarea name="content4" rows="2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Conteúdo da UT 4"></textarea>
+            <textarea name="content5" rows="2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" placeholder="Conteúdo da UT 5"></textarea>
+          </div>
+          <button type="button" id="addContentButton" class="mt-2 bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700">Adicionar Conteúdo</button>
+        </div>
+      </div>
+
+      <!-- Metodologias -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Metodologias</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodologies" value="Aprendizagem Baseada em Projetos" class="rounded text-gray-600">
+            <span class="ml-2">Aprendizagem Baseada em Projetos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodologies" value="Sala de Aula Invertida" class="rounded text-gray-600">
+            <span class="ml-2">Sala de Aula Invertida</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodologies" value="Gamificação" class="rounded text-gray-600">
+            <span class="ml-2">Gamificação</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodologies" value="Ensino Híbrido" class="rounded text-gray-600">
+            <span class="ml-2">Ensino Híbrido</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodologies" value="Aprendizagem Cooperativa" class="rounded text-gray-600">
+            <span class="ml-2">Aprendizagem Cooperativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="methodologies" value="Metodologia Ativa" class="rounded text-gray-600">
+            <span class="ml-2">Metodologia Ativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherMethodologyCheckbox" name="methodologies" value="Outra" class="rounded text-gray-600">
+            <span class="ml-2">Outra</span>
+          </label>
+        </div>
+        <input type="text" id="otherMethodology" name="otherMethodology" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra metodologia (opcional)">
+      </div>
+
+      <!-- Recursos Didáticos -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Recursos Didáticos</label>
+        <textarea id="teachingResources" name="teachingResources" rows="4" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500"></textarea>
+      </div>
+
+      <!-- Número de Avaliações da Unidade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Número de Avaliações da Unidade</label>
+        <select id="evaluationNumber" name="evaluationNumber" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="outra">Outra</option>
+        </select>
+        <input type="text" id="otherEvaluationNumber" name="otherEvaluationNumber" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro número de avaliações (opcional)">
+      </div>
+
+      <!-- Avaliação -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Avaliação</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluation" value="Avaliação Diagnóstica" class="rounded text-gray-600">
+            <span class="ml-2">Avaliação Diagnóstica</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluation" value="Avaliação Formativa" class="rounded text-gray-600">
+            <span class="ml-2">Avaliação Formativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluation" value="Avaliação Somativa" class="rounded text-gray-600">
+            <span class="ml-2">Avaliação Somativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluation" value="Formativa + Somativa" class="rounded text-gray-600">
+            <span class="ml-2">Formativa + Somativa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluation" value="Rubrica" class="rounded text-gray-600">
+            <span class="ml-2">Rubrica</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluation" value="Portfólio" class="rounded text-gray-600">
+            <span class="ml-2">Portfólio</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="evaluation" value="Projetos" class="rounded text-gray-600">
+            <span class="ml-2">Projetos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" id="otherEvaluationCheckbox" name="evaluation" value="Outra" class="rounded text-gray-600">
+            <span class="ml-2">Outra</span>
+          </label>
+        </div>
+        <input type="text" id="otherEvaluation" name="otherEvaluation" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra avaliação (opcional)">
+      </div>
+
+      <!-- Botões Gerar e Limpar Campos -->
+      <div class="flex space-x-4">
+        <button type="button" id="generateButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Gerar Prompt</button>
+        <button type="button" id="clearFieldsButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Limpar Campos</button>
+      </div>
+    </form>
+
+    <!-- Área de Exibição do Plano de Unidade -->
+    <div id="outputSection" class="hidden mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Plano de Unidade Gerado:</h2>
+      <div id="generatedText" class="w-full p-4 border-2 border-gray-200 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Copiar Texto</button>
+      <button id="clearButton" class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Apagar Texto</button>
+    </div>
+
+    <!-- Seção de Links para AIs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar Plano de Unidade com as AIs:</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="https://chat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Chat GPT
+        </a>
+        <a href="https://claude.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Claude
+        </a>
+        <a href="https://qwenlm.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Qwen
+        </a>
+        <a href="https://deepseek.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          DeepSeek
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('discipline').addEventListener('change', function () {
+      const otherDisciplineField = document.getElementById('otherDiscipline');
+      if (this.value === 'Outra') {
+        otherDisciplineField.classList.remove('hidden');
+      } else {
+        otherDisciplineField.classList.add('hidden');
+        otherDisciplineField.value = '';
+      }
+    });
+
+    document.getElementById('otherMethodologyCheckbox').addEventListener('change', function () {
+      const otherMethodologyField = document.getElementById('otherMethodology');
+      if (this.checked) {
+        otherMethodologyField.classList.remove('hidden');
+      } else {
+        otherMethodologyField.classList.add('hidden');
+        otherMethodologyField.value = '';
+      }
+    });
+
+    document.getElementById('otherEvaluationCheckbox').addEventListener('change', function () {
+      const otherEvaluationField = document.getElementById('otherEvaluation');
+      if (this.checked) {
+        otherEvaluationField.classList.remove('hidden');
+      } else {
+        otherEvaluationField.classList.add('hidden');
+        otherEvaluationField.value = '';
+      }
+    });
+
+    document.getElementById('evaluationNumber').addEventListener('change', function () {
+      const otherEvaluationNumberField = document.getElementById('otherEvaluationNumber');
+      if (this.value === 'outra') {
+        otherEvaluationNumberField.classList.remove('hidden');
+      } else {
+        otherEvaluationNumberField.classList.add('hidden');
+        otherEvaluationNumberField.value = '';
+      }
+    });
+
+    document.getElementById('addUTButton').addEventListener('click', function () {
+      const utContainer = document.getElementById('utContainer');
+      const newUTIndex = utContainer.children.length + 1;
+      const newUTInput = document.createElement('input');
+      newUTInput.type = 'text';
+      newUTInput.name = `ut${newUTIndex}`;
+      newUTInput.className = 'w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500';
+      newUTInput.placeholder = `Unidade Temática ${newUTIndex}`;
+      utContainer.appendChild(newUTInput);
+    });
+
+    document.getElementById('addContentButton').addEventListener('click', function () {
+      const contentContainer = document.getElementById('contentContainer');
+      const newContentIndex = contentContainer.children.length + 1;
+      const newContentTextarea = document.createElement('textarea');
+      newContentTextarea.name = `content${newContentIndex}`;
+      newContentTextarea.rows = '2';
+      newContentTextarea.className = 'w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500';
+      newContentTextarea.placeholder = `Conteúdo da UT ${newContentIndex}`;
+      contentContainer.appendChild(newContentTextarea);
+    });
+
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const otherDiscipline = document.getElementById('otherDiscipline').value;
+      const grade = document.getElementById('grade').value;
+      const unit = document.getElementById('unit').value;
+      const schoolDays = document.getElementById('schoolDays').value;
+      const weeklyClasses = document.getElementById('weeklyClasses').value;
+
+      // Captura das Unidades Temáticas e Conteúdos
+      const utInputs = document.querySelectorAll('#utContainer input[type="text"]');
+      const contentTextareas = document.querySelectorAll('#contentContainer textarea');
+
+      let utContents = '';
+      utInputs.forEach((utInput, index) => {
+        const contentTextarea = contentTextareas[index];
+        if (utInput.value && contentTextarea) {
+          utContents += `<li><strong>${utInput.value}</strong>: ${contentTextarea.value}</li>`;
+        }
+      });
+
+      const methodologies = Array.from(document.querySelectorAll('input[name="methodologies"]:checked')).map(checkbox => checkbox.value === 'Outra' ? document.getElementById('otherMethodology').value : checkbox.value).join(', ');
+      const teachingResources = document.getElementById('teachingResources').value;
+      const evaluation = Array.from(document.querySelectorAll('input[name="evaluation"]:checked')).map(checkbox => checkbox.value === 'Outra' ? document.getElementById('otherEvaluation').value : checkbox.value).join(', ');
+      const evaluationNumber = document.getElementById('evaluationNumber').value === 'outra' ? document.getElementById('otherEvaluationNumber').value : document.getElementById('evaluationNumber').value;
+
+      const finalDiscipline = discipline === 'Outra' ? otherDiscipline : discipline;
+
+      const generatedText = `
+        Plano de Unidade para a disciplina <strong>${finalDiscipline}</strong>, voltado para alunos do <strong>${grade}</strong>. A unidade a ser planejada é a <strong>${unit}</strong>, com <strong>${schoolDays}</strong> dias letivos e <strong>${weeklyClasses}</strong> aulas semanais.
+
+        <strong>Unidades Temáticas e Conteúdos:</strong>
+        <ul>
+          ${utContents}
+        </ul>
+
+        <strong>Metodologias:</strong> ${methodologies}
+
+        <strong>Recursos Didáticos:</strong> ${teachingResources}
+
+        <strong>Número de Avaliações da Unidade:</strong> ${evaluationNumber}
+
+        <strong>Avaliação:</strong> ${evaluation}
+
+        <strong>Instruções para a IA:</strong>
+        1. Inclua as competências e habilidades da BNCC relacionadas às unidades temáticas e conteúdos fornecidos.
+        2. Divida os conteúdos da unidade de forma equilibrada ao longo das aulas semanais.
+        3. O plano de unidade deve ser gerado em formato de tabela, facilmente copiável para o Word.
+        4. Inclua uma seção com sugestões de ODAs (Objetos Digitais de Aprendizagem) para trabalhar os conteúdos da unidade.
+        5. Certifique-se de que o plano seja claro, objetivo e adaptado ao nível de escolaridade selecionado.
+        6. Inclua um <strong>Objetivo Geral</strong> e <strong>Objetivos Específicos</strong> para a unidade, com base nos conteúdos e unidades temáticas fornecidos.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+      document.getElementById('outputSection').classList.remove('hidden');
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+
+    document.getElementById('clearButton').addEventListener('click', function () {
+      document.getElementById('generatedText').innerHTML = '';
+      document.getElementById('outputSection').classList.add('hidden');
+    });
+
+    document.getElementById('clearFieldsButton').addEventListener('click', function () {
+      document.getElementById('unitPlanForm').reset();
+      document.getElementById('generatedText').innerHTML = '';
+      document.getElementById('outputSection').classList.add('hidden');
+    });
+  </script>
+</body>
+</html>

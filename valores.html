@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompt para Plano de Aula de Ética e Valores</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompt para Plano de Aula de Ética e Valores</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo Professor(a) ao Gerador de Prompt para criar Plano de Aula de Ética e Valores com IA</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo a criar prompts personalizados que serão enviados por você para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para gerar planos de aula completos e adaptados às suas necessidades.</p>
+      <center> <h2 class="text-3xl font-bold mb-2">Como funciona este Gerador de Prompt:</h2></center>
+      <p class="text-gray-700"><strong>Preencha os Campos do Formulário:</strong></p>
+      <p>Cada campo no formulário foi criado para capturar informações essenciais que ajudarão a personalizar o prompt enviado às IAs.</p>
+      <p><strong>Gere o Prompt:</strong></p>
+      <p>Após preencher todos os campos, clique no botão "Gerar".</p>
+      <p><strong>Envie o Prompt para as IAs:</strong></p>
+      <p>Abaixo do prompt gerado, você encontrará links para as ferramentas de IA (Chat GPT, Claude e DeepSeek).</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha corretamente os campos abaixo para gerar um Prompt personalizado para o seu plano de aula:</h2></center>
+    <form id="ethicsValuesForm" class="space-y-4">
+      <!-- Disciplina -->
+      <div>
+        <label for="discipline" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina que será abordada na aula. Use "Outra" se não estiver na lista.</span>
+          </span>
+        </label>
+        <select id="discipline" name="discipline" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Ensino Religioso">Ensino Religioso</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherDiscipline" name="otherDiscipline" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra disciplina (opcional)" style="display: none;">
+      </div>
+
+      <!-- Ano/Série -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano/Série
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano ou série da turma para adaptar o conteúdo ao nível de conhecimento dos alunos.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="G4">G4</option>
+          <option value="G5">G5</option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Duração da Aula -->
+      <div>
+        <label for="classTime" class="block text-lg font-medium text-gray-700 flex items-center">
+          Duração da Aula
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Escolha a duração da aula (45 ou 50 minutos) ou selecione "Outra" para especificar.</span>
+          </span>
+        </label>
+        <select id="classTime" name="classTime" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="45 minutos">45 minutos</option>
+          <option value="50 minutos">50 minutos</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherClassTime" name="otherClassTime" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra duração (opcional)" style="display: none;">
+      </div>
+
+      <!-- Tema -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione um ou mais temas que serão abordados na aula.</span>
+          </span>
+        </label>
+        <div class="mt-1 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="theme" value="Empatia" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Empatia</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="theme" value="Respeito" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Respeito</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="theme" value="Cidadania" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Cidadania</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="theme" value="Convivência" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Convivência</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="theme" value="Outro" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="otherTheme" name="otherTheme" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outro tema (opcional)" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Avaliação -->
+      <div>
+        <label for="evaluation" class="block text-lg font-medium text-gray-700 flex items-center">
+          Avaliação
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o tipo de avaliação que será utilizada na aula.</span>
+          </span>
+        </label>
+        <select id="evaluation" name="evaluation" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Formativa">Formativa</option>
+          <option value="Formativa + Somativa">Formativa + Somativa</option>
+          <option value="Autoavaliação">Autoavaliação</option>
+          <option value="Avaliação por pares">Avaliação por pares</option>
+          <option value="Portfólio">Portfólio</option>
+          <option value="Rubrica de avaliação">Rubrica de avaliação</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherEvaluation" name="otherEvaluation" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra avaliação (opcional)" style="display: none;">
+      </div>
+
+      <!-- Características da Turma -->
+      <div>
+        <label for="classCharacteristics" class="block text-lg font-medium text-gray-700 flex items-center">
+          Características da Turma
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva brevemente as características da turma, como nível de maturidade, interesses e necessidades específicas.</span>
+          </span>
+        </label>
+        <textarea id="classCharacteristics" name="classCharacteristics" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="3"></textarea>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Plano de Aula -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Plano de Aula Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Copiar Texto</button>
+
+      <!-- Seção de Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Plano de Aula com as AIs:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Link para Chat GPT -->
+          <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+            <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+              <i class="fas fa-robot mr-2"></i> Chat GPT
+            </a>
+            <p class="text-sm text-gray-600 text-center">Uma ferramenta de IA da OpenAI, especializada em geração de texto e assistência em tarefas criativas.</p>
+          </div>
+
+          <!-- Link para Claude -->
+          <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+            <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+              <i class="fas fa-brain mr-2"></i> Claude
+            </a>
+            <p class="text-sm text-gray-600 text-center">Uma IA avançada da Anthropic, focada em segurança e assistência em tarefas complexas.</p>
+          </div>
+
+          <!-- Link para DeepSeek -->
+          <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+            <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700">
+              <i class="fas fa-search mr-2"></i> DeepSeek
+            </a>
+            <p class="text-sm text-gray-600 text-center">Uma plataforma de IA para pesquisa e geração de conteúdo, ideal para exploração de dados e insights.</p>
+          </div>
+
+          <!-- Link para Le Chat -->
+          <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+            <a href="https://lechat.ai/" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
+              <i class="fas fa-comments mr-2"></i> Le Chat
+            </a>
+            <p class="text-sm text-gray-600 text-center">Uma IA focada em interações conversacionais e suporte personalizado.</p>
+          </div>
+
+          <!-- Link para Gemini -->
+          <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+            <a href="https://gemini.ai/" target="_blank" class="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700">
+              <i class="fas fa-star mr-2"></i> Gemini
+            </a>
+            <p class="text-sm text-gray-600 text-center">Uma IA especializada em análise de dados e geração de insights.</p>
+          </div>
+
+          <!-- Link para Copilot -->
+          <div class="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md">
+            <a href="https://copilot.microsoft.com/" target="_blank" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+              <i class="fas fa-cogs mr-2"></i> Copilot
+            </a>
+            <p class="text-sm text-gray-600 text-center">Uma IA da Microsoft, integrada ao Office, para automação e suporte em tarefas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Gerador de Plano de Aula. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    document.getElementById('discipline').addEventListener('change', function () {
+      const otherDisciplineField = document.getElementById('otherDiscipline');
+      if (this.value === 'Outra') {
+        otherDisciplineField.style.display = 'block';
+      } else {
+        otherDisciplineField.style.display = 'none';
+        otherDisciplineField.value = '';
+      }
+    });
+
+    document.getElementById('classTime').addEventListener('change', function () {
+      const otherClassTimeField = document.getElementById('otherClassTime');
+      if (this.value === 'Outra') {
+        otherClassTimeField.style.display = 'block';
+      } else {
+        otherClassTimeField.style.display = 'none';
+        otherClassTimeField.value = '';
+      }
+    });
+
+    document.getElementById('evaluation').addEventListener('change', function () {
+      const otherEvaluationField = document.getElementById('otherEvaluation');
+      if (this.value === 'Outra') {
+        otherEvaluationField.style.display = 'block';
+      } else {
+        otherEvaluationField.style.display = 'none';
+        otherEvaluationField.value = '';
+      }
+    });
+
+    document.querySelectorAll('input[name="theme"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        const otherThemeField = document.getElementById('otherTheme');
+        if (this.value === 'Outro' && this.checked) {
+          otherThemeField.style.display = 'block';
+        } else if (this.value === 'Outro' && !this.checked) {
+          otherThemeField.style.display = 'none';
+          otherThemeField.value = '';
+        }
+      });
+    });
+
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const otherDiscipline = document.getElementById('otherDiscipline').value;
+      const grade = document.getElementById('grade').value;
+      const classTime = document.getElementById('classTime').value;
+      const otherClassTime = document.getElementById('otherClassTime').value;
+      const themes = Array.from(document.querySelectorAll('input[name="theme"]:checked')).map(checkbox => checkbox.value);
+      const otherTheme = document.getElementById('otherTheme').value;
+      const evaluation = document.getElementById('evaluation').value;
+      const otherEvaluation = document.getElementById('otherEvaluation').value;
+      const classCharacteristics = document.getElementById('classCharacteristics').value;
+
+      const finalDiscipline = discipline === 'Outra' ? otherDiscipline : discipline;
+      const finalClassTime = classTime === 'Outra' ? otherClassTime : classTime;
+      const finalThemes = themes.includes('Outro') ? [...themes.filter(theme => theme !== 'Outro'), otherTheme] : themes;
+      const finalEvaluation = evaluation === 'Outra' ? otherEvaluation : evaluation;
+
+      let generatedText = `
+        **Prompt para Ensino de Ética e Valores:**
+
+        Crie um plano de aula completo sobre **${finalDiscipline}** para o **${grade}**, com duração de **${finalClassTime}**, abordando os seguintes temas: **${finalThemes.join(', ')}**. O objetivo é desenvolver a empatia, o respeito, a cidadania e a convivência. A aula deve incluir:
+
+        1. **Objetivos de aprendizagem** claros e alinhados às competências socioemocionais.
+        2. Uma **introdução interativa** para engajar os alunos, como uma reflexão sobre situações do cotidiano que envolvem escolhas éticas.
+        3. **Atividades práticas** (individuais, em dupla ou em grupo) que incentivem a análise crítica, a troca de experiências e o diálogo sobre questões éticas.
+        4. Um momento para abordar um **conceito teórico** (como empatia ou cidadania) de forma acessível, usando exemplos concretos.
+        5. **Materiais de apoio** sugeridos, como vídeos, histórias, imagens ou textos que complementem a aula.
+        6. Uma **atividade de encerramento** que permita aos alunos refletirem sobre o aprendizado e como aplicá-lo em sua vida cotidiana, podendo incluir um compromisso prático ou uma proposta de ação na escola/comunidade.
+        7. **Avaliação**: Utilize uma abordagem de **${finalEvaluation}** para avaliar o progresso dos alunos.
+
+        Adapte o vocabulário, a profundidade dos conteúdos e a complexidade das atividades de acordo com o público-alvo (**${classCharacteristics}**). Indique o tempo estimado para cada etapa e forneça orientações para o professor facilitar discussões sensíveis e promover um ambiente de respeito e inclusão.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

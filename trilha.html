@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompts para Trilhas de Aprendizagem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompts para Trilhas de Aprendizagem</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Prompts para Trilhas de Aprendizagem</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar "Trilhas de Aprendizagem" personalizadas para seus alunos. Preencha os campos abaixo para gerar sugestões de trilhas adaptadas às necessidades dos seus alunos e alinhadas às habilidades e competências da BNCC.</p>
+      <p class="text-gray-700 mt-2">Uma "Trilha de Aprendizagem" é um conjunto de atividades e recursos organizados de forma sequencial, com o objetivo de guiar os alunos no desenvolvimento de conhecimentos e habilidades específicas.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar uma Trilha de Aprendizagem:</h2></center>
+    <form id="activityForm" class="space-y-4">
+      <!-- Ano Escolar -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano Escolar
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano escolar da turma.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+        </select>
+      </div>
+
+      <!-- Disciplina -->
+      <div>
+        <label for="subject" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina relacionada à trilha.</span>
+          </span>
+        </label>
+        <select id="subject" name="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Língua Portuguesa">Língua Portuguesa</option>
+          <option value="Matemática">Matemática</option>
+          <option value="Ciências">Ciências</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Ensino Religioso">Ensino Religioso</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherSubject" name="otherSubject" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra disciplina (opcional)" style="display: none;">
+      </div>
+
+      <!-- Tema da Trilha -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema da Trilha
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Defina o tema central da trilha de aprendizagem.</span>
+          </span>
+        </label>
+        <input type="text" id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Fotossíntese, Revolução Industrial, Programação em Python">
+      </div>
+
+      <!-- Recursos Desejados -->
+      <div>
+        <label class="block text-lg font-medium text-gray-700 flex items-center">
+          Recursos Desejados
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione os tipos de recursos que deseja incluir na trilha.</span>
+          </span>
+        </label>
+        <div class="mt-2 space-y-2">
+          <label class="flex items-center">
+            <input type="checkbox" name="resources" value="Vídeos explicativos" class="rounded border-gray-300 text-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Vídeos explicativos</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" name="resources" value="Textos e artigos" class="rounded border-gray-300 text-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Textos e artigos</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" name="resources" value="Quizzes e testes" class="rounded border-gray-300 text-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Quizzes e testes</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" name="resources" value="Projetos práticos" class="rounded border-gray-300 text-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Projetos práticos</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" name="resources" value="Discussões em grupo" class="rounded border-gray-300 text-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Discussões em grupo</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" name="resources" value="Outro" class="rounded border-gray-300 text-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Outro</span>
+          </label>
+        </div>
+        <input type="text" id="otherResources" name="otherResources" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outros recursos (opcional)" style="display: none;">
+      </div>
+
+      <!-- Avaliação -->
+      <div>
+        <label for="evaluation" class="block text-lg font-medium text-gray-700 flex items-center">
+          Avaliação
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva como deseja avaliar o progresso dos alunos.</span>
+          </span>
+        </label>
+        <textarea id="evaluation" name="evaluation" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="3" placeholder="Ex: Quizzes semanais, projeto final, autoavaliação dos alunos"></textarea>
+      </div>
+
+      <!-- Habilidades e Competências da BNCC -->
+      <div>
+        <label for="bnccSkills" class="block text-lg font-medium text-gray-700 flex items-center">
+          Habilidades e Competências da BNCC
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione as habilidades e competências da BNCC que deseja trabalhar.</span>
+          </span>
+        </label>
+        <select id="bnccSkills" name="bnccSkills" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="EF01LP01 - Ler e compreender textos curtos">EF01LP01 - Ler e compreender textos curtos</option>
+          <option value="EF02MA05 - Resolver problemas de adição e subtração">EF02MA05 - Resolver problemas de adição e subtração</option>
+          <option value="EF03CI05 - Identificar formas de uso sustentável dos recursos naturais">EF03CI05 - Identificar formas de uso sustentável dos recursos naturais</option>
+          <option value="EF04HI03 - Reconhecer a diversidade cultural como um direito dos povos">EF04HI03 - Reconhecer a diversidade cultural como um direito dos povos</option>
+          <option value="EF05GE01 - Analisar impactos ambientais causados pela ação humana">EF05GE01 - Analisar impactos ambientais causados pela ação humana</option>
+          <option value="EF06LP01 - Produzir textos escritos com coesão e coerência">EF06LP01 - Produzir textos escritos com coesão e coerência</option>
+          <option value="EF07MA01 - Resolver problemas envolvendo números racionais">EF07MA01 - Resolver problemas envolvendo números racionais</option>
+          <option value="EF08CI01 - Compreender a importância da água para a vida">EF08CI01 - Compreender a importância da água para a vida</option>
+          <option value="EF09HI01 - Analisar processos de formação de identidades culturais">EF09HI01 - Analisar processos de formação de identidades culturais</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherBnccSkills" name="otherBnccSkills" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra habilidade ou competência (opcional)" style="display: none;">
+      </div>
+
+      <!-- Duração da Trilha -->
+      <div>
+        <label for="duration" class="block text-lg font-medium text-gray-700 flex items-center">
+          Duração da Trilha
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a duração estimada da trilha.</span>
+          </span>
+        </label>
+        <select id="duration" name="duration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="1 semana">1 semana</option>
+          <option value="2 semanas">2 semanas</option>
+          <option value="1 mês">1 mês</option>
+          <option value="2 meses">2 meses</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="text" id="otherDuration" name="otherDuration" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra duração (opcional)" style="display: none;">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1414b8]">Gerar Trilha de Aprendizagem</button>
+    </form>
+
+    <!-- Área de Exibição da Trilha Gerada -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Trilha de Aprendizagem Gerada:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1414b8]">Copiar Texto</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Trilha com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Prompts para Trilhas de Aprendizagem. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Mostrar campos de texto quando "Outro" é selecionado
+    document.querySelectorAll('input[name="resources"]').forEach((checkbox) => {
+      checkbox.addEventListener('change', function () {
+        const otherResourcesField = document.getElementById('otherResources');
+        if (this.value === 'Outro' && this.checked) {
+          otherResourcesField.style.display = 'block';
+        } else {
+          otherResourcesField.style.display = 'none';
+          otherResourcesField.value = '';
+        }
+      });
+    });
+
+    document.getElementById('subject').addEventListener('change', function () {
+      const otherSubjectField = document.getElementById('otherSubject');
+      if (this.value === 'Outra') {
+        otherSubjectField.style.display = 'block';
+      } else {
+        otherSubjectField.style.display = 'none';
+        otherSubjectField.value = '';
+      }
+    });
+
+    document.getElementById('bnccSkills').addEventListener('change', function () {
+      const otherBnccSkillsField = document.getElementById('otherBnccSkills');
+      if (this.value === 'Outra') {
+        otherBnccSkillsField.style.display = 'block';
+      } else {
+        otherBnccSkillsField.style.display = 'none';
+        otherBnccSkillsField.value = '';
+      }
+    });
+
+    document.getElementById('duration').addEventListener('change', function () {
+      const otherDurationField = document.getElementById('otherDuration');
+      if (this.value === 'Outro') {
+        otherDurationField.style.display = 'block';
+      } else {
+        otherDurationField.style.display = 'none';
+        otherDurationField.value = '';
+      }
+    });
+
+    // Gerar trilha de aprendizagem
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const grade = document.getElementById('grade').value;
+      const subject = document.getElementById('subject').value === 'Outra' ? document.getElementById('otherSubject').value : document.getElementById('subject').value;
+      const theme = document.getElementById('theme').value;
+      const resources = Array.from(document.querySelectorAll('input[name="resources"]:checked')).map((checkbox) => checkbox.value).join(', ');
+      const otherResources = document.getElementById('otherResources').value;
+      const evaluation = document.getElementById('evaluation').value;
+      const bnccSkills = document.getElementById('bnccSkills').value === 'Outra' ? document.getElementById('otherBnccSkills').value : document.getElementById('bnccSkills').value;
+      const duration = document.getElementById('duration').value === 'Outro' ? document.getElementById('otherDuration').value : document.getElementById('duration').value;
+
+      const generatedText = `
+        Crie uma **Trilha de Aprendizagem** para o ${grade}, na disciplina de ${subject}, com foco no tema "${theme}". 
+
+        **Recursos desejados**: ${resources}${otherResources ? `, ${otherResources}` : ''}.
+        **Avaliação**: ${evaluation || "Proponha métodos de avaliação como quizzes, projetos ou feedbacks."}
+        **Habilidades e competências da BNCC**: ${bnccSkills}.
+        **Duração estimada**: ${duration}.
+
+        A trilha deve incluir:
+        1. Uma sequência lógica de atividades, começando com conceitos básicos e avançando para tópicos mais complexos.
+        2. Uma variedade de recursos, como vídeos, textos, quizzes, projetos práticos e discussões.
+        3. Sugestões de links na web para materiais de estudo prévio, como vídeos, artigos e infográficos.
+        4. Avaliações para medir o progresso dos alunos, como quizzes e feedbacks.
+        5. Uma atividade final que permita aos alunos aplicar o conhecimento adquirido.
+
+        Certifique-se de que a trilha seja envolvente, prática e adaptada à faixa etária dos alunos, além de alinhada às habilidades e competências da BNCC.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

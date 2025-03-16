@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análise de Texto Literário para Sala de Aula</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Análise de Texto Literário para Sala de Aula</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Analisador de Texto Literário</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudar professores a analisar textos literários e gerar sugestões de como utilizá-los em sala de aula. Insira o texto abaixo e gere um prompt detalhado para obter recomendações de IAs. </p>
+      <p class="text-gray-700 mt-2">Essa ferramenta é ideal para professores que desejam explorar textos literários de forma criativa e engajadora em sala de aula. O prompt gerado ajudará a identificar elementos literários, temas e estratégias para ensinar literatura de forma engajadora e eficaz.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Insira o texto literário para análise:</h2></center>
+    <form id="literaryForm" class="space-y-4">
+      <!-- Texto Literário -->
+      <div>
+        <label for="literaryText" class="block text-lg font-medium text-gray-700 flex items-center">
+          Texto Literário
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira o texto literário que deseja analisar.</span>
+          </span>
+        </label>
+        <textarea id="literaryText" name="literaryText" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="10" placeholder="Cole o texto literário aqui..." required></textarea>
+      </div>
+
+      <!-- Botão Analisar -->
+      <button type="button" id="analyzeButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Analisar Texto</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedPrompt" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyPromptButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">Copiar Prompt</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Obter Análise com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt para obter uma análise detalhada do texto literário:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://chat.mistral.ai/" target="_blank" class="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 inline-block">
+            <i class="fas fa-comments mr-2"></i>Le Chat (Mistral.AI)
+          </a>
+          <a href="https://www.microsoft.com/copilot" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-cogs mr-2"></i>Copilot
+          </a>
+          <a href="https://ai.meta.com/" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 inline-block">
+            <i class="fas fa-network-wired mr-2"></i>Meta.AI
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Análise de Texto Literário para Sala de Aula. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Prompt -->
+  <script>
+    // Gerar prompt
+    document.getElementById('analyzeButton').addEventListener('click', function () {
+      const literaryText = document.getElementById('literaryText').value;
+
+      const generatedPrompt = `
+        Atue como um especialista em literatura e pedagogia. Analise o seguinte texto literário e forneça uma análise detalhada, identificando elementos como tema, estilo, personagens, enredo e contexto histórico. Em seguida, sugira maneiras de utilizá-lo em sala de aula para gerar aprendizagens sobre literatura. Considere atividades como debates, análises críticas, produções textuais e conexões com outras obras literárias.
+
+        **Texto Literário**:
+        ${literaryText}
+
+        Por favor, forneça:
+        1. Uma análise detalhada do texto, destacando seus principais elementos literários.
+        2. Sugestões de atividades práticas para utilizar o texto em sala de aula.
+        3. Exemplos de como conectar o texto a outros temas ou obras literárias.
+        4. Estratégias para engajar os alunos e promover uma compreensão profunda do texto.
+      `;
+
+      document.getElementById('generatedPrompt').innerText = generatedPrompt;
+    });
+
+    // Copiar prompt gerado
+    document.getElementById('copyPromptButton').addEventListener('click', function () {
+      const generatedPrompt = document.getElementById('generatedPrompt');
+      const textToCopy = generatedPrompt.innerText || generatedPrompt.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Prompt Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Prompt';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

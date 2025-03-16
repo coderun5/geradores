@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Texto Base para Aula</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    body {
+      background-image: url(''); /* Substitua pela URL da sua imagem */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para o conteúdo */
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-4xl mx-auto content-container">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      📚 Gerador de Texto de Apoio para a Aula
+    </h1>
+    <p>Esta ferramenta foi projetada para ajudá-lo a criar textos personalizados e adaptados às suas necessidades.</p>
+    <marquee></marquee>
+    <form id="textForm" class="space-y-6">
+      <!-- Disciplina -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Disciplina</label>
+        <select id="discipline" name="discipline" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherDiscipline" name="otherDiscipline" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outra disciplina (opcional)">
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Ano de Escolaridade</label>
+        <select id="grade" name="grade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Alfabetização">Alfabetização</option>
+          <option value="G4">G4</option>
+          <option value="G5">G5</option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Tamanho do Texto -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Tamanho do Texto</label>
+        <select id="size" name="size" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="1">1 Parágrafo</option>
+          <option value="2">2 Parágrafos</option>
+          <option value="3">3 Parágrafos</option>
+          <option value="4">4 Parágrafos</option>
+          <option value="5">5 Parágrafos</option>
+          <option value="outro">Outro</option>
+        </select>
+        <input type="text" id="otherSize" name="otherSize" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro tamanho (opcional)">
+      </div>
+
+      <!-- Tipo de Texto -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Tipo de Texto</label>
+        <select id="type" name="type" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+          <option value=""></option>
+          <option value="Informativo">Informativo</option>
+          <option value="Descritivo">Descritivo</option>
+          <option value="Dissertativo-Argumentativo">Dissertativo-Argumentativo</option>
+          <option value="Conceitual">Conceitual</option>
+          <option value="Informação Científica">Informação Científica</option>
+          <option value="Narrativo">Narrativo</option>
+          <option value="outro">Outro</option>
+        </select>
+        <input type="text" id="otherType" name="otherType" class="mt-2 w-full p-2 border rounded-md hidden" placeholder="Especifique outro tipo (opcional)">
+      </div>
+
+      <!-- Tópico -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Descreva o Assunto do texto</label>
+        <input type="text" id="topic" name="topic" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500" required>
+      </div>
+
+      <!-- Botões Gerar e Limpar Campos -->
+      <div class="flex space-x-4">
+        <button type="button" id="generateButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Gerar Prompt</button>
+        <button type="button" id="clearFieldsButton" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Limpar Campos</button>
+      </div>
+    </form>
+
+    <!-- Área de Exibição do Texto -->
+    <div id="outputSection" class="hidden mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Texto Gerado:</h2>
+      <div id="generatedText" class="w-full p-4 border-2 border-gray-200 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">Copiar Texto</button>
+    </div>
+
+    <!-- Seção de Links para AIs -->
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Gerar Texto com as AIs:</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="https://chat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Chat GPT
+        </a>
+        <a href="https://claude.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Claude
+        </a>
+        <a href="https://deepseek.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          DeepSeek
+        </a>
+        <a href="https://lechat.openai.com/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Le Chat
+        </a>
+        <a href="https://qwen.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Qwen AI
+        </a>
+        <a href="https://kimi.ai/" target="_blank" class="bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition-colors text-center">
+          Kimi AI
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('discipline').addEventListener('change', function () {
+      const otherDisciplineField = document.getElementById('otherDiscipline');
+      if (this.value === 'Outra') {
+        otherDisciplineField.classList.remove('hidden');
+      } else {
+        otherDisciplineField.classList.add('hidden');
+        otherDisciplineField.value = '';
+      }
+    });
+
+    document.getElementById('size').addEventListener('change', function () {
+      const otherSizeField = document.getElementById('otherSize');
+      if (this.value === 'outro') {
+        otherSizeField.classList.remove('hidden');
+      } else {
+        otherSizeField.classList.add('hidden');
+        otherSizeField.value = '';
+      }
+    });
+
+    document.getElementById('type').addEventListener('change', function () {
+      const otherTypeField = document.getElementById('otherType');
+      if (this.value === 'outro') {
+        otherTypeField.classList.remove('hidden');
+      } else {
+        otherTypeField.classList.add('hidden');
+        otherTypeField.value = '';
+      }
+    });
+
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const otherDiscipline = document.getElementById('otherDiscipline').value;
+      const grade = document.getElementById('grade').value;
+      const size = document.getElementById('size').value;
+      const otherSize = document.getElementById('otherSize').value;
+      const type = document.getElementById('type').value;
+      const otherType = document.getElementById('otherType').value;
+      const topic = document.getElementById('topic').value;
+
+      const finalDiscipline = discipline === 'Outra' ? otherDiscipline : discipline;
+      const finalSize = size === 'outro' ? otherSize : size;
+      const finalType = type === 'outro' ? otherType : type;
+
+      const generatedText = `
+        Crie um texto <strong>${finalType}</strong> para a disciplina <strong>${finalDiscipline}</strong>, voltado para alunos do <strong>${grade}</strong> ano, com o tema <strong>${topic}</strong>.
+
+        O texto deve ter <strong>${finalSize}</strong> parágrafos e ser claro, objetivo e adaptado ao nível de escolaridade.
+
+        <strong>Instruções adicionais para a IA:</strong>
+        1. Ao final do texto, pergunte ao professor se ele deseja criar um quiz (questionário) sobre o conteúdo do texto.
+        2. Faça sugestões de como o texto pode ser utilizado em sala de aula, como:
+           - Leitura compartilhada e discussão em grupo.
+           - Produção de resumos ou mapas mentais.
+           - Atividades de interpretação e análise crítica.
+           - Uso de recursos visuais (imagens, vídeos) para complementar o texto.
+        3. Certifique-se de que o texto seja envolvente e adequado ao nível de compreensão dos alunos.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+      document.getElementById('outputSection').classList.remove('hidden');
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+
+    document.getElementById('clearFieldsButton').addEventListener('click', function () {
+      document.getElementById('textForm').reset(); // Reseta o formulário
+      document.getElementById('generatedText').innerHTML = ''; // Limpa o texto gerado
+      document.getElementById('outputSection').classList.add('hidden'); // Oculta a seção de texto gerado
+
+      // Oculta os campos "Outro" se estiverem visíveis
+      document.getElementById('otherDiscipline').classList.add('hidden');
+      document.getElementById('otherSize').classList.add('hidden');
+      document.getElementById('otherType').classList.add('hidden');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Sociograma de Moreno</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompt para Sociograma de Moreno</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo Professor(a) ao Gerador de Prompt para Sociograma de Moreno</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo a criar prompts personalizados para gerar sociogramas de Moreno, que ajudam a mapear as relações sociais entre os alunos da turma. O prompt gerado será enviado para ferramentas de IA, como Chat GPT, Claude e DeepSeek, para criar o sociograma.</p>O sociograma é uma ferramenta visual que mapeia as relações interpessoais de um grupo, representando os membros como pontos e as conexões entre eles como setas que indicam preferências, rejeições ou neutralidades. Criado por Jacob Levy Moreno, ele ajuda o professor a identificar alunos isolados, lideranças naturais, subgrupos e possíveis conflitos, permitindo intervenções que promovam a inclusão e fortaleçam as relações interpessoais. Aplicado a partir de perguntas simples, como “Com quem você gostaria de trabalhar?”, o sociograma oferece uma visão clara da dinâmica social da turma, sendo especialmente útil no início do ano letivo, durante mudanças na composição da turma ou sempre que o professor notar dificuldades de integração ou conflitos entre os alunos.
+      <center><h2 class="text-3xl font-bold mb-2">Como funciona este Gerador:</h2></center>
+      <p class="text-gray-700"><strong>Preencha os Campos do Formulário:</strong></p>
+      <p class="text-gray-700">Cada campo no formulário foi criado para capturar informações essenciais que ajudarão a personalizar o prompt enviado às IAs. Ao preencher os campos, você fornece detalhes que serão incorporados ao prompt, permitindo que as IAs gerem um sociograma mais preciso e relevante.</p>
+      <p><strong>Gere o Prompt:</strong></p>
+      <p class="text-gray-700">Após preencher todos os campos, clique no botão "Gerar". O sistema criará um prompt baseado nas informações fornecidas, que será exibido na caixa de texto abaixo.</p>
+      <p><strong>Envie o Prompt para as IAs:</strong></p>
+      <p class="text-gray-700">Abaixo do prompt gerado, você encontrará links para as ferramentas de IA (Chat GPT, Claude e DeepSeek). Clique em um dos links para enviar o prompt diretamente para a IA correspondente e gerar o sociograma.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha corretamente os campos abaixo para gerar um Prompt personalizado para o Sociograma de Moreno:</h2></center>
+    <form id="sociogramForm" class="space-y-4">
+      <!-- Informações da Turma -->
+      <div>
+        <label for="classCode" class="block text-lg font-medium text-gray-700 flex items-center">
+          Nome ou código da turma
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira o nome ou código da turma para identificação.</span>
+          </span>
+        </label>
+        <input type="text" id="classCode" name="classCode" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+      </div>
+
+      <div>
+        <label for="studentCount" class="block text-lg font-medium text-gray-700 flex items-center">
+          Número de alunos na turma
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira o número total de alunos na turma.</span>
+          </span>
+        </label>
+        <input type="number" id="studentCount" name="studentCount" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+      </div>
+
+      <div>
+        <label for="averageAge" class="block text-lg font-medium text-gray-700 flex items-center">
+          Idade média dos alunos
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira a idade média dos alunos ou selecione um intervalo.</span>
+          </span>
+        </label>
+        <input type="number" id="averageAge" name="averageAge" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+      </div>
+
+      <!-- Perguntas Sociométricas -->
+      <div>
+        <label for="question1" class="block text-lg font-medium text-gray-700 flex items-center">
+          Pergunta 1
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Exemplo: "Com quem você gostaria de trabalhar em um projeto em grupo?"</span>
+          </span>
+        </label>
+        <table class="w-full mt-2 border-collapse">
+          <thead>
+            <tr>
+              <th class="border p-2">Aluno</th>
+              <th class="border p-2">Aluno com quem se relaciona</th>
+            </tr>
+          </thead>
+          <tbody id="question1TableBody">
+            <tr>
+              <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno"></td>
+              <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno relacionado"></td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" id="addQuestion1Row" class="mt-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300">Adicionar Linha</button>
+      </div>
+
+      <div>
+        <label for="question2" class="block text-lg font-medium text-gray-700 flex items-center">
+          Pergunta 2
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Exemplo: "Quem você escolheria para sentar ao seu lado durante uma viagem?"</span>
+          </span>
+        </label>
+        <table class="w-full mt-2 border-collapse">
+          <thead>
+            <tr>
+              <th class="border p-2">Aluno</th>
+              <th class="border p-2">Aluno com quem se relaciona</th>
+            </tr>
+          </thead>
+          <tbody id="question2TableBody">
+            <tr>
+              <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno"></td>
+              <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno relacionado"></td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" id="addQuestion2Row" class="mt-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300">Adicionar Linha</button>
+      </div>
+
+      <div>
+        <label for="question3" class="block text-lg font-medium text-gray-700 flex items-center">
+          Pergunta 3 (opcional)
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Exemplo: "Quem você chamaria para resolver um problema em equipe?"</span>
+          </span>
+        </label>
+        <table class="w-full mt-2 border-collapse">
+          <thead>
+            <tr>
+              <th class="border p-2">Aluno</th>
+              <th class="border p-2">Aluno com quem se relaciona</th>
+            </tr>
+          </thead>
+          <tbody id="question3TableBody">
+            <tr>
+              <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno"></td>
+              <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno relacionado"></td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" id="addQuestion3Row" class="mt-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300">Adicionar Linha</button>
+      </div>
+
+      <!-- Preferências de Visualização do Sociograma -->
+      <div>
+        <label for="relationType" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tipo de relação a ser analisada
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Escolha entre relações positivas, negativas ou ambas.</span>
+          </span>
+        </label>
+        <select id="relationType" name="relationType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Relações positivas">Relações positivas</option>
+          <option value="Relações negativas">Relações negativas</option>
+          <option value="Ambos">Ambos</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="visualizationType" class="block text-lg font-medium text-gray-700 flex items-center">
+          Forma de visualização desejada
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Escolha entre sociograma simples, com clusters ou análise de liderança e isolamento.</span>
+          </span>
+        </label>
+        <select id="visualizationType" name="visualizationType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Sociograma simples">Sociograma simples</option>
+          <option value="Sociograma com clusters">Sociograma com clusters</option>
+          <option value="Sociograma com análise de liderança e isolamento">Sociograma com análise de liderança e isolamento</option>
+        </select>
+      </div>
+
+      <!-- Informações Sobre a Dinâmica Social -->
+      <div>
+        <label for="teacherObservations" class="block text-lg font-medium text-gray-700 flex items-center">
+          Observações do professor sobre a turma
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira observações sobre a dinâmica social da turma.</span>
+          </span>
+        </label>
+        <textarea id="teacherObservations" name="teacherObservations" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]"></textarea>
+      </div>
+
+      <div>
+        <label for="specificStudents" class="block text-lg font-medium text-gray-700 flex items-center">
+          Alunos com características específicas
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira informações sobre alunos com características específicas (ex.: introvertidos, líderes, etc.).</span>
+          </span>
+        </label>
+        <textarea id="specificStudents" name="specificStudents" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]"></textarea>
+      </div>
+
+      <!-- Análise Específica Desejada -->
+      <div>
+        <label for="analysisFocus" class="block text-lg font-medium text-gray-700 flex items-center">
+          Foco da análise
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Escolha os focos da análise (ex.: identificação de alunos isolados, lideranças naturais, etc.).</span>
+          </span>
+        </label>
+        <select id="analysisFocus" name="analysisFocus" multiple class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="Identificação de alunos isolados">Identificação de alunos isolados</option>
+          <option value="Reconhecimento de lideranças naturais">Reconhecimento de lideranças naturais</option>
+          <option value="Mapeamento de subgrupos ou cliques">Mapeamento de subgrupos ou cliques</option>
+          <option value="Relações conflituosas ou rejeições">Relações conflituosas ou rejeições</option>
+          <option value="Outros">Outros</option>
+        </select>
+      </div>
+
+      <!-- Contexto da Aplicação -->
+      <div>
+        <label for="applicationDate" class="block text-lg font-medium text-gray-700 flex items-center">
+          Quando o sociograma será aplicado?
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira a data de aplicação do sociograma.</span>
+          </span>
+        </label>
+        <input type="date" id="applicationDate" name="applicationDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+      </div>
+
+      <div>
+        <label for="purpose" class="block text-lg font-medium text-gray-700 flex items-center">
+          Qual o propósito do sociograma?
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Exemplo: "Planejar dinâmicas de integração para melhorar a colaboração."</span>
+          </span>
+        </label>
+        <input type="text" id="purpose" name="purpose" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1414b8]">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Sociograma -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Sociograma Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1414b8]">Copiar Texto</button>
+
+      <!-- Seção de Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Sociograma com as AIs:</h3>
+        <p class="text-gray-700 mb-4">Clique nos links abaixo para enviar o prompt gerado diretamente para as ferramentas de IA:</p>
+        <div class="space-y-4">
+          <!-- Link para Chat GPT -->
+          <div class="flex items-center space-x-4">
+            <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+              <i class="fas fa-robot mr-2"></i> Chat GPT
+            </a>
+            <p class="text-sm text-gray-600">Uma ferramenta de IA da OpenAI, especializada em geração de texto e assistência em tarefas criativas.</p>
+          </div>
+
+          <!-- Link para Claude -->
+          <div class="flex items-center space-x-4">
+            <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+              <i class="fas fa-brain mr-2"></i> Claude
+            </a>
+            <p class="text-sm text-gray-600">Uma IA avançada da Anthropic, focada em segurança e assistência em tarefas complexas.</p>
+          </div>
+
+          <!-- Link para DeepSeek -->
+          <div class="flex items-center space-x-4">
+            <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700">
+              <i class="fas fa-search mr-2"></i> DeepSeek
+            </a>
+            <p class="text-sm text-gray-600">Uma plataforma de IA para pesquisa e geração de conteúdo, ideal para exploração de dados e insights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Gerador de Sociograma de Moreno. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Função para adicionar linhas às tabelas
+    function addRow(tableId) {
+      const tableBody = document.getElementById(tableId);
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno"></td>
+        <td class="border p-2"><input type="text" class="w-full border-0 focus:ring-0" placeholder="Nome do aluno relacionado"></td>
+      `;
+      tableBody.appendChild(newRow);
+    }
+
+    // Adicionar linhas às tabelas de perguntas
+    document.getElementById('addQuestion1Row').addEventListener('click', () => addRow('question1TableBody'));
+    document.getElementById('addQuestion2Row').addEventListener('click', () => addRow('question2TableBody'));
+    document.getElementById('addQuestion3Row').addEventListener('click', () => addRow('question3TableBody'));
+
+    // Função para gerar o prompt
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const classCode = document.getElementById('classCode').value;
+      const studentCount = document.getElementById('studentCount').value;
+      const averageAge = document.getElementById('averageAge').value;
+      const relationType = document.getElementById('relationType').value;
+      const visualizationType = document.getElementById('visualizationType').value;
+      const teacherObservations = document.getElementById('teacherObservations').value;
+      const specificStudents = document.getElementById('specificStudents').value;
+      const analysisFocus = Array.from(document.getElementById('analysisFocus').selectedOptions).map(option => option.value).join(', ');
+      const applicationDate = document.getElementById('applicationDate').value;
+      const purpose = document.getElementById('purpose').value;
+
+      // Função para coletar dados das tabelas
+      function getTableData(tableId) {
+        const rows = document.querySelectorAll(`#${tableId} tr`);
+        const data = [];
+        rows.forEach(row => {
+          const student = row.children[0].querySelector('input').value;
+          const relatedStudent = row.children[1].querySelector('input').value;
+          if (student && relatedStudent) {
+            data.push({ student, relatedStudent });
+          }
+        });
+        return data;
+      }
+
+      const question1Data = getTableData('question1TableBody');
+      const question2Data = getTableData('question2TableBody');
+      const question3Data = getTableData('question3TableBody');
+
+      const generatedText = `
+        Crie um sociograma de Moreno para a turma <strong>${classCode}</strong>, com <strong>${studentCount}</strong> alunos e idade média de <strong>${averageAge}</strong> anos. As perguntas sociométricas são:
+        <ul>
+          <li>1. Pergunta 1: ${question1Data.map(item => `${item.student} → ${item.relatedStudent}`).join(', ')}</li>
+          <li>2. Pergunta 2: ${question2Data.map(item => `${item.student} → ${item.relatedStudent}`).join(', ')}</li>
+          <li>3. Pergunta 3: ${question3Data.map(item => `${item.student} → ${item.relatedStudent}`).join(', ')}</li>
+        </ul>
+        O tipo de relação a ser analisada é <strong>${relationType}</strong>, e a forma de visualização desejada é <strong>${visualizationType}</strong>. Observações do professor: <strong>${teacherObservations}</strong>. Alunos com características específicas: <strong>${specificStudents}</strong>. O foco da análise é <strong>${analysisFocus}</strong>. O sociograma será aplicado em <strong>${applicationDate}</strong>, com o propósito de <strong>${purpose}</strong>.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+    });
+
+    // Função para copiar o texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
