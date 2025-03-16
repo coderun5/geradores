@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Estudos de Caso</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 300px;
+      background-color: #333;
+      color: #fff;
+      text-align: left;
+      border-radius: 6px;
+      padding: 12px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -150px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompts de Estudos de Caso</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Prompts para Estudos de Caso</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar estudos de caso personalizados para o Ensino Fundamental (1º ao 9º ano). Preencha os campos abaixo para gerar sugestões de atividades adaptadas às suas necessidades.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um estudo de caso:</h2></center>
+    <form id="caseStudyForm" class="space-y-4">
+      <!-- Ano Escolar -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano Escolar
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano escolar da turma (1º ao 9º ano).</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+        </select>
+      </div>
+
+      <!-- Disciplina -->
+      <div>
+        <label for="subject" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina relacionada ao estudo de caso (ex: Matemática, Ciências, História, etc.).</span>
+          </span>
+        </label>
+        <select id="subject" name="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Matemática">Matemática</option>
+          <option value="Ciências">Ciências</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Língua Portuguesa">Língua Portuguesa</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherSubject" name="otherSubject" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra disciplina (opcional)" style="display: none;">
+      </div>
+
+      <!-- Tema do Estudo de Caso -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema do Estudo de Caso
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o tema central do estudo de caso (ex: meio ambiente, saúde, tecnologia, etc.).</span>
+          </span>
+        </label>
+        <select id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Meio Ambiente">Meio Ambiente</option>
+          <option value="Saúde e Bem-Estar">Saúde e Bem-Estar</option>
+          <option value="Tecnologia e Inovação">Tecnologia e Inovação</option>
+          <option value="Cidadania e Direitos Humanos">Cidadania e Direitos Humanos</option>
+          <option value="Educação Financeira">Educação Financeira</option>
+          <option value="História e Cultura">História e Cultura</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="text" id="otherTheme" name="otherTheme" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outro tema (opcional)" style="display: none;">
+      </div>
+
+      <!-- Objetivos de Aprendizagem -->
+      <div>
+        <label for="objectives" class="block text-lg font-medium text-gray-700 flex items-center">
+          Objetivos de Aprendizagem
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva os objetivos de aprendizagem que os alunos devem alcançar com o estudo de caso.</span>
+          </span>
+        </label>
+        <textarea id="objectives" name="objectives" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Desenvolver pensamento crítico, promover empatia, resolver problemas complexos..."></textarea>
+      </div>
+
+      <!-- Contextualização -->
+      <div>
+        <label for="context" class="block text-lg font-medium text-gray-700 flex items-center">
+          Contextualização
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">
+              <strong>Exemplo:</strong><br>
+              Em uma pequena cidade litorânea, os moradores estão enfrentando um problema crescente de poluição nas praias. O lixo plástico está afetando a vida marinha e o turismo, principal fonte de renda da região. A prefeitura precisa tomar uma decisão urgente para resolver o problema, mas há divergências entre os moradores sobre as melhores soluções.
+            </span>
+          </span>
+        </label>
+        <textarea id="context" name="context" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Descreva o cenário do estudo de caso..."></textarea>
+      </div>
+
+      <!-- Questões Norteadoras -->
+      <div>
+        <label for="questions" class="block text-lg font-medium text-gray-700 flex items-center">
+          Questões Norteadoras
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">
+              <strong>Exemplo:</strong><br>
+              1. Quais são as principais causas da poluição nas praias?<br>
+              2. Quais são os impactos do lixo plástico na vida marinha e na economia local?<br>
+              3. Quais soluções podem ser propostas para resolver o problema?<br>
+              4. Como os moradores podem contribuir para a solução?<br>
+              5. Quais são os prós e contras de cada solução proposta?
+            </span>
+          </span>
+        </label>
+        <textarea id="questions" name="questions" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Insira perguntas que guiem a análise do caso..."></textarea>
+      </div>
+
+      <!-- Recursos de Apoio -->
+      <div>
+        <label for="resources" class="block text-lg font-medium text-gray-700 flex items-center">
+          Recursos de Apoio
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Liste os materiais complementares que os alunos podem usar (ex: textos, dados, documentos).</span>
+          </span>
+        </label>
+        <textarea id="resources" name="resources" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Textos teóricos, dados estatísticos, links para pesquisa..."></textarea>
+      </div>
+
+      <!-- Metodologia -->
+      <div>
+        <label for="methodology" class="block text-lg font-medium text-gray-700 flex items-center">
+          Metodologia
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva como o caso será trabalhado (individual ou em grupo) e o formato de apresentação.</span>
+          </span>
+        </label>
+        <textarea id="methodology" name="methodology" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Trabalho em grupo, apresentação oral, relatório escrito..."></textarea>
+      </div>
+
+      <!-- Tempo da Atividade -->
+      <div>
+        <label for="duration" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tempo da Atividade
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira o tempo estimado para a atividade (ex: 30 minutos, 1 hora, 2 horas).</span>
+          </span>
+        </label>
+        <input type="text" id="duration" name="duration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: 45 minutos, 1 hora, 2 horas">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Gerar Estudo de Caso</button>
+    </form>
+
+    <!-- Área de Exibição do Estudo de Caso Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Estudo de Caso Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Copiar Texto</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Estudo de Caso com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Estudos de Caso. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Mostrar campos de texto quando "Outro" é selecionado
+    document.getElementById('theme').addEventListener('change', function () {
+      const otherThemeField = document.getElementById('otherTheme');
+      if (this.value === 'Outro') {
+        otherThemeField.style.display = 'block';
+      } else {
+        otherThemeField.style.display = 'none';
+        otherThemeField.value = '';
+      }
+    });
+
+    document.getElementById('subject').addEventListener('change', function () {
+      const otherSubjectField = document.getElementById('otherSubject');
+      if (this.value === 'Outra') {
+        otherSubjectField.style.display = 'block';
+      } else {
+        otherSubjectField.style.display = 'none';
+        otherSubjectField.value = '';
+      }
+    });
+
+    // Gerar estudo de caso
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const grade = document.getElementById('grade').value;
+      const subject = document.getElementById('subject').value === 'Outra' ? document.getElementById('otherSubject').value : document.getElementById('subject').value;
+      const theme = document.getElementById('theme').value === 'Outro' ? document.getElementById('otherTheme').value : document.getElementById('theme').value;
+      const objectives = document.getElementById('objectives').value;
+      const context = document.getElementById('context').value;
+      const questions = document.getElementById('questions').value;
+      const resources = document.getElementById('resources').value;
+      const methodology = document.getElementById('methodology').value;
+      const duration = document.getElementById('duration').value;
+
+      const generatedText = `
+        Crie um estudo de caso para o Ensino Fundamental (${grade}) na disciplina de ${subject}, com as seguintes características:
+        - Tema: ${theme}.
+        - Objetivos de Aprendizagem: ${objectives}.
+        - Contextualização: ${context}.
+        - Questões Norteadoras: ${questions}.
+        - Recursos de Apoio: ${resources}.
+        - Metodologia: ${methodology}.
+        - Duração: ${duration}.
+
+        O estudo de caso deve ser envolvente e adequado à faixa etária. Inclua:
+        1. Uma breve introdução para contextualizar o caso.
+        2. Um cenário ou problema realista para os alunos analisarem.
+        3. Perguntas ou desafios que estimulem o pensamento crítico e a resolução de problemas.
+        4. Sugestões de atividades complementares (ex: debates, pesquisas, projetos).
+        5. Uma conclusão que reforce o aprendizado e incentive a reflexão.
+
+        Além disso, o estudo de caso deve estar alinhado às **habilidades da BNCC** para a disciplina de ${subject} no ${grade}. Certifique-se de que as situações de aprendizagem promovam o desenvolvimento das competências e habilidades esperadas para essa etapa escolar, considerando aspectos cognitivos, emocionais e sociais.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

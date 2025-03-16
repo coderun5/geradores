@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompts para Sala de Aula Invertida</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompts para Sala de Aula Invertida</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Prompts para Sala de Aula Invertida</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar atividades de "Sala de Aula Invertida (Flipped Classroom)" para o ensino fundamental. Preencha os campos abaixo para gerar sugestões de atividades adaptadas às necessidades dos seus alunos e alinhadas às habilidades e competências da BNCC.</p>
+      <p class="text-gray-700 mt-2">A "Sala de Aula Invertida" é uma metodologia em que os alunos estudan o conteúdo em casa, por meio de vídeos, textos ou outros recursos, e utilizam o tempo em sala para atividades práticas, discussões e aprofundamento do conhecimento, com o professor atuando como facilitador.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar uma atividade:</h2></center>
+    <form id="activityForm" class="space-y-4">
+      <!-- Ano Escolar -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano Escolar
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano escolar da turma.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+        </select>
+      </div>
+
+      <!-- Disciplina -->
+      <div>
+        <label for="subject" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina relacionada à atividade.</span>
+          </span>
+        </label>
+        <select id="subject" name="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Língua Portuguesa">Língua Portuguesa</option>
+          <option value="Matemática">Matemática</option>
+          <option value="Ciências">Ciências</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Ensino Religioso">Ensino Religioso</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherSubject" name="otherSubject" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra disciplina (opcional)" style="display: none;">
+      </div>
+
+      <!-- Tema ou Conteúdo -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema ou Conteúdo
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Defina o tema ou conteúdo que será estudado em casa.</span>
+          </span>
+        </label>
+        <input type="text" id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Fotossíntese, Adição e Subtração, Revolução Industrial">
+      </div>
+
+      <!-- Recursos para Estudo Prévio -->
+      <div>
+        <label for="resources" class="block text-lg font-medium text-gray-700 flex items-center">
+          Recursos para Estudo Prévio
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione os recursos que os alunos usarão para estudar em casa.</span>
+          </span>
+        </label>
+        <select id="resources" name="resources" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="Vídeo explicativo">Vídeo explicativo</option>
+          <option value="Texto ou artigo">Texto ou artigo</option>
+          <option value="Apresentação de slides">Apresentação de slides</option>
+          <option value="Podcast ou áudio">Podcast ou áudio</option>
+          <option value="Infográfico">Infográfico</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="text" id="otherResources" name="otherResources" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outros recursos (opcional)" style="display: none;">
+      </div>
+
+      <!-- Atividade em Sala -->
+      <div>
+        <label for="classActivity" class="block text-lg font-medium text-gray-700 flex items-center">
+          Atividade em Sala
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva a atividade que será realizada em sala de aula.</span>
+          </span>
+        </label>
+        <textarea id="classActivity" name="classActivity" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="3" placeholder="Ex: Discussão em grupo, resolução de problemas, experimento prático"></textarea>
+      </div>
+
+      <!-- Habilidades e Competências da BNCC -->
+      <div>
+        <label for="bnccSkills" class="block text-lg font-medium text-gray-700 flex items-center">
+          Habilidades e Competências da BNCC
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione as habilidades e competências da BNCC que deseja trabalhar.</span>
+          </span>
+        </label>
+        <select id="bnccSkills" name="bnccSkills" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="EF01LP01 - Ler e compreender textos curtos">EF01LP01 - Ler e compreender textos curtos</option>
+          <option value="EF02MA05 - Resolver problemas de adição e subtração">EF02MA05 - Resolver problemas de adição e subtração</option>
+          <option value="EF03CI05 - Identificar formas de uso sustentável dos recursos naturais">EF03CI05 - Identificar formas de uso sustentável dos recursos naturais</option>
+          <option value="EF04HI03 - Reconhecer a diversidade cultural como um direito dos povos">EF04HI03 - Reconhecer a diversidade cultural como um direito dos povos</option>
+          <option value="EF05GE01 - Analisar impactos ambientais causados pela ação humana">EF05GE01 - Analisar impactos ambientais causados pela ação humana</option>
+          <option value="EF06LP01 - Produzir textos escritos com coesão e coerência">EF06LP01 - Produzir textos escritos com coesão e coerência</option>
+          <option value="EF07MA01 - Resolver problemas envolvendo números racionais">EF07MA01 - Resolver problemas envolvendo números racionais</option>
+          <option value="EF08CI01 - Compreender a importância da água para a vida">EF08CI01 - Compreender a importância da água para a vida</option>
+          <option value="EF09HI01 - Analisar processos de formação de identidades culturais">EF09HI01 - Analisar processos de formação de identidades culturais</option>
+          <option value="Outra">Outra</option>
+        </select>
+        <input type="text" id="otherBnccSkills" name="otherBnccSkills" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra habilidade ou competência (opcional)" style="display: none;">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Gerar Atividade</button>
+    </form>
+
+    <!-- Área de Exibição da Atividade Gerada -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Atividade Gerada:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Copiar Texto</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Atividade com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Prompts para Sala de Aula Invertida. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Mostrar campos de texto quando "Outro" é selecionado
+    document.getElementById('resources').addEventListener('change', function () {
+      const otherResourcesField = document.getElementById('otherResources');
+      if (this.value === 'Outro') {
+        otherResourcesField.style.display = 'block';
+      } else {
+        otherResourcesField.style.display = 'none';
+        otherResourcesField.value = '';
+      }
+    });
+
+    document.getElementById('subject').addEventListener('change', function () {
+      const otherSubjectField = document.getElementById('otherSubject');
+      if (this.value === 'Outra') {
+        otherSubjectField.style.display = 'block';
+      } else {
+        otherSubjectField.style.display = 'none';
+        otherSubjectField.value = '';
+      }
+    });
+
+    document.getElementById('bnccSkills').addEventListener('change', function () {
+      const otherBnccSkillsField = document.getElementById('otherBnccSkills');
+      if (this.value === 'Outra') {
+        otherBnccSkillsField.style.display = 'block';
+      } else {
+        otherBnccSkillsField.style.display = 'none';
+        otherBnccSkillsField.value = '';
+      }
+    });
+
+    // Gerar atividade
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const grade = document.getElementById('grade').value;
+      const subject = document.getElementById('subject').value === 'Outra' ? document.getElementById('otherSubject').value : document.getElementById('subject').value;
+      const theme = document.getElementById('theme').value;
+      const resources = document.getElementById('resources').value === 'Outro' ? document.getElementById('otherResources').value : document.getElementById('resources').value;
+      const classActivity = document.getElementById('classActivity').value;
+      const bnccSkills = document.getElementById('bnccSkills').value === 'Outra' ? document.getElementById('otherBnccSkills').value : document.getElementById('bnccSkills').value;
+
+      const generatedText = `
+        Crie uma atividade de **Sala de Aula Invertida** para o ${grade}, na disciplina de ${subject}, com foco no tema "${theme}". 
+
+        **Recursos para estudo prévio**: ${resources}.
+        **Sugira links na web para recursos apropriados** (vídeos, textos, infográficos, etc.) que os alunos possam usar em casa.
+        **Atividade em sala**: ${classActivity || "Proponha uma atividade prática ou discussão para consolidar o conhecimento."}
+
+        A atividade deve desenvolver as seguintes habilidades e competências da BNCC: ${bnccSkills}.
+
+        Certifique-se de que o material de estudo prévio seja claro e envolvente, e que a atividade em sala promova a aplicação prática do conhecimento.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

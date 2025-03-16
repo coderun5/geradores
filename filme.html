@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Planos de Aula com Filmes Nacionais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompts para Planos de Aula com Filmes Nacionais</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Planos de Aula com Filmes Nacionais</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar planos de aula com base em filmes nacionais, alinhados às habilidades e competências da BNCC. Preencha os campos abaixo para gerar um plano de aula personalizado.</p>
+      <p class="text-gray-700 mt-2">Os planos de aula gerados podem ser facilmente copiados para o Word e incluem objetivos, atividades, avaliações e sugestões de discussão.</p>
+      <p class="text-gray-700 mt-2"><strong>Importância da Lei nº 13.006/2014</strong>: Esta lei determina que as escolas de educação básica exibam, mensalmente, pelo menos 2 horas de filmes de produção nacional. O objetivo é promover o cinema nacional, ampliar o acesso dos estudantes à cultura brasileira e contribuir para a formação crítica e reflexiva dos alunos.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um plano de aula:</h2></center>
+    <form id="lessonPlanForm" class="space-y-4">
+      <!-- Ano Escolar -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano Escolar
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano escolar da turma.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA">EJA (Educação de Jovens e Adultos)</option>
+        </select>
+      </div>
+
+      <!-- Filme Nacional -->
+      <div>
+        <label for="movie" class="block text-lg font-medium text-gray-700 flex items-center">
+          Filme Nacional
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Digite o título do filme nacional que será utilizado ou aceite sugestão.</span>
+          </span>
+        </label>
+        <input type="text" id="movie" name="movie" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: O Auto da Compadecida, Central do Brasil">
+        <label class="inline-flex items-center mt-2">
+          <input type="checkbox" id="suggestMovie" name="suggestMovie" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <span class="ml-2">Aceito sugestão</span>
+        </label>
+      </div>
+
+      <!-- Duração do Filme -->
+      <div>
+        <label for="movieDuration" class="block text-lg font-medium text-gray-700 flex items-center">
+          Duração do Filme (em minutos)
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Informe a duração do filme em minutos.</span>
+          </span>
+        </label>
+        <input type="number" id="movieDuration" name="movieDuration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: 120 minutos">
+      </div>
+
+      <!-- Disciplina ou Abordagem Interdisciplinar -->
+      <div>
+        <label class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina ou Abordagem Interdisciplinar
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione uma ou mais disciplinas para o plano de aula.</span>
+          </span>
+        </label>
+        <div class="mt-2 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Língua Portuguesa" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Língua Portuguesa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Matemática" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Matemática</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Ciências" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Ciências</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="História" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">História</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Geografia" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Geografia</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Artes" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Artes</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Educação Física" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Educação Física</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Ensino Religioso" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Ensino Religioso</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="subject" value="Outra" class="rounded border-gray-300 text-[#1919e6] shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+            <span class="ml-2">Outra</span>
+          </label>
+        </div>
+        <input type="text" id="otherSubject" name="otherSubject" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outra disciplina (opcional)" style="display: none;">
+      </div>
+
+      <!-- Tema ou Conteúdo -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema ou Conteúdo
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Defina o tema ou conteúdo que será trabalhado no plano de aula.</span>
+          </span>
+        </label>
+        <input type="text" id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Cultura popular, Desigualdade social, Identidade cultural">
+      </div>
+
+      <!-- Habilidades e Competências da BNCC (Opcional) -->
+      <div>
+        <label for="bnccSkills" class="block text-lg font-medium text-gray-700 flex items-center">
+          Habilidades e Competências da BNCC (Opcional)
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva as habilidades e competências da BNCC que deseja trabalhar (opcional).</span>
+          </span>
+        </label>
+        <textarea id="bnccSkills" name="bnccSkills" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="4" placeholder="Ex: EF01LP01 - Ler e compreender textos curtos"></textarea>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Plano de Aula Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Copiar Prompt</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Plano de Aula com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+          <a href="https://qwenlm.ai/" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 inline-block">
+            <i class="fas fa-lightbulb mr-2"></i>QwenLM
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Planos de Aula com Filmes Nacionais. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Mostrar campo de texto para "Outra" disciplina
+    document.querySelectorAll('input[name="subject"]').forEach(el => {
+      el.addEventListener('change', function () {
+        const otherSubjectField = document.getElementById('otherSubject');
+        if (this.value === 'Outra' && this.checked) {
+          otherSubjectField.style.display = 'block';
+        } else {
+          otherSubjectField.style.display = 'none';
+          otherSubjectField.value = '';
+        }
+      });
+    });
+
+    // Gerar plano de aula
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const grade = document.getElementById('grade').value;
+      const movie = document.getElementById('movie').value;
+      const movieDuration = document.getElementById('movieDuration').value;
+      const subjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(el => el.value === 'Outra' ? document.getElementById('otherSubject').value : el.value).join(', ');
+      const theme = document.getElementById('theme').value;
+      const bnccSkills = document.getElementById('bnccSkills').value;
+      const suggestMovie = document.getElementById('suggestMovie').checked;
+
+      // Sugestões de habilidades da BNCC com base nas escolhas
+      const suggestedBnccSkills = `
+        Sugestões de habilidades da BNCC com base nas escolhas:
+        - **Filme**: ${movie}.
+        - **Disciplina(s)**: ${subjects}.
+        - **Tema**: ${theme}.
+        Exemplos:
+        ${getSuggestedBnccSkills(movie, subjects, theme)}
+      `;
+
+      let generatedText = `
+        Crie um plano de aula para o ${grade}, utilizando o filme nacional "${movie}" (Duração: ${movieDuration} minutos), nas disciplinas de ${subjects}, com foco no tema "${theme}".
+        ${suggestMovie ? 'Aceito sugestão para o filme nacional.' : ''}
+
+        **Habilidades e competências da BNCC**:
+        ${bnccSkills || suggestedBnccSkills}
+      `;
+
+      if (subjects.includes("Interdisciplinar")) {
+        generatedText += `
+          **Abordagem interdisciplinar**: O plano de aula deve integrar conhecimentos de diferentes disciplinas, promovendo uma visão holística do tema abordado no filme.
+        `;
+      }
+
+      generatedText += `
+        O plano de aula deve incluir:
+        1. **Objetivos de aprendizagem**: O que os alunos devem aprender com a aula.
+        2. **Atividades prévias**: Sugestões de discussões ou leituras para contextualizar o filme.
+        3. **Atividades durante o filme**: Orientações para os alunos assistirem ao filme de forma crítica.
+        4. **Atividades pós-filme**: Discussões, debates ou atividades práticas relacionadas ao filme.
+        5. **Avaliação**: Sugestões de como avaliar a compreensão dos alunos sobre o tema.
+        6. **Recursos adicionais**: Indicações de materiais complementares (textos, vídeos, etc.).
+
+        **Observação**: Considere a duração do filme (${movieDuration} minutos) para distribuir o tempo das atividades de forma equilibrada, garantindo que todas as etapas sejam realizadas de maneira viável.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+
+    // Função para sugerir habilidades da BNCC com base nas escolhas
+    function getSuggestedBnccSkills(movie, subjects, theme) {
+      let suggestions = [];
+      if (subjects.includes("Língua Portuguesa")) {
+        suggestions.push("- EF01LP01 - Ler e compreender textos curtos");
+      }
+      if (subjects.includes("História")) {
+        suggestions.push("- EF04HI03 - Reconhecer a diversidade cultural como um direito dos povos");
+      }
+      if (subjects.includes("Geografia")) {
+        suggestions.push("- EF05GE01 - Analisar impactos ambientais causados pela ação humana");
+      }
+      if (subjects.includes("Artes")) {
+        suggestions.push("- EF15AR01 - Identificar e apreciar formas de expressão artística");
+      }
+      if (theme.includes("Cultura popular")) {
+        suggestions.push("- EF03HI02 - Reconhecer manifestações culturais como expressões de identidade");
+      }
+      if (theme.includes("Desigualdade social")) {
+        suggestions.push("- EF09CI03 - Analisar as causas e consequências das desigualdades sociais");
+      }
+      return suggestions.join('\n');
+    }
+  </script>
+</body>
+</html>
