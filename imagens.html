@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompts para Imagens com IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompts para Imagens com IA</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Prompts para Imagens com IA</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar prompts eficazes para a geração de imagens com IA. Preencha os campos abaixo para gerar sugestões personalizadas e alinhadas às suas necessidades.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um prompt:</h2></center>
+    <form id="imagePromptForm" class="space-y-4">
+      <!-- Descrição da Cena -->
+      <div>
+        <label for="sceneDescription" class="block text-lg font-medium text-gray-700 flex items-center">
+          Descrição da Cena
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva a cena que deseja criar. Ex: 'Uma floresta mágica com árvores brilhantes e criaturas encantadas.'</span>
+          </span>
+        </label>
+        <textarea id="sceneDescription" name="sceneDescription" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" rows="3" placeholder="Ex: Uma cidade futurista com arranha-céus brilhantes e carros voadores."></textarea>
+      </div>
+
+      <!-- Estilo Artístico -->
+      <div>
+        <label for="style" class="block text-lg font-medium text-gray-700 flex items-center">
+          Estilo Artístico
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o estilo artístico da imagem.</span>
+          </span>
+        </label>
+        <select id="style" name="style" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="realistic">Realista</option>
+          <option value="cartoon">Desenho Animado</option>
+          <option value="anime">Anime Japonês</option>
+          <option value="painting">Pintura</option>
+          <option value="3d">3D</option>
+          <option value="pixel-art">Pixel Art</option>
+          <option value="abstract">Abstrato</option>
+        </select>
+      </div>
+
+      <!-- Tema -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Escolha o tema da imagem.</span>
+          </span>
+        </label>
+        <select id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="fantasy">Fantasia</option>
+          <option value="sci-fi">Ficção Científica</option>
+          <option value="horror">Horror</option>
+          <option value="nature">Natureza</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="retro">Retrô</option>
+        </select>
+      </div>
+
+      <!-- Iluminação -->
+      <div>
+        <label for="lighting" class="block text-lg font-medium text-gray-700 flex items-center">
+          Iluminação
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Defina o tipo de iluminação da cena.</span>
+          </span>
+        </label>
+        <select id="lighting" name="lighting" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="natural">Natural</option>
+          <option value="dramatic">Dramática</option>
+          <option value="soft">Suave</option>
+          <option value="neon">Neon</option>
+          <option value="sunset">Pôr do Sol</option>
+        </select>
+      </div>
+
+      <!-- Cores Predominantes -->
+      <div>
+        <label for="colors" class="block text-lg font-medium text-gray-700 flex items-center">
+          Cores Predominantes
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Insira as cores que devem predominar na imagem.</span>
+          </span>
+        </label>
+        <input type="text" id="colors" name="colors" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Tons de azul e verde">
+      </div>
+
+      <!-- Nível de Detalhamento -->
+      <div>
+        <label for="details" class="block text-lg font-medium text-gray-700 flex items-center">
+          Nível de Detalhamento
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o nível de detalhamento da imagem.</span>
+          </span>
+        </label>
+        <select id="details" name="details" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="low">Baixo</option>
+          <option value="medium">Médio</option>
+          <option value="high">Alto</option>
+          <option value="ultra">Ultra Detalhado</option>
+        </select>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Copiar Prompt</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Imagem com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://copilot.microsoft.com/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Copilot
+          </a>
+          <a href="https://gemini.google.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-gem mr-2"></i>Gemini
+          </a>
+          <!-- Adicionando Llama -->
+          <a href="https://ai.meta.com/llama/" target="_blank" class="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 inline-block">
+            <i class="fas fa-horse mr-2"></i>Llama (Meta AI)
+          </a>
+          <!-- Adicionando Adobe Express -->
+          <a href="https://www.adobe.com/express/feature/image/ai-image-generator" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 inline-block">
+            <i class="fas fa-palette mr-2"></i>Adobe Express
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Prompts para Imagens com IA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Gerar prompt
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const sceneDescription = document.getElementById('sceneDescription').value;
+      const style = document.getElementById('style').value;
+      const theme = document.getElementById('theme').value;
+      const lighting = document.getElementById('lighting').value;
+      const colors = document.getElementById('colors').value;
+      const details = document.getElementById('details').value;
+
+      const generatedText = `
+        Crie uma imagem com as seguintes características:
+        - Descrição da Cena: ${sceneDescription}
+        - Estilo Artístico: ${style}
+        - Tema: ${theme}
+        - Iluminação: ${lighting}
+        - Cores Predominantes: ${colors}
+        - Nível de Detalhamento: ${details}
+
+        **Instruções Adicionais:**
+        1. A imagem deve ser gerada em alta resolução.
+        2. Certifique-se de que o estilo e o tema estejam alinhados com a descrição fornecida.
+        3. Se possível, gere uma imagem realista e detalhada.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

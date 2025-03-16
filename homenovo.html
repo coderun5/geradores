@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geradores e Prompts Educacionais</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e0f7fa; /* Azul claro */
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #b3e5fc; /* Azul mais escuro */
+      color: #333;
+      padding: 20px;
+      text-align: center;
+      box-shadow: inset 5px 5px 10px #a3d5fb, inset -5px -5px 10px #c3f5fd; /* Efeito neumórfico */
+      border-radius: 15px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 1rem;
+    }
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #e0f7fa; /* Azul claro */
+      border-radius: 15px;
+      box-shadow: 5px 5px 10px #a3d5fb, -5px -5px 10px #c3f5fd; /* Efeito neumórfico */
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #333;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #e0f7fa; /* Azul claro */
+      border-radius: 15px;
+      box-shadow: 5px 5px 10px #a3d5fb, -5px -5px 10px #c3f5fd; /* Efeito neumórfico */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    li:hover {
+      transform: translateY(-2px);
+      box-shadow: 10px 10px 20px #a3d5fb, -10px -10px 20px #c3f5fd; /* Efeito pressionado */
+    }
+    li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      margin-left: 10px;
+      flex-grow: 1;
+    }
+    li i {
+      color: #333;
+      font-size: 1.2rem;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .buttons a {
+      text-decoration: none;
+      color: #333;
+      background-color: #e0f7fa; /* Azul claro */
+      padding: 10px 20px;
+      border-radius: 15px;
+      box-shadow: 5px 5px 10px #a3d5fb, -5px -5px 10px #c3f5fd; /* Efeito neumórfico */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .buttons a:hover {
+      transform: translateY(-2px);
+      box-shadow: 10px 10px 20px #a3d5fb, -10px -10px 20px #c3f5fd; /* Efeito pressionado */
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #b3e5fc; /* Azul mais escuro */
+      color: #333;
+      margin-top: 20px;
+      box-shadow: inset 5px 5px 10px #a3d5fb, inset -5px -5px 10px #c3f5fd; /* Efeito neumórfico */
+      border-radius: 15px;
+    }
+    footer a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>Geradores e Prompts Educacionais</h1>
+    <p>Hub de Geradores de Prompts para Professores</p>
+  </header>
+  <main>
+    <section>
+      <h2>Ferramentas</h2>
+      <ul>
+        <li><i class="fas fa-book"></i><a href="#">Atividade para sala de aula</a></li>
+        <li><i class="fas fa-chalkboard-teacher"></i><a href="#">Plano de Aula</a></li>
+        <li><i class="fas fa-list"></i><a href="#">Plano de Unidade</a></li>
+        <li><i class="fas fa-pencil-alt"></i><a href="#">Atividade Avaliativa</a></li>
+        <li><i class="fas fa-star"></i><a href="#">Rubrica Avaliativa</a></li>
+        <li><i class="fas fa-project-diagram"></i><a href="#">Sequência Didática</a></li>
+        <li><i class="fas fa-lightbulb"></i><a href="#">Projeto Didático</a></li>
+        <li><i class="fas fa-edit"></i><a href="#">Corrigir Texto</a></li>
+        <li><i class="fas fa-file-alt"></i><a href="#">Texto de Apoio</a></li>
+        <li><i class="fas fa-calendar-alt"></i><a href="#">Atividade do Mês</a></li>
+        <li><i class="fas fa-pen"></i><a href="#">Corrigir Redação</a></li>
+        <li><i class="fas fa-child"></i><a href="#">Atividade de Alfabetização</a></li>
+        <li><i class="fas fa-chart-bar"></i><a href="#">Baseada no SAEB</a></li>
+        <li><i class="fas fa-check-circle"></i><a href="#">Aula Relevante</a></li>
+        <li><i class="fas fa-language"></i><a href="#">Atividade de Inglês</a></li>
+        <li><i class="fas fa-calculator"></i><a href="#">Atividade de Matemática</a></li>
+        <li><i class="fas fa-search"></i><a href="#">Caça-Palavras</a></li>
+        <li><i class="fas fa-puzzle-piece"></i><a href="#">Palavras Cruzadas</a></li>
+        <li><i class="fas fa-book-open"></i><a href="#">Histórias Infantis</a></li>
+        <li><i class="fas fa-font"></i><a href="#">Vocabulário</a></li>
+        <li><i class="fas fa-brain"></i><a href="#">Compreensão de Texto</a></li>
+        <li><i class="fas fa-door-open"></i><a href="#">Escape Room</a></li>
+        <li><i class="fas fa-baby"></i><a href="#">Atividade de Educação Infantil</a></li>
+        <li><i class="fas fa-heart"></i><a href="#">Atividades Socioemocionais</a></li>
+        <li><i class="fas fa-book-reader"></i><a href="#">Estudo de Caso</a></li>
+        <li><i class="fas fa-wheelchair"></i><a href="#">Atividade para PCD</a></li>
+        <li><i class="fas fa-cogs"></i><a href="#">Design Thinking</a></li>
+        <li><i class="fas fa-school"></i><a href="#">Sala de Aula Invertida</a></li>
+        <li><i class="fas fa-map-signs"></i><a href="#">Trilha de Aprendizagem</a></li>
+        <li><i class="fas fa-map"></i><a href="#">Mapas Mentais</a></li>
+        <li><i class="fas fa-file-alt"></i><a href="#">Resumos</a></li>
+        <li><i class="fas fa-sliders-h"></i><a href="#">Slides</a></li>
+        <li><i class="fas fa-tasks"></i><a href="#">Habilidades da BNCC</a></li>
+        <li><i class="fas fa-gamepad"></i><a href="#">Games</a></li>
+        <li><i class="fas fa-question-circle"></i><a href="#">Quizzes</a></li>
+        <li><i class="fas fa-file-pdf"></i><a href="#">Questões de PDF</a></li>
+        <li><i class="fas fa-clipboard-list"></i><a href="#">Boletim de Aprendizagem</a></li>
+        <li><i class="fas fa-video"></i><a href="#">Questões de Vídeos</a></li>
+        <li><i class="fas fa-robot"></i><a href="#">Autocorreção de Textos</a></li>
+        <li><i class="fas fa-image"></i><a href="#">Gerar Imagens</a></li>
+        <li><i class="fas fa-graduation-cap"></i><a href="#">Atividades de EJA</a></li>
+        <li><i class="fas fa-baby-carriage"></i><a href="#">Atividades de Creche</a></li>
+        <li><i class="fas fa-table"></i><a href="#">Quadro Comparativo</a></li>
+        <li><i class="fas fa-film"></i><a href="#">Filmes Nacionais</a></li>
+        <li><i class="fas fa-book"></i><a href="#">Bibliografia</a></li>
+        <li><i class="fas fa-shapes"></i><a href="#">Atividades de Geometria</a></li>
+        <li><i class="fas fa-users"></i><a href="#">Debate Regrado</a></li>
+        <li><i class="fas fa-clock"></i><a href="#">Linha do Tempo</a></li>
+        <li><i class="fas fa-calendar-day"></i><a href="#">1º Dia de Aula</a></li>
+        <li><i class="fas fa-tree"></i><a href="#">Educação Integral</a></li>
+        <li><i class="fas fa-search"></i><a href="#">Detector de AI</a></li>
+        <li><i class="fas fa-lightbulb"></i><a href="#">Estratégias de Aprendizagem</a></li>
+        <li><i class="fas fa-feather-alt"></i><a href="#">Texto Literário</a></li>
+        <li><i class="fas fa-balance-scale"></i><a href="#">Ética e Valores</a></li>
+        <li><i class="fas fa-leaf"></i><a href="#">Educação Ambiental</a></li>
+        <li><i class="fas fa-shopping-cart"></i><a href="#">Consumo Consciente</a></li>
+        <li><i class="fas fa-video"></i><a href="#">Roteiro de Documentário</a></li>
+        <li><i class="fas fa-gavel"></i><a href="#">Júri Simulado</a></li>
+        <li><i class="fas fa-check-double"></i><a href="#">Corrigir Provas</a></li>
+        <li><i class="fas fa-calculator"></i><a href="#">Problemas de Matemática</a></li>
+        <li><i class="fas fa-file-alt"></i><a href="#">Teste Simulado: ENEM, SAEB, SABE</a></li>
+        <li><i class="fas fa-clipboard-check"></i><a href="#">Teste de Sondagem</a></li>
+        <li><i class="fas fa-book"></i><a href="#">Conteúdos de Aula</a></li>
+        <li><i class="fas fa-book"></i><a href="#">Base PNLD por Unidade</a></li>
+        <li><i class="fas fa-language"></i><a href="#">Descritores SAEB Português</a></li>
+        <li><i class="fas fa-calculator"></i><a href="#">Descritores SAEB Matemática</a></li>
+        <li><i class="fas fa-school"></i><a href="#">Plano 4 Pilares da Educação</a></li>
+        <li><i class="fas fa-school"></i><a href="#">Plano Específico para o FI</a></li>
+        <li><i class="fas fa-handshake"></i><a href="#">Plano de Aula: Cultura de Paz</a></li>
+      </ul>
+    </section>
+
+    <div class="buttons">
+      <a href="#">Ferramentas Online</a>
+      <a href="#">E-book Trilhas</a>
+      <a href="#">Links Úteis</a>
+      <a href="#">Colaborativo</a>
+      <a href="#">MECRED</a>
+      <a href="#">AvAMec</a>
+      <a href="#">Nossa comunidade</a>
+      <a href="#">Produtividade</a>
+      
+    </div>
+  </main>
+  <footer>
+    <p>
+     
+     Hub de geradores de prompts para professores está licenciado sob CC BY-NC 4.0 Sérgio Araújo 2025
+    </p>
+  </footer>
+</body>
+</html>
