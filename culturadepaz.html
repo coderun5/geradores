@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompts para Cultura de Paz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompts para Cultura de Paz</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Prompts para Planos de Aula sobre Cultura de Paz</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo(a) a criar prompts perfeitos para gerar planos de aula sobre Cultura de Paz, alinhados às competências e habilidades socioemocionais da BNCC. Ótimo para trabalhar como complementação ao Projeto "Risque Rabisque" no FI. Preencha os campos abaixo para gerar sugestões adaptadas às suas necessidades.</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um prompt:</h2></center>
+    <form id="promptForm" class="space-y-4">
+      <!-- Nível de Ensino -->
+      <div>
+        <label class="block text-lg font-medium text-gray-700 flex items-center">
+          Nível de Ensino
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o nível de ensino para o qual o plano de aula será criado.</span>
+          </span>
+        </label>
+        <div class="mt-1 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="radio" name="level" value="Educação Infantil" class="form-radio">
+            <span class="ml-2">Educação Infantil</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="level" value="Ensino Fundamental I" class="form-radio">
+            <span class="ml-2">Ensino Fundamental I</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="level" value="Ensino Fundamental II" class="form-radio">
+            <span class="ml-2">Ensino Fundamental II</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="level" value="Ensino Médio" class="form-radio">
+            <span class="ml-2">Ensino Médio</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="level" value="Outro" id="otherLevelRadio" class="form-radio">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="otherLevel" name="otherLevel" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outro nível de ensino (opcional)" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Tema Específico -->
+      <div>
+        <label class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema Específico
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Escolha um tema específico relacionado à cultura de paz (ex: resolução de conflitos, empatia, etc.).</span>
+          </span>
+        </label>
+        <div class="mt-1 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="radio" name="theme" value="Resolução de Conflitos" class="form-radio">
+            <span class="ml-2">Resolução de Conflitos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="theme" value="Empatia e Solidariedade" class="form-radio">
+            <span class="ml-2">Empatia e Solidariedade</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="theme" value="Diversidade e Inclusão" class="form-radio">
+            <span class="ml-2">Diversidade e Inclusão</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="theme" value="Comunicação Não Violenta" class="form-radio">
+            <span class="ml-2">Comunicação Não Violenta</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="theme" value="Direitos Humanos" class="form-radio">
+            <span class="ml-2">Direitos Humanos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="theme" value="Outro" id="otherThemeRadio" class="form-radio">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="otherTheme" name="otherTheme" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outro tema (opcional)" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Objetivo da Aula -->
+      <div>
+        <label class="block text-lg font-medium text-gray-700 flex items-center">
+          Objetivo da Aula
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Defina o objetivo principal da aula (ex: promover o diálogo, ensinar técnicas de mediação, etc.).</span>
+          </span>
+        </label>
+        <div class="mt-1 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="radio" name="objective" value="Promover o diálogo" class="form-radio">
+            <span class="ml-2">Promover o diálogo</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="objective" value="Ensinar técnicas de mediação" class="form-radio">
+            <span class="ml-2">Ensinar técnicas de mediação</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="objective" value="Desenvolver empatia" class="form-radio">
+            <span class="ml-2">Desenvolver empatia</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="objective" value="Reforçar valores de respeito" class="form-radio">
+            <span class="ml-2">Reforçar valores de respeito</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="objective" value="Outro" id="otherObjectiveRadio" class="form-radio">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="otherObjective" name="otherObjective" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outro objetivo (opcional)" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Recursos Necessários -->
+      <div>
+        <label class="block text-lg font-medium text-gray-700 flex items-center">
+          Recursos Necessários
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione os materiais necessários para a aula (ex: vídeos, textos, atividades práticas, etc.).</span>
+          </span>
+        </label>
+        <div class="mt-1 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="radio" name="resources" value="Vídeos educativos" class="form-radio">
+            <span class="ml-2">Vídeos educativos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="resources" value="Textos e histórias" class="form-radio">
+            <span class="ml-2">Textos e histórias</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="resources" value="Atividades práticas" class="form-radio">
+            <span class="ml-2">Atividades práticas</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="resources" value="Jogos cooperativos" class="form-radio">
+            <span class="ml-2">Jogos cooperativos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="resources" value="Outro" id="otherResourcesRadio" class="form-radio">
+            <span class="ml-2">Outro</span>
+          </label>
+          <input type="text" id="otherResources" name="otherResources" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Especifique outros recursos (opcional)" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt Gerado -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#1919e6]/90">Copiar Texto</button>
+
+      <!-- Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Gerar Plano de Aula com IA:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+          <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+          <a href="https://chat.qwenlm.ai/" target="_blank" class="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 inline-block">
+            <i class="fas fa-lightbulb mr-2"></i>Qwen
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Gerador de Prompts para Cultura de Paz. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    // Mostrar campos de texto quando "Outro" é selecionado
+    document.getElementById('otherLevelRadio').addEventListener('change', function () {
+      const otherLevelField = document.getElementById('otherLevel');
+      if (this.checked) {
+        otherLevelField.style.display = 'block';
+      } else {
+        otherLevelField.style.display = 'none';
+        otherLevelField.value = '';
+      }
+    });
+
+    document.getElementById('otherThemeRadio').addEventListener('change', function () {
+      const otherThemeField = document.getElementById('otherTheme');
+      if (this.checked) {
+        otherThemeField.style.display = 'block';
+      } else {
+        otherThemeField.style.display = 'none';
+        otherThemeField.value = '';
+      }
+    });
+
+    document.getElementById('otherObjectiveRadio').addEventListener('change', function () {
+      const otherObjectiveField = document.getElementById('otherObjective');
+      if (this.checked) {
+        otherObjectiveField.style.display = 'block';
+      } else {
+        otherObjectiveField.style.display = 'none';
+        otherObjectiveField.value = '';
+      }
+    });
+
+    document.getElementById('otherResourcesRadio').addEventListener('change', function () {
+      const otherResourcesField = document.getElementById('otherResources');
+      if (this.checked) {
+        otherResourcesField.style.display = 'block';
+      } else {
+        otherResourcesField.style.display = 'none';
+        otherResourcesField.value = '';
+      }
+    });
+
+    // Gerar prompt
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const level = document.querySelector('input[name="level"]:checked')?.value === 'Outro' ? document.getElementById('otherLevel').value : document.querySelector('input[name="level"]:checked')?.value;
+      const theme = document.querySelector('input[name="theme"]:checked')?.value === 'Outro' ? document.getElementById('otherTheme').value : document.querySelector('input[name="theme"]:checked')?.value;
+      const objective = document.querySelector('input[name="objective"]:checked')?.value === 'Outro' ? document.getElementById('otherObjective').value : document.querySelector('input[name="objective"]:checked')?.value;
+      const resources = document.querySelector('input[name="resources"]:checked')?.value === 'Outro' ? document.getElementById('otherResources').value : document.querySelector('input[name="resources"]:checked')?.value;
+
+      const generatedText = `
+        Crie um plano de aula sobre Cultura de Paz com as seguintes características:
+        - Nível de Ensino: ${level}.
+        - Tema: ${theme}.
+        - Objetivo: ${objective}.
+        - Recursos Necessários: ${resources}.
+
+        O plano de aula deve:
+        1. Alinhar-se às competências e habilidades socioemocionais da BNCC, como empatia, cooperação, responsabilidade e resolução de conflitos.
+        2. Incluir uma introdução que contextualize o tema e sua importância.
+        3. Propor atividades práticas e interativas que promovam a reflexão e o engajamento dos alunos.
+        4. Abordar estratégias para desenvolver habilidades socioemocionais, como comunicação não violenta e trabalho em equipe.
+        5. Concluir com uma reflexão que reforce os valores de paz e respeito, incentivando os alunos a aplicá-los no cotidiano.
+
+        Certifique-se de que o plano seja adaptado à faixa etária dos alunos e promova o desenvolvimento integral, considerando aspectos cognitivos, emocionais e sociais.
+      `;
+
+      document.getElementById('generatedText').innerText = generatedText;
+    });
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Estilos Neumorphism */
+    .neumorphism {
+      background: #f0f0f0;
+      border-radius: 20px;
+      box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
+    }
+    .neumorphism-inset {
+      background: #f0f0f0;
+      border-radius: 20px;
+      box-shadow: inset 10px 10px 20px #d9d9d9, inset -10px -10px 20px #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <h1 class="text-2xl font-bold"> Compartilhamento de Atividades</h1>
+      <ul class="flex space-x-4">
+        <li><a href="#inicio" class="hover:underline">Início</a></li>
+        <li><a href="#upload" class="hover:underline">Enviar Atividade</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Explicação sobre como usar a página -->
+  <section class="bg-gray-200 py-6">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-4">Como usar a página</h2>
+      <p class="text-gray-700 mb-2">
+        Esta página foi criada para ajudar professores a compartilhar e baixar atividades educacionais geradas  pelos nossos prompts e aplicadas em sala de aula,  de forma simples e colaborativa. Siga os passos abaixo para aproveitar ao máximo:
+      </p>
+      <ul class="list-disc list-inside text-gray-700">
+        <li><strong>Navegue pelas atividades:</strong> Nesta página, você encontrará uma lista de atividades compartilhadas por outros professores.</li>
+        <li><strong>Veja os detalhes:</strong> Clique em "Ver Detalhes" para acessar informações completas sobre a atividade, incluindo objetivos, recursos necessários e depoimentos.</li>
+        <li><strong>Baixe a atividade:</strong> Use o botão de download para acessar a pasta do Google Drive e baixar a atividade desejada.</li>
+        <li><strong>Compartilhe suas atividades:</strong> Clique em "Enviar Atividade" para preencher o formulário e compartilhar suas próprias atividades com a comunidade.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Página Inicial -->
+  <section id="inicio" class="container mx-auto p-4">
+    <h2 class="text-3xl font-bold mb-6">Atividades Compartilhadas</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card de Atividade -->
+      <div class="neumorphism p-6 rounded-lg">
+        <h3 class="text-xl font-bold mb-2">Explorando Formas Geométricas</h3>
+        <p class="text-gray-700 mb-4">Atividade prática para identificar formas geométricas planas e espaciais.</p>
+        <a href="#detalhes" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Ver Detalhes</a>
+      </div>
+      <!-- Adicione mais cards aqui -->
+    </div>
+  </section>
+
+  <!-- Detalhes da Atividade -->
+  <section id="detalhes" class="container mx-auto p-4 mt-8">
+    <h1 class="text-3xl font-bold mb-4">Explorando Formas Geométricas</h1>
+    <p class="text-gray-700 mb-6">Uma atividade prática para identificar e classificar formas geométricas planas e espaciais.</p>
+
+    <!-- Informações Técnicas -->
+    <div class="neumorphism p-6 rounded-lg mb-6">
+      <h2 class="text-xl font-bold mb-4">Informações Técnicas</h2>
+      <ul class="list-disc list-inside">
+        <li><strong>Série/Ano:</strong> 4º ano</li>
+        <li><strong>Tema:</strong> Geometria</li>
+        <li><strong>Habilidades da BNCC:</strong> EF04MA14, EF04MA15</li>
+        <li><strong>Duração:</strong> 50 minutos</li>
+        <li><strong>Recursos Necessários:</strong> Papel quadriculado, régua, lápis de cor.</li>
+      </ul>
+    </div>
+
+    <!-- Botão de Download (Link para a pasta do Google Drive) -->
+    <div class="mb-6">
+      <a
+        href="https://drive.google.com/drive/folders/1faQ5tbu5dNd5-fGcfF6A_V0b9S_p_y7pHFOUbmA_BCYsU1v78vr55YXQCz6FiF1qz212nobs?usp=drive_link"
+        target="_blank"
+        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+      >
+        <i class="fas fa-download mr-2"></i>Baixar Atividade
+      </a>
+    </div>
+
+    <!-- Depoimentos -->
+    <div class="neumorphism p-6 rounded-lg">
+      <h2 class="text-xl font-bold mb-4">Depoimentos</h2>
+      <div class="mb-4">
+        <p class="text-gray-700">"A atividade foi um sucesso! Meus alunos adoraram desenhar as formas e classificar os objetos da sala."</p>
+        <p class="text-sm text-gray-500 mt-2">- Professora Maria, 4º ano</p>
+      </div>
+      <!-- Adicione mais depoimentos aqui -->
+    </div>
+  </section>
+
+  <!-- Formulário de Upload -->
+  <section id="upload" class="container mx-auto p-4 mt-8">
+    <h1 class="text-3xl font-bold mb-6">Enviar Nova Atividade</h1>
+    <div class="neumorphism p-6 rounded-lg">
+      <p class="text-gray-700 mb-4">
+        Para enviar uma nova atividade, clique no botão abaixo e preencha o formulário. Sua atividade será revisada e adicionada à plataforma.
+      </p>
+      <a
+        href="https://forms.gle/xDA7uw6nCbqNxTAz9"
+        target="_blank"
+        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+      >
+        <i class="fas fa-upload mr-2"></i>Enviar Atividade
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2025 Colab. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

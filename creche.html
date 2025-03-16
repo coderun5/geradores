@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Atividades para Creches</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .card {
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-[#1919e6] text-white py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Atividades para Creches</h1>
+      <ul class="flex space-x-4">
+        <li>
+          <a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container mx-auto px-4">
+      <center>
+        <h2 class="text-3xl font-bold mb-2">Bem-vindo(a) ao Gerador de Prompts de Atividades para Creches</h2>
+      </center>
+      <p class="text-gray-700">
+        Esta ferramenta foi desenvolvida para ajudar professores a criar atividades alinhadas com as Diretrizes Pedagógicas e a BNCC para crianças de 0 a 3 anos. Preencha os campos abaixo para gerar sugestões personalizadas.
+      </p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container mx-auto px-4 py-8">
+    <form id="activityForm" class="space-y-6">
+      <!-- Faixa Etária -->
+      <div>
+        <label for="ageGroup" class="block text-lg font-medium text-gray-700">
+          Faixa Etária
+        </label>
+        <select id="ageGroup" name="ageGroup" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="0-1">0 a 1 ano</option>
+          <option value="1-2">1 a 2 anos</option>
+          <option value="2-3">2 a 3 anos</option>
+        </select>
+      </div>
+
+      <!-- Área de Desenvolvimento -->
+      <div>
+        <label for="developmentArea" class="block text-lg font-medium text-gray-700">
+          Área de Desenvolvimento
+        </label>
+        <select id="developmentArea" name="developmentArea" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]">
+          <option value="motor">Desenvolvimento Motor</option>
+          <option value="cognitive">Desenvolvimento Cognitivo</option>
+          <option value="social">Desenvolvimento Social e Emocional</option>
+          <option value="language">Desenvolvimento da Linguagem</option>
+        </select>
+      </div>
+
+      <!-- Tema da Atividade -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700">
+          Tema da Atividade
+        </label>
+        <input type="text" id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Animais, Cores, Natureza">
+      </div>
+
+      <!-- Recursos Disponíveis -->
+      <div>
+        <label for="resources" class="block text-lg font-medium text-gray-700">
+          Recursos Disponíveis
+        </label>
+        <input type="text" id="resources" name="resources" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1919e6] focus:ring-[#1919e6]" placeholder="Ex: Tintas, Massinha, Livros, Músicas">
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">
+        Gerar Prompt
+      </button>
+    </form>
+
+    <!-- Área de Exibição da Atividade Gerada -->
+    <div class="mt-8 p-6 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold mb-4">Atividade Gerada:</h2>
+      <div id="generatedActivity" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-[#1919e6] text-white px-4 py-2 rounded-md hover:bg-[#0000cc]">
+        Copiar Prompt
+      </button>
+
+      <!-- Botões para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Levar Prompt para uma IA:</h3>
+        <div class="space-y-4">
+          <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block">
+            <i class="fas fa-robot mr-2"></i>ChatGPT
+          </a>
+          <a href="https://www.deepseek.com/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block">
+            <i class="fas fa-search mr-2"></i>DeepSeek
+          </a>
+          <a href="https://www.anthropic.com/claude" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 inline-block">
+            <i class="fas fa-brain mr-2"></i>Claude
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1919e6] text-white mt-8 py-4">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; 2025 Sérgio Araújo. Gerador de Atividades para Creches. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar a Atividade -->
+  <script>
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const ageGroup = document.getElementById('ageGroup').value;
+      const developmentArea = document.getElementById('developmentArea').value;
+      const theme = document.getElementById('theme').value;
+      const resources = document.getElementById('resources').value;
+
+      // Exemplo de prompt gerado
+      const generatedActivity = `
+        Atividade para crianças de ${ageGroup.replace('-', ' a ')} anos:
+        - Área de Desenvolvimento: ${developmentArea}.
+        - Tema: ${theme}.
+        - Recursos: ${resources}.
+
+        **Descrição da Atividade:**
+        Crie uma atividade lúdica que envolva ${resources} para explorar o tema "${theme}". 
+        Exemplo: Para o desenvolvimento ${developmentArea}, utilize ${resources} para ${getActivitySuggestion(developmentArea)}.
+      `;
+
+      document.getElementById('generatedActivity').innerText = generatedActivity;
+    });
+
+    // Função para sugerir atividades com base na área de desenvolvimento
+    function getActivitySuggestion(area) {
+      switch (area) {
+        case 'motor':
+          return "promover a coordenação motora fina e grossa, como pintura com os dedos ou brincadeiras com bolas.";
+        case 'cognitive':
+          return "estimular a curiosidade e a resolução de problemas, como jogos de encaixe ou quebra-cabeças simples.";
+        case 'social':
+          return "trabalhar a interação e o compartilhamento, como brincadeiras em grupo ou rodas de conversa.";
+        case 'language':
+          return "desenvolver a comunicação e o vocabulário, como contar histórias ou cantar músicas.";
+        default:
+          return "explorar o tema de forma criativa e divertida.";
+      }
+    }
+
+    // Copiar texto gerado
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedActivity = document.getElementById('generatedActivity');
+      const textToCopy = generatedActivity.innerText || generatedActivity.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Atividade';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

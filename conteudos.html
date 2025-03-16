@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompt para Conteúdos de Aula</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+  <style>
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Posiciona acima do ícone */
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-lg">
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white py-4">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Gerador de Prompt para Conteúdos de Aula</h1>
+      <ul class="flex space-x-4">
+        <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline">Voltar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Explicativo -->
+  <header class="bg-gray-200 py-6">
+    <div class="container">
+      <center><h2 class="text-3xl font-bold mb-2">Bem-vindo Professor(a) ao Gerador de Prompt para Conteúdos de Aula</h2></center>
+      <p class="text-gray-700">Esta ferramenta foi projetada para ajudá-lo a criar prompts que gerem sugestões de conteúdos personalizados, prontos para serem utilizados em ferramentas de IA como Chat GPT, Claude, DeepSeek, Qwen AI, Amazônia AI e Copilot. O prompt gerado pode ser usado para encontrar materiais, atividades e recursos que auxiliem no planejamento das suas aulas.</p>
+      <center> <h2 class="text-3xl font-bold mb-2">Como funciona este Gerador de Prompt:</h2></center>
+      <p class="text-gray-700"><strong>Preencha os Campos do Formulário:</strong></p>
+      <p>Cada campo no formulário foi criado para capturar informações essenciais que ajudarão a personalizar o prompt enviado às IAs.</p>
+      <p><strong>Gere o Prompt:</strong></p>
+      <p>Após preencher todos os campos, clique no botão "Gerar".</p>
+      <p><strong>Envie o Prompt para as IAs:</strong></p>
+      <p>Abaixo do prompt gerado, você encontrará links para as ferramentas de IA (Chat GPT, Claude, DeepSeek, Qwen AI, Amazônia AI e Copilot).</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container p-4">
+    <center><h2 class="text-3xl font-bold mt-8 mb-4">Preencha os campos abaixo para gerar um Prompt personalizado:</h2></center>
+    <form id="contentForm" class="space-y-4">
+      <!-- Disciplina -->
+      <div>
+        <label for="discipline" class="block text-lg font-medium text-gray-700 flex items-center">
+          Disciplina
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione a disciplina para a qual deseja encontrar conteúdos.</span>
+          </span>
+        </label>
+        <select id="discipline" name="discipline" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <option value=""></option>
+          <option value="Português">Português</option>
+          <option value="Matemática">Matemática</option>
+          <option value="História">História</option>
+          <option value="Geografia">Geografia</option>
+          <option value="Ciências">Ciências</option>
+          <option value="Artes">Artes</option>
+          <option value="Educação Física">Educação Física</option>
+          <option value="Inglês">Inglês</option>
+          <option value="Religião">Religião</option>
+          <option value="Literatura e Produção Textual">Literatura e Produção Textual</option>
+        </select>
+      </div>
+
+      <!-- Tema da Aula -->
+      <div>
+        <label for="theme" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tema da Aula
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Descreva o tema ou assunto que será abordado na aula.</span>
+          </span>
+        </label>
+        <input type="text" id="theme" name="theme" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+      </div>
+
+      <!-- Ano de Escolaridade -->
+      <div>
+        <label for="grade" class="block text-lg font-medium text-gray-700 flex items-center">
+          Ano de Escolaridade
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o ano da turma para adaptar o conteúdo ao nível de conhecimento dos alunos.</span>
+          </span>
+        </label>
+        <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <option value=""></option>
+          <option value="1º ano">1º ano</option>
+          <option value="2º ano">2º ano</option>
+          <option value="3º ano">3º ano</option>
+          <option value="4º ano">4º ano</option>
+          <option value="5º ano">5º ano</option>
+          <option value="6º ano">6º ano</option>
+          <option value="7º ano">7º ano</option>
+          <option value="8º ano">8º ano</option>
+          <option value="9º ano">9º ano</option>
+          <option value="EJA I">EJA I</option>
+          <option value="EJA II">EJA II</option>
+        </select>
+      </div>
+
+      <!-- Tipo de Conteúdo -->
+      <div>
+        <label for="contentType" class="block text-lg font-medium text-gray-700 flex items-center">
+          Tipo de Conteúdo
+          <span class="tooltip ml-2">
+            <i class="fas fa-info-circle text-gray-500"></i>
+            <span class="tooltiptext">Selecione o tipo de conteúdo que deseja encontrar.</span>
+          </span>
+        </label>
+        <div class="mt-1 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Vídeos" class="form-checkbox text-blue-600">
+            <span class="ml-2">Vídeos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Textos" class="form-checkbox text-blue-600">
+            <span class="ml-2">Textos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Atividades Práticas" class="form-checkbox text-blue-600">
+            <span class="ml-2">Atividades Práticas</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Jogos Educativos" class="form-checkbox text-blue-600">
+            <span class="ml-2">Jogos Educativos</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Avaliações" class="form-checkbox text-blue-600">
+            <span class="ml-2">Avaliações</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Imagem" class="form-checkbox text-blue-600">
+            <span class="ml-2">Imagem</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Gráfico" class="form-checkbox text-blue-600">
+            <span class="ml-2">Gráfico</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Infográfico" class="form-checkbox text-blue-600">
+            <span class="ml-2">Infográfico</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Música" class="form-checkbox text-blue-600">
+            <span class="ml-2">Música</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Mapa" class="form-checkbox text-blue-600">
+            <span class="ml-2">Mapa</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Mapa Mental" class="form-checkbox text-blue-600">
+            <span class="ml-2">Mapa Mental</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Tabela" class="form-checkbox text-blue-600">
+            <span class="ml-2">Tabela</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="contentType" value="Outros" class="form-checkbox text-blue-600" id="otherCheckbox">
+            <span class="ml-2">Outros</span>
+          </label>
+          <input type="text" id="otherContentType" name="otherContentType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Especifique o outro tipo de conteúdo" style="display:none;">
+        </div>
+      </div>
+
+      <!-- Botão Gerar -->
+      <button type="button" id="generateButton" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Gerar Prompt</button>
+    </form>
+
+    <!-- Área de Exibição do Prompt -->
+    <div class="mt-8 p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-2">Prompt Gerado:</h2>
+      <div id="generatedText" class="border p-4 rounded-md bg-gray-50"></div>
+      <button id="copyButton" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Copiar Texto</button>
+
+      <!-- Seção de Links para AIs -->
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Encontrar Conteúdos com as AIs:</h3>
+        <p class="text-gray-700 mb-4">Clique em um dos links abaixo e escolha para qual IA você quer levar o seu prompt gerado:</p>
+        <div class="flex space-x-4">
+          <!-- Link para Chat GPT -->
+          <div class="flex-1">
+            <a href="https://chat.openai.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 block text-center">
+              <i class="fas fa-robot mr-2"></i> Chat GPT
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma ferramenta de IA da OpenAI, especializada em geração de texto e assistência em tarefas criativas.</p>
+          </div>
+
+          <!-- Link para Claude -->
+          <div class="flex-1">
+            <a href="https://claude.ai/" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 block text-center">
+              <i class="fas fa-brain mr-2"></i> Claude
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma IA avançada da Anthropic, focada em segurança e assistência em tarefas complexas.</p>
+          </div>
+
+          <!-- Link para DeepSeek -->
+          <div class="flex-1">
+            <a href="https://deepseek.com/" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 block text-center">
+              <i class="fas fa-search mr-2"></i> DeepSeek
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma plataforma de IA para pesquisa e geração de conteúdo, ideal para exploração de dados e insights.</p>
+          </div>
+
+          <!-- Link para Qwen AI -->
+          <div class="flex-1">
+            <a href="https://qwen.ai/" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 block text-center">
+              <i class="fas fa-cogs mr-2"></i> Qwen AI
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma IA versátil e poderosa, ideal para geração de conteúdo e automação de tarefas.</p>
+          </div>
+
+          <!-- Link para Amazônia AI -->
+          <div class="flex-1">
+            <a href="https://amazonia.ai/" target="_blank" class="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 block text-center">
+              <i class="fas fa-leaf mr-2"></i> Amazônia AI
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma IA focada em conteúdos educacionais e sustentabilidade, ideal para temas interdisciplinares.</p>
+          </div>
+
+          <!-- Link para Copilot -->
+          <div class="flex-1">
+            <a href="https://copilot.microsoft.com/" target="_blank" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 block text-center">
+              <i class="fas fa-pilot mr-2"></i> Copilot
+            </a>
+            <p class="text-sm text-gray-600 mt-2">Uma IA da Microsoft, especializada em assistência em tarefas criativas e produtivas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white mt-8 py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 Gerador de Prompt para Conteúdos de Aula. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script para Gerar e Copiar o Texto -->
+  <script>
+    document.getElementById('generateButton').addEventListener('click', function () {
+      const discipline = document.getElementById('discipline').value;
+      const theme = document.getElementById('theme').value;
+      const grade = document.getElementById('grade').value;
+      const contentTypeCheckboxes = document.querySelectorAll('input[name="contentType"]:checked');
+      const otherContentType = document.getElementById('otherContentType').value;
+      let contentTypes = Array.from(contentTypeCheckboxes).map(checkbox => checkbox.value).join(', ');
+
+      if (otherContentType) {
+        contentTypes += ', ' + otherContentType;
+      }
+
+      const generatedText = `
+        Encontre conteúdos para a disciplina de <strong>${discipline}</strong>, com foco no tema <strong>${theme}</strong>, adequados para alunos do <strong>${grade}</strong> ano. O conteúdo deve ser do tipo <strong>${contentTypes}</strong>. Inclua sugestões de materiais, atividades e recursos que possam ser utilizados em sala de aula ou como tarefa para os alunos.
+
+        <strong>Instruções para o Prompt Gerado:</strong>
+
+        1. <strong>Fornecimento de Links:</strong>
+           - Se possível, inclua links diretos para os conteúdos sugeridos (vídeos, textos, atividades práticas, jogos educativos, avaliações, etc.).
+           - Certifique-se de que os links sejam de fontes confiáveis e apropriadas para o nível de escolaridade dos alunos.
+
+        2. <strong>Descrição dos Conteúdos:</strong>
+           - Para cada conteúdo sugerido, forneça uma breve descrição do que ele aborda e como ele se relaciona com o tema da aula.
+           - Inclua informações sobre a duração (para vídeos) ou o comprimento (para textos) dos conteúdos.
+
+        3. <strong>Maneira de Usar em Sala de Aula:</strong>
+           - Sugira a melhor maneira de utilizar cada conteúdo em sala de aula. Por exemplo:
+             - <strong>Vídeos:</strong> Indique se o vídeo deve ser assistido inteiro ou se há partes específicas que são mais relevantes. Sugira questões de discussão ou atividades que podem ser realizadas após a exibição do vídeo.
+             - <strong>Textos:</strong> Proponha se o texto deve ser lido em voz alta, discutido em grupo ou utilizado para uma atividade de leitura individual. Inclua perguntas de compreensão ou atividades de escrita relacionadas ao texto.
+             - <strong>Atividades Práticas:</strong> Descreva como a atividade deve ser conduzida, incluindo materiais necessários e instruções passo a passo. Sugira como avaliar o desempenho dos alunos na atividade.
+             - <strong>Jogos Educativos:</strong> Explique as regras do jogo e como ele pode ser integrado à aula. Sugira como adaptar o jogo para diferentes níveis de habilidade dos alunos.
+             - <strong>Avaliações:</strong> Forneça exemplos de questões de avaliação que podem ser utilizadas para verificar a compreensão dos alunos sobre o tema. Inclua diferentes tipos de questões (múltipla escolha, dissertativas, etc.).
+
+        4. <strong>Adaptação ao Nível de Escolaridade:</strong>
+           - Certifique-se de que as sugestões de conteúdos e atividades sejam adequadas ao ano de escolaridade selecionado. Adapte a complexidade e o nível de detalhe das informações conforme necessário.
+
+        5. <strong>Recursos Adicionais:</strong>
+           - Se aplicável, inclua recursos adicionais que possam complementar o conteúdo principal, como planilhas, apresentações de slides, ou links para ferramentas interativas online.
+      `;
+
+      document.getElementById('generatedText').innerHTML = generatedText;
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+      const generatedText = document.getElementById('generatedText');
+      const textToCopy = generatedText.innerText || generatedText.textContent;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+
+      this.textContent = 'Texto Copiado!';
+      setTimeout(() => {
+        this.textContent = 'Copiar Texto';
+      }, 2000);
+    });
+
+    document.getElementById('otherCheckbox').addEventListener('change', function () {
+      const otherContentType = document.getElementById('otherContentType');
+      if (this.checked) {
+        otherContentType.style.display = 'block';
+      } else {
+        otherContentType.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
