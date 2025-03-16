@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Prompts para FI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <a href="https://educ.nekoweb.org/geradores/home.html" class="text-white">Voltar</a>
+    </nav>
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Cabeçalho -->
+        <div class="text-center mb-12 bg-gray-200 p-6 rounded-lg">
+            <h1 class="text-4xl font-bold text-blue-600 mb-4">Gerador de Prompts para FI</h1>
+            <p class="text-gray-600">Preencha os campos abaixo para gerar um prompt detalhado para as AIs criarem planos de aula abrangentes.</p>
+        </div>
+
+        <!-- Formulário -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <!-- Seleção de Disciplinas -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-blue-500 mb-4">Selecione as Disciplinas</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Disciplinas</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label><input type="checkbox" value="Língua Portuguesa" class="disciplina"> Língua Portuguesa</label>
+                            <label><input type="checkbox" value="Matemática" class="disciplina"> Matemática</label>
+                            <label><input type="checkbox" value="Geografia" class="disciplina"> Geografia</label>
+                            <label><input type="checkbox" value="História" class="disciplina"> História</label>
+                            <label><input type="checkbox" value="Ciências" class="disciplina"> Ciências</label>
+                            <label><input type="checkbox" value="LPT" class="disciplina"> LPT</label>
+                            <label><input type="checkbox" value="Arte" class="disciplina"> Arte</label>
+                            <label><input type="checkbox" value="Religião" class="disciplina"> Religião</label>
+                            <label><input type="checkbox" value="Inglês" class="disciplina"> Inglês</label>
+                            <label><input type="checkbox" value="Ed. Física" class="disciplina"> Ed. Física</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configurações Adicionais -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-green-500 mb-4">Configurações Adicionais</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Período</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <label><input type="checkbox" value="Dia" class="periodo"> Dia</label>
+                            <label><input type="checkbox" value="Semana" class="periodo"> Semana</label>
+                            <label><input type="checkbox" value="Sequência" class="periodo"> Sequência</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ano/Série</label>
+                        <select id="ano_serie" class="w-full p-2 border rounded-md">
+                            <option value="">Selecione o ano/série</option>
+                            <option>1º Ano</option>
+                            <option>2º Ano</option>
+                            <option>3º Ano</option>
+                            <option>4º Ano</option>
+                            <option>5º Ano</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Duração Total do Turno</label>
+                        <input type="text" id="duracao_turno" class="w-full p-2 border rounded-md" placeholder="Ex: 4 horas">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão e Resultado -->
+        <div class="text-center">
+            <button onclick="generatePrompt()"
+                    class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors mb-6">
+                Gerar Prompt
+            </button>
+
+            <div id="output" class="hidden bg-white p-6 rounded-lg shadow-md text-left">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Prompt Gerado:</h2>
+                    <div>
+                        <button onclick="copyPrompt()"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 mr-2">
+                            📋 Copiar
+                        </button>
+                    </div>
+                </div>
+                <pre id="promptOutput" class="whitespace-pre-wrap bg-gray-50 p-4 rounded-md"></pre>
+
+                <div class="mt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <a href="https://chat.deepseek.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-robot"></i> DeepSeek
+                    </a>
+                    <a href="https://chat.qwenlm.ai/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-brain"></i> QwenAi
+                    </a>
+                    <a href="https://chat.openai.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fab fa-openai"></i> ChatGPT
+                    </a>
+                    <a href="https://claude.ai/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-cloud"></i> Claude
+                    </a>
+                    <a href="https://gemini.google.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-gem"></i> Gemini
+                    </a>
+                    <a href="https://copilot.microsoft.com/" target="_blank" class="p-2 bg-gray-100 rounded hover:bg-gray-200 text-center">
+                        <i class="fas fa-copilot"></i> Copilot
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 p-4 text-center text-white">
+        <p>&copy; 2025 Gerador de Prompts para FI. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function generatePrompt() {
+            const getSelectedValues = (className) => {
+                const elements = document.querySelectorAll(`.${className}:checked`);
+                const values = Array.from(elements).map(element => element.value);
+                return values.length > 0 ? values.join(', ') : '[Não especificado]';
+            };
+
+            const disciplinas = getSelectedValues('disciplina');
+            const periodo = getSelectedValues('periodo');
+            const ano_serie = document.getElementById('ano_serie').value;
+            const duracao_turno = document.getElementById('duracao_turno').value;
+
+            const prompt = `Crie um plano de aula detalhado para o Ensino Fundamental I, ano/série ${ano_serie}, cobrindo todas as disciplinas selecionadas para o período de ${periodo}, com uma duração total do turno de ${duracao_turno}. As disciplinas a serem abordadas são: ${disciplinas}.
+
+**Instruções Adicionais**:
+- Alinhar às competências da BNCC
+- Incluir objetivos de aprendizagem claros
+- Sugerir estratégias de avaliação formativa
+- Fornecer orientações para implementação em sala de aula
+- Listar recursos necessários
+- Incluir adaptações para diferentes necessidades educacionais`;
+
+            document.getElementById('promptOutput').textContent = prompt;
+            document.getElementById('output').classList.remove('hidden');
+        }
+
+        function copyPrompt() {
+            const prompt = document.getElementById('promptOutput').textContent;
+            navigator.clipboard.writeText(prompt);
+            alert('Prompt copiado com sucesso!');
+        }
+    </script>
+</body>
+</html>

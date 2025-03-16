@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Situações de Aprendizagem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        .accent-color {
+            accent-color: #007BFF;
+        }
+        .bg-accent {
+            background-color: #007BFF;
+        }
+        .text-accent {
+            color: #007BFF;
+        }
+        .border-accent {
+            border-color: #007BFF;
+        }
+        .header {
+            background-color: #f3f4f6; /* Cinza claro */
+            color: #374151; /* Cinza escuro para o texto */
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .header h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .header p {
+            font-size: 1.125rem;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .button-group a {
+            background-color: #007BFF;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .button-group a:hover {
+            background-color: #0056b3;
+        }
+        .button-group i {
+            margin-right: 0.5rem;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-accent text-white py-4">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <h1 class="text-2xl font-bold">Gerador de Situações de Aprendizagem Base PNLD</h1>
+            <ul class="flex space-x-4">
+                <li><a href="https://educ.nekoweb.org/geradores/home.html" class="hover:underline"><i class="fas fa-arrow-left"></i> Voltar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Cabeçalho Explicativo -->
+    <header class="header">
+        <div class="container mx-auto px-6">
+            <h2>Bem-vindo ao Gerador de Situações de Aprendizagem Base PNLD</h2>
+            <p>Escolha a disciplina, a série e os capítulos prioritários do livro didático do PNLD da sua Escola. Em seguida, selecione o tipo de situação de aprendizagem desejada. Clique no botão para gerar um prompt estruturado para uso em inteligência artificial.</p>
+            <p>Obs: As AIs mais objetivas para os prompts desta página foram: DeepSeek e Qwen.</p>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <div class="content container mx-auto p-6">
+        <form id="activityForm" class="bg-white p-8 rounded-lg shadow-md">
+            <!-- 1. Dados Gerais da Atividade -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-accent mb-4">1. Dados Gerais da Atividade</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="disciplina" class="block text-sm font-medium text-gray-700">Disciplina:</label>
+                        <select id="disciplina" name="disciplina" class="mt-1 block w-full p-2 border border-gray-300 rounded-md accent-color">
+                            <option>Matemática</option>
+                            <option>Língua Portuguesa</option>
+                            <option>LPT</option>
+                            <option>Arte</option>
+                            <option>Inglês</option>
+                            <option>Religião</option>
+                            <option>Ed. Física</option>
+                            <option>Ciências</option>
+                            <option>História</option>
+                            <option>Geografia</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="serie" class="block text-sm font-medium text-gray-700">Série:</label>
+                        <select id="serie" name="serie" class="mt-1 block w-full p-2 border border-gray-300 rounded-md accent-color">
+                            <option>1º Ano</option>
+                            <option>2º Ano</option>
+                            <option>3º Ano</option>
+                            <option>4º Ano</option>
+                            <option>5º Ano</option>
+                            <option>6º Ano</option>
+                            <option>7º Ano</option>
+                            <option>8º Ano</option>
+                            <option>9º Ano</option>
+                            <option>EJA I</option>
+                            <option>EJA II</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Capítulos Prioritários -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-accent mb-4">2. Capítulos do Livro Didático a serem trabalhados durante o ano</h2>
+                <div id="capitulos" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><input type="checkbox" value="Capítulo 1" class="accent-color"> Capítulo 1 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                    <div><input type="checkbox" value="Capítulo 2" class="accent-color"> Capítulo 2 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                    <div><input type="checkbox" value="Capítulo 3" class="accent-color"> Capítulo 3 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                    <div><input type="checkbox" value="Capítulo 4" class="accent-color"> Capítulo 4 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                    <div><input type="checkbox" value="Capítulo 5" class="accent-color"> Capítulo 5 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                    <div><input type="checkbox" value="Capítulo 6" class="accent-color"> Capítulo 6 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                    <div><input type="checkbox" value="Capítulo 7" class="accent-color"> Capítulo 7 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                    <div><input type="checkbox" value="Capítulo 8" class="accent-color"> Capítulo 8 <input type="text" placeholder="Descrição" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></div>
+                </div>
+            </div>
+
+            <!-- 3. Unidade Letiva -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-accent mb-4">3. Unidade Letiva</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="unidadeLetiva" class="block text-sm font-medium text-gray-700">Unidade Letiva:</label>
+                        <select id="unidadeLetiva" name="unidadeLetiva" class="mt-1 block w-full p-2 border border-gray-300 rounded-md accent-color">
+                            <option>I</option>
+                            <option>II</option>
+                            <option>III</option>
+                            <option>Dividir os Capítulos entre as 3 unidades Letivas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="aulasSemanais" class="block text-sm font-medium text-gray-700">Quantidade de aulas semanais:</label>
+                        <input type="number" id="aulasSemanais" name="aulasSemanais" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div>
+                        <label for="diasLetivos" class="block text-sm font-medium text-gray-700">Quantidade de Dias letivos da(s) Unidade(s) letiva(s):</label>
+                        <input type="number" id="diasLetivos" name="diasLetivos" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Tipo de Situação de Aprendizagem -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-accent mb-4">4. Tipo de Situação de Aprendizagem</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de Situação de Aprendizagem:</label>
+                        <select id="tipo" name="tipo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md accent-color">
+                            <option>Sequência Didática</option>
+                            <option>Projeto Interdisciplinar</option>
+                            <option>Aula de Exposição Dialogada</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Tipo de Avaliação -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-accent mb-4">5. Tipo de Avaliação</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><input type="checkbox" value="Avaliação Diagnóstica" class="accent-color"> Avaliação Diagnóstica</div>
+                    <div><input type="checkbox" value="Avaliação Formativa" class="accent-color"> Avaliação Formativa</div>
+                    <div><input type="checkbox" value="Avaliação Somativa" class="accent-color"> Avaliação Somativa</div>
+                    <div><input type="checkbox" value="Autoavaliação" class="accent-color"> Autoavaliação</div>
+                    <div><input type="checkbox" value="Avaliação por Portfólio" class="accent-color"> Avaliação por Portfólio</div>
+                    <div><input type="checkbox" value="Avaliação por Projeto" class="accent-color"> Avaliação por Projeto</div>
+                    <div><input type="checkbox" value="Avaliação Oral" class="accent-color"> Avaliação Oral</div>
+                    <div><input type="checkbox" value="Avaliação Escrita" class="accent-color"> Avaliação Escrita</div>
+                </div>
+            </div>
+
+            <!-- 6. Instrumentos de Avaliação -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-accent mb-4">6. Instrumentos de Avaliação</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><input type="checkbox" value="Provas" class="accent-color"> Provas</div>
+                    <div><input type="checkbox" value="Questionários" class="accent-color"> Questionários</div>
+                    <div><input type="checkbox" value="Listas de Exercícios" class="accent-color"> Listas de Exercícios</div>
+                    <div><input type="checkbox" value="Trabalhos Práticos" class="accent-color"> Trabalhos Práticos</div>
+                    <div><input type="checkbox" value="Observações Diretas" class="accent-color"> Observações Diretas</div>
+                    <div><input type="checkbox" value="Entrevistas" class="accent-color"> Entrevistas</div>
+                    <div><input type="checkbox" value="Autoavaliações" class="accent-color"> Autoavaliações</div>
+                    <div><input type="checkbox" value="Portfólios" class="accent-color"> Portfólios</div>
+                </div>
+            </div>
+
+            <!-- Botão de Gerar Prompt -->
+            <div class="text-center">
+                <button type="button" onclick="gerarPrompt()" class="bg-accent text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                    Gerar Prompt
+                </button>
+            </div>
+        </form>
+
+        <!-- Área de Exibição do Prompt Gerado -->
+        <div id="generatedPrompt" class="mt-8 bg-white p-8 rounded-lg shadow-md hidden">
+            <h2 class="text-xl font-semibold text-accent mb-4">Prompt Gerado</h2>
+            <textarea id="prompt" class="w-full p-2 border border-gray-300 rounded-md" rows="6" readonly></textarea>
+            <button id="copyButton" class="mt-4 bg-accent text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                Copiar Prompt
+            </button>
+        </div>
+
+        <!-- Botões das AIs -->
+        <div class="button-group">
+            <a href="https://chat.openai.com" target="_blank">
+                <i class="fas fa-robot"></i> Chat GPT
+            </a>
+            <a href="https://deepseek.com" target="_blank">
+                <i class="fas fa-search"></i> DeepSeek
+            </a>
+            <a href="https://qwen.ai" target="_blank">
+                <i class="fas fa-cogs"></i> Qwen
+            </a>
+            <a href="https://mistral.ai" target="_blank">
+                <i class="fas fa-brain"></i> Mistral AI
+            </a>
+            <a href="https://claude.ai" target="_blank">
+                <i class="fas fa-brain"></i> Claude
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function gerarPrompt() {
+            const disciplina = document.getElementById('disciplina').value;
+            const serie = document.getElementById('serie').value;
+            const capitulosSelecionados = Array.from(document.querySelectorAll('#capitulos input[type=checkbox]:checked'))
+                .map(checkbox => checkbox.value + ' - ' + checkbox.nextElementSibling.value).join(', ');
+            const unidadeLetiva = document.getElementById('unidadeLetiva').value;
+            const aulasSemanais = document.getElementById('aulasSemanais').value;
+            const diasLetivos = document.getElementById('diasLetivos').value;
+            const tipo = document.getElementById('tipo').value;
+            const avaliacoesSelecionadas = Array.from(document.querySelectorAll('#activityForm input[type=checkbox]:checked'))
+                .filter(checkbox => checkbox.parentElement.parentElement.previousElementSibling.textContent.includes('Tipo de Avaliação'))
+                .map(checkbox => checkbox.value).join(', ');
+            const instrumentosSelecionados = Array.from(document.querySelectorAll('#activityForm input[type=checkbox]:checked'))
+                .filter(checkbox => checkbox.parentElement.parentElement.previousElementSibling.textContent.includes('Instrumentos de Avaliação'))
+                .map(checkbox => checkbox.value).join(', ');
+
+            const prompt = `Crie uma ${tipo} para a disciplina de ${disciplina} no ${serie}, focada nos capítulos prioritários do livro didático: ${capitulosSelecionados}.
+            A unidade letiva é ${unidadeLetiva} com ${aulasSemanais} aulas semanais e ${diasLetivos} dias letivos.
+            Os tipos de avaliação selecionados são: ${avaliacoesSelecionadas}.
+            Os instrumentos de avaliação selecionados são: ${instrumentosSelecionados}.
+            Estruture o planejamento detalhadamente, incluindo objetivos, estratégias, metodologias e avaliação.
+            Inclua indicações e links (se possível) para materiais de apoio às aulas e forneça mais detalhes para orientar o professor.
+            Gere uma versão responsiva para Word e PDF, garantindo organização e clareza.
+            Nota: Os capítulos prioritários do livro didático são diferentes das unidades letivas, que são a divisão dos dias letivos anuais em 3 unidades letivas.`;
+
+            document.getElementById('prompt').value = prompt;
+            document.getElementById('generatedPrompt').classList.remove('hidden');
+        }
+
+        document.getElementById('copyButton').addEventListener('click', function () {
+            const promptText = document.getElementById('prompt').value;
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert('Prompt copiado para a área de transferência!');
+            });
+        });
+    </script>
+    <!-- FontAwesome CDN -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

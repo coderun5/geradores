@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edição Colaborativa de Textos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Cabeçalho -->
+    <header class="bg-orange-600 text-white py-6 text-center">
+        <h1 class="text-4xl font-bold">Edição Colaborativa de Textos</h1>
+        <p class="mt-2 text-lg">Colabore em tempo real com o Pad do Disroot.</p>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Botão para Abrir o Modal -->
+        <button
+            onclick="openModal()"
+            class="fixed bottom-4 right-4 bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors shadow-lg"
+        >
+            Ver Instruções
+        </button>
+
+        <!-- Seção do Pad do Disroot -->
+        <section>
+            <iframe
+                src="https://pad.disroot.org/"
+                class="w-full h-[600px] bg-white rounded-lg shadow-md"
+                frameborder="0"
+            ></iframe>
+        </section>
+    </main>
+
+    <!-- Modal com Instruções -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-8 rounded-lg w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto">
+            <h2 class="text-2xl font-bold text-orange-600 mb-4">Como Usar o Pad do Disroot</h2>
+            <div class="text-gray-600 space-y-4">
+                <p>
+                    O <strong>Pad do Disroot</strong> é uma ferramenta de edição colaborativa de textos em tempo real. Abaixo, explicamos passo a passo como usá-lo:
+                </p>
+                <h3 class="text-xl font-semibold">1. Acesse a Ferramenta</h3>
+                <p>
+                    A ferramenta já está incorporada nesta página. Basta rolar para cima e usar a interface do Pad do Disroot diretamente no site.
+                </p>
+                <h3 class="text-xl font-semibold">2. Comece a Escrever</h3>
+                <p>
+                    No campo de texto grande, comece a digitar ou cole o conteúdo que deseja editar. Você pode usar a ferramenta para escrever documentos, fazer anotações ou colaborar em projetos.
+                </p>
+                <h3 class="text-xl font-semibold">3. Compartilhe o Link</h3>
+                <p>
+                    Para colaborar com outras pessoas, compartilhe o link da página. Todas as alterações serão sincronizadas em tempo real para todos os participantes.
+                </p>
+                <h3 class="text-xl font-semibold">4. Use as Ferramentas de Formatação</h3>
+                <p>
+                    O Pad do Disroot oferece opções básicas de formatação, como:
+                    <ul class="list-disc list-inside">
+                        <li><strong>Negrito:</strong> Use <code>**texto**</code> para negrito.</li>
+                        <li><strong>Itálico:</strong> Use <code>_texto_</code> para itálico.</li>
+                        <li><strong>Listas:</strong> Use <code>-</code> ou <code>*</code> para criar listas.</li>
+                        <li><strong>Títulos:</strong> Use <code>#</code> para títulos e <code>##</code> para subtítulos.</li>
+                    </ul>
+                </p>
+                <h3 class="text-xl font-semibold">5. Salve o Documento</h3>
+                <p>
+                    O Pad do Disroot salva automaticamente o conteúdo enquanto você edita. Para garantir que o texto não seja perdido, você pode copiar e colar o conteúdo em um arquivo local.
+                </p>
+                <h3 class="text-xl font-semibold">6. Colaboração em Tempo Real</h3>
+                <p>
+                    Todos os participantes que acessarem o link poderão editar o texto simultaneamente. As alterações são destacadas com cores diferentes para cada usuário.
+                </p>
+                <h3 class="text-xl font-semibold">7. Privacidade e Segurança</h3>
+                <p>
+                    O Pad do Disroot é uma ferramenta segura porque:
+                    <ul class="list-disc list-inside">
+                        <li>Nenhum cadastro ou login é necessário.</li>
+                        <li>O conteúdo é armazenado temporariamente no servidor.</li>
+                        <li>Nenhum dado pessoal é coletado ou armazenado.</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="mt-6 text-right">
+                <button
+                    onclick="closeModal()"
+                    class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors"
+                >
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para Controle do Modal -->
+    <script>
+        // Funções para abrir e fechar o modal
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        // Abrir o modal automaticamente ao carregar a página
+        window.onload = openModal;
+    </script>
+</body>
+</html>
